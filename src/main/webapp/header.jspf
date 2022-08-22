@@ -1,0 +1,55 @@
+
+     <h2 align="center">
+              <a style="color:#0000ff" href="index.jsp">Main</a>
+              <a style="color:#ffff00" href="about_us.jsp">About Us</a>
+              <a style="color:#0000ff" href="contacts.jsp">Contacts</a>
+              <a style="color:#ffff00" href="doctors.jsp">Doctors</a>
+
+         <c:if  test="${user.getRolesId()==1}" >
+                    <br>
+                <a style="color:#0000ff" href="admins_only/giving_a_role.jsp">Giving a role</a>
+                <a style="color:#ffff00" href="admins_only/giving_a_category.jsp">Giving a category</a>
+                <a style="color:#0000ff" href="admins_only/patients.jsp">Patients</a>
+                <a style="color:#ffff00" href="admins_only/appoint_a_doctor.jsp">Appoint a doctor</a>
+                <a style="color:#0000ff" href="admins_only/add_category.jsp">Add Category</a>
+         </c:if>
+
+         <c:if  test="${user.getRolesId()==2}" >
+              <br>
+            <a style="color:#0000ff" href="doctors_only/my_patients.jsp">My Patients</a>
+            <a style="color:#ffff00" href="doctors_only/hospital_cards.jsp">Hospital Cards</a>
+            <a style="color:#0000ff" href="doctors_only/add_appointment.jsp">Add appointment</a>
+         </c:if>
+
+         <c:if  test="${user.getRolesId()==3}" >
+                    <br>
+            <a style="color:#0000ff" href="nurses_only/my_appointments.jsp">My Appointments</a>
+         </c:if>
+
+         <c:if  test="${user.getRolesId()==4}" >
+                    <br>
+             <a style="color:#0000ff" href="patients_only/my_appointments.jsp">My Appointments</a>
+         </c:if>
+
+     </h2>
+                    <c:choose>
+                        <c:when test="${empty user}">
+                            <div align="right" >
+                                 <form action="register_form.jsp" method="post">
+                                      <input type="submit" value="Register now"/>
+                                 </form>
+                                 <input type="submit" value="to Login"
+                                  onclick="window.location='index.jsp';"/>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                           <div align="right" >
+                                   <form action="edit_profile.jsp" method="post">
+                                       <input type="submit" value="Edit My Profile"/>
+                                   </form>
+                                   <form action="logout" method="get">
+                                       <input type="submit" value="Log out"/>
+                                   </form>
+                           </div>
+                        </c:otherwise>
+                    </c:choose>

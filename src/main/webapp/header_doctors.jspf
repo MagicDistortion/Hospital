@@ -1,0 +1,19 @@
+
+       <h2 align="center"  >
+                <a style="color:#0000ff" href="../index.jsp">Main</a>
+                <a style="color:#ffff00" href="../about_us.jsp">About Us</a>
+                <a style="color:#0000ff" href="../contacts.jsp">Contacts</a>
+                <a style="color:#ffff00" href="../doctors.jsp">Doctors</a>
+                    <br>
+                <a style="color:#0000ff" href="my_patients.jsp">My Patients</a>
+                <a style="color:#ffff00" href="hospital_cards.jsp">Hospital Cards</a>
+                <a style="color:#0000ff" href="add_appointment.jsp">Add appointment</a>
+       </h2>
+         <div align="right" >
+             <form action="../edit_profile.jsp" method="post">
+                <input type="submit" value="Edit My Profile"/>
+             </form>
+             <form action="../logout" method="get">
+                <input type="submit" value="Log out"/>
+             </form>
+         </div>

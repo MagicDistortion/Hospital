@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/about_us.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/contacts.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/doctors.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/error404.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/index.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/main.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/register_form.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/test.jsp" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
