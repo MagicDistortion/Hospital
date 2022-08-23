@@ -28,12 +28,14 @@ body {background:#000000 url(../images/Serze2.jpg)}
              <col>
              <col>
              <col>
+             <col>
             </colgroup>
                <th style="color:#0000ff"><h3/> Appointment &nbsp</th>
                <th style="color:#ffff00"><h3/> Appointment details &nbsp</th>
                <th style="color:#0000ff"><h3/> Current Doctor &nbsp</th>
                <th style="color:#ffff00"><h3 />Designated Nurse &nbsp</th>
                <th style="color:#0000ff"><h3 />Date &nbsp&nbsp&nbsp</th>
+               <th style="color:#ffff00"><h3 />Status &nbsp&nbsp&nbsp</th>
            <c:forEach items="${appointments}" var="i">
                   <tr>
                     <td><h3 style="color:#fff"/>${i.getAppointment()}&nbsp</td>
@@ -41,6 +43,7 @@ body {background:#000000 url(../images/Serze2.jpg)}
                     <td><h3 style="color:#fff"/>${i.getDoctorFullName()}&nbsp</td>
                     <td><h3 style="color:#fff"/>${i.getNurseFullName()} &nbsp</td>
                     <td><h3 style="color:#fff"/>${i.getDate()} &nbsp</td>
+                    <td><h3 style="color:#fff"/>${i.getStatus()} &nbsp</td>
                   </tr>
            </c:forEach>
            </table>
@@ -71,11 +74,11 @@ body {background:#000000 url(../images/Serze2.jpg)}
         <td>
             <h3>
                 <table>
-                            <colgroup style="background-color:#87CEFA;">
-                             <col>
-                             <col>
-                            </colgroup>
-                <br><br><br>
+                  <colgroup style="background-color:#87CEFA;">
+                    <col>
+                    <col>
+                  </colgroup>
+                <br><br>
                      <tr style="color:#0000ff">
                          <td>Patient Surname:</td>
                          <td>${patient_surname}</td>
@@ -100,12 +103,29 @@ body {background:#000000 url(../images/Serze2.jpg)}
                         <td>Current diagnosis:</td>
                         <td width=400>${diagnosis}</td>
                      </tr>
+                     <tr style="color:#0000ff">
+                        <td>Status:</td>
+                        <td width=400>${status_patient}</td>
+                     </tr>
+                     <tr>
+                         <td><form action ="../doctors_only/update_diagnosis" method ="post">
+                           <input type="hidden" name="id" value="${id_card}"/>
+    	                   <input type="submit" value="change diagnosis"/><br>
+    	                   <input name="diagnosis" placeholder="Enter new diagnosis"/><br>
+                         </form></td>
+                         <td><form action ="../doctors_only/update_status" method ="post">
+                             <select name="status">
+                             <option disabled>set status</option>
+                             <option value="is being treated">is being treated</option>
+                             <option value="cured">cured</option>
+                             <option value="discharged">discharged</option>
+                             <input type="submit" value="Set status"/>
+                             </select></form></td>
+                     </tr>
             </table>
-              <form action ="../doctors_only/update_diagnosis" method ="post">
-                  <input type="hidden" name="id" value="${id_card}"/>
-    	          <input type="submit" value="change diagnosis"/><br>
-    	          <input name="diagnosis" placeholder="Enter new diagnosis"/><br>
-              </form>
+             <h2 style="color:#B22222">
+                 <c:if  test="${not empty messtatus}" >${messtatus}</c:if>
+             </h2>
             </h3>
         </td>
     </tr>

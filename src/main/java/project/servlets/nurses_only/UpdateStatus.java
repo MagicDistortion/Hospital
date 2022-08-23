@@ -17,12 +17,11 @@ public class UpdateStatus extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         int id = Integer.parseInt(req.getParameter("id"));
         String status =req.getParameter("status");
-
         dbManager.updateAppointmentStatus(status,id);
         req.setAttribute("message","status updated");
+
         req.getRequestDispatcher("/nurses_only/my_appointments.jsp").forward(req, resp);
     }
 }

@@ -36,7 +36,7 @@ public class Constants {
     public static final String FIND_PATIENT_BY_ID = "SELECT * FROM patients LEFT JOIN users on id_users = id  WHERE patients.id = ?";
     public static final String FIND_NURSE_BY_ID = "SELECT * FROM nurse LEFT JOIN users on id_users = id WHERE id = ?";
     public static final String GET_A_HOSPITAL_CARD = "SELECT * FROM hospital_card LEFT JOIN users on id_card=id_users WHERE id_card = ?";
-    public static final String GET_ALL_HOSPITAL_CARDS = "SELECT * FROM hospital_card LEFT JOIN users on id_card=id_users";
+    public static final String GET_ALL_HOSPITAL_CARDS = "SELECT * FROM hospital_card LEFT JOIN users on id_card=id_users WHERE status!='discharged' ";
     public static final String UPDATE_USER_SURNAME = "UPDATE users SET `surname` = ? WHERE (`id_users` = ?)";
     public static final String UPDATE_USER_NAME = "UPDATE users SET `name` = ? WHERE (`id_users` = ?)";
     public static final String UPDATE_USER_LOGIN = "UPDATE users SET `login` = ? WHERE (`id_users` = ?)";

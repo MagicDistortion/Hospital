@@ -23,21 +23,22 @@ public class EditHospitalCard extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Appointment> allAppointments = dbManager.findAllAppointments();
-        req.getSession().setAttribute("appoints",allAppointments);
+        req.getSession().setAttribute("appoints", allAppointments);
 
         List<Nurse> allNurse = dbManager.findAllNurse();
-        req.getSession().setAttribute("nurses",allNurse);
+        req.getSession().setAttribute("nurses", allNurse);
 
         req.getSession().setAttribute("today", LocalDate.now());
 
         int patientId = Integer.parseInt(req.getParameter("id"));
         HospitalCard hospitalCard = dbManager.getHospitalCard(patientId);
 
-        req.getSession().setAttribute("back",req.getParameter("back"));
+        req.getSession().setAttribute("back", req.getParameter("back"));
         req.getSession().setAttribute("patient_surname", hospitalCard.getPatientsSurname());
         req.getSession().setAttribute("patient_name", hospitalCard.getPatientsName());
         req.getSession().setAttribute("create_time", hospitalCard.getCreateTime());
         req.getSession().setAttribute("id_card", hospitalCard.getId());
+        req.getSession().setAttribute("status_patient", hospitalCard.getStatus());
 
         if (hospitalCard.getDiagnosis() != null) {
             req.getSession().setAttribute("diagnosis", hospitalCard.getDiagnosis());

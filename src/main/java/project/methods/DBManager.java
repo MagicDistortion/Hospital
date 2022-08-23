@@ -659,6 +659,7 @@ public class DBManager {
                     hospitalCard.setCurrentDoctorSurname(doctor.getSurname());
                 }
                 hospitalCardList.add(hospitalCard);
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -687,6 +688,7 @@ public class DBManager {
                     hospitalCard.setCurrentDoctorSurname(doctor.getSurname());
                 }
                 hospitalCardList.add(hospitalCard);
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
