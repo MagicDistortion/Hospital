@@ -11,9 +11,12 @@ public class HospitalCard {
     private LocalDate createTime;
     private String currentDoctorSurname;
     private String currentDoctorName;
+    private String status;
+
     public HospitalCard(int id) {
-    this.id = id;
+        this.id = id;
     }
+
     public int getId() {
         return id;
     }
@@ -68,6 +71,14 @@ public class HospitalCard {
 
     public void setCurrentDoctorSurname(String currentDoctorSurname) {
         this.currentDoctorSurname = currentDoctorSurname;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getCurrentDoctorName() {

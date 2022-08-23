@@ -1,8 +1,8 @@
 package project.appointments;
 
 public class Appointment {
-    int id;
-    String name;
+    private int id;
+    private String name;
 
     public Appointment(String name) {
         this.name = name;
@@ -26,6 +26,6 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "Appointment{"+name+'}';
+        return "Appointment{" + name + '}';
     }
 }

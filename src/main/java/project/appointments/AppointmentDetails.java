@@ -4,16 +4,17 @@ import java.time.LocalDate;
 
 public class AppointmentDetails {
     int id;
-    String text;
+    private String text;
     int nurseId;
     int appointmentId;
     int doctorsId;
     int hospitalCardId;
-    String doctorFullName;
-    String nurseFullName;
-    String patientFullName;
-    String appointment;
-    LocalDate date;
+    private String doctorFullName;
+    private String nurseFullName;
+    private String patientFullName;
+    private String appointment;
+    private LocalDate date;
+    private String status;
 
 
     public AppointmentDetails(String text, LocalDate date) {
@@ -99,6 +100,14 @@ public class AppointmentDetails {
 
     public void setPatientFullName(String patientFullName) {
         this.patientFullName = patientFullName;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public LocalDate getDate() {

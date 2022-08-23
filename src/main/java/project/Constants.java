@@ -15,6 +15,8 @@ public class Constants {
     public static final String UPDATE_USER_ROLE = "UPDATE users SET `id_roles` = ? WHERE (`id_users` = ?)";
     public static final String UPDATE_DOCTOR_CATEGORY = "UPDATE doctors SET `category_id` = ? WHERE (`id` = ?)";
     public static final String UPDATE_DIAGNOS= "UPDATE hospital_card SET diagnosis = ? WHERE id_card =?";
+    public static final String UPDATE_APPOINTMENT_STATUS= "UPDATE appoinment_detail SET status = ? WHERE id = ? ";
+    public static final String UPDATE_HOSPITAL_CARD_STATUS= "UPDATE hospital_card SET status = ? WHERE id_card = ? ";
     public static final String APPOINT_A_DOCTOR = "UPDATE hospital_card,doctors SET `current_doctor_id` = ? , doctors.number_of_patients= ? WHERE id_card = ? AND doctors.id=?";
     public static final String FROM_USERS = "SELECT * FROM users ";
     public static final String FROM_USERS_WITHOUT_ROLE = "SELECT * FROM users where id_roles is null";

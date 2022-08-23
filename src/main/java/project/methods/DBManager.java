@@ -154,9 +154,7 @@ public class DBManager {
     public void insertAppointmentDetails(AppointmentDetails appointmentDetails) {
         try (PreparedStatement preparedStatement = getPreparedStatement(Constants.INSERT_APPOINTMENT_DETAIL)) {
             preparedStatement.setString(1, appointmentDetails.getText());
-            if (appointmentDetails.getNurseId() != 0) {
-                preparedStatement.setInt(2, appointmentDetails.getNurseId());
-            } else preparedStatement.setObject(2, null);
+            preparedStatement.setInt(2, appointmentDetails.getNurseId());
             preparedStatement.setInt(3, appointmentDetails.getAppointmentId());
             preparedStatement.setInt(4, appointmentDetails.getDoctorsId());
             preparedStatement.setInt(5, appointmentDetails.getHospitalCardId());
@@ -194,6 +192,26 @@ public class DBManager {
         try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_DIAGNOS)) {
             preparedStatement.setString(1, diagnos);
             preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateAppointmentStatus(String status, int id) {
+        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_APPOINTMENT_STATUS)) {
+            preparedStatement.setString(1, status);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateHospitalCardStatus(String status, int idCard) {
+        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_HOSPITAL_CARD_STATUS)) {
+            preparedStatement.setString(1, status);
+            preparedStatement.setInt(2, idCard);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -285,7 +303,7 @@ public class DBManager {
         return userList;
     }
 
-    public List<User> findUsersWitchoutRole() {
+    public List<User> findUsersWitchOutRole() {
         List<User> userList = new ArrayList<>();
         try (ResultSet resultSet = getResultSet(Constants.FROM_USERS_WITHOUT_ROLE)) {
             while (resultSet.next()) {
@@ -428,6 +446,7 @@ public class DBManager {
                 LocalDate date = resultSet.getDate("date").toLocalDate();
                 if (date.equals(LocalDate.now()) || date.isAfter(LocalDate.now())) {
                     Doctor doctor = findDoctorById(resultSet.getInt("doctors_id"));
+
                     Nurse nurse = findNurseById(resultSet.getInt("nurse_id"));
                     AppointmentDetails appointmentDetails = new AppointmentDetails(resultSet.getString("text"), date);
                     appointmentDetails.setId(resultSet.getInt("id"));
@@ -436,6 +455,8 @@ public class DBManager {
                     appointmentDetails.setDoctorsId(resultSet.getInt("doctors_id"));
                     appointmentDetails.setHospitalCardId(resultSet.getInt("hospital_card_id"));
                     appointmentDetails.setAppointment(resultSet.getString("name"));
+                    appointmentDetails.setStatus(resultSet.getString("status"));
+
                     appointmentDetails.setDoctorFullName(doctor.getSurname() + " " + doctor.getName());
                     appointmentDetails.setNurseFullName(nurse.getSurname() + " " + nurse.getName());
                     appointmentDetailsList.add(appointmentDetails);
@@ -454,21 +475,26 @@ public class DBManager {
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getResultSet();
             while (resultSet.next()) {
+                String status = resultSet.getString("status");
                 LocalDate date = resultSet.getDate("date").toLocalDate();
-                if (date.equals(LocalDate.now()) || date.isAfter(LocalDate.now())) {
-                    Doctor doctor = findDoctorById(resultSet.getInt("doctors_id"));
-                    Patient patient = findPatientById(resultSet.getInt("hospital_card_id"));
-                    AppointmentDetails appointmentDetails = new AppointmentDetails(resultSet.getString("text"), date);
-                    appointmentDetails.setId(resultSet.getInt("id"));
-                    appointmentDetails.setNurseId(resultSet.getInt("nurse_id"));
-                    appointmentDetails.setAppointmentId(resultSet.getInt("appoinment_id"));
-                    appointmentDetails.setDoctorsId(resultSet.getInt("doctors_id"));
-                    appointmentDetails.setHospitalCardId(resultSet.getInt("hospital_card_id"));
-                    appointmentDetails.setAppointment(resultSet.getString("name"));
-                    appointmentDetails.setDoctorFullName(doctor.getSurname() + " " + doctor.getName());
-                    appointmentDetails.setPatientFullName(patient.getSurname() + " " + patient.getName());
-                    appointmentDetailsList.add(appointmentDetails);
-                }
+                if (!status.equals("done"))
+                    if (date.equals(LocalDate.now()) || date.isAfter(LocalDate.now())) {
+                        Doctor doctor = findDoctorById(resultSet.getInt("doctors_id"));
+
+                        Patient patient = findPatientById(resultSet.getInt("hospital_card_id"));
+                        AppointmentDetails appointmentDetails = new AppointmentDetails(resultSet.getString("text"), date);
+                        appointmentDetails.setId(resultSet.getInt("id"));
+                        appointmentDetails.setNurseId(resultSet.getInt("nurse_id"));
+                        appointmentDetails.setAppointmentId(resultSet.getInt("appoinment_id"));
+                        appointmentDetails.setDoctorsId(resultSet.getInt("doctors_id"));
+                        appointmentDetails.setHospitalCardId(resultSet.getInt("hospital_card_id"));
+                        appointmentDetails.setAppointment(resultSet.getString("name"));
+                        appointmentDetails.setStatus(status);
+
+                        appointmentDetails.setDoctorFullName(doctor.getSurname() + " " + doctor.getName());
+                        appointmentDetails.setPatientFullName(patient.getSurname() + " " + patient.getName());
+                        appointmentDetailsList.add(appointmentDetails);
+                    }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -593,13 +619,16 @@ public class DBManager {
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getResultSet();
             if (resultSet.next()) {
+                Doctor doctor = findDoctorById(resultSet.getInt("current_doctor_id"));
+
                 hospitalCard = new HospitalCard(resultSet.getInt("id_card"));
                 hospitalCard.setDiagnosis(resultSet.getString("diagnosis"));
                 hospitalCard.setDoctorsId(resultSet.getInt("current_doctor_id"));
                 hospitalCard.setCreateTime(resultSet.getDate("create_time").toLocalDate());
                 hospitalCard.setPatientsName(resultSet.getString("name"));
                 hospitalCard.setPatientsSurname(resultSet.getString("surname"));
-                Doctor doctor = findDoctorById(resultSet.getInt("current_doctor_id"));
+                hospitalCard.setStatus(resultSet.getString("status"));
+
                 if (doctor != null) {
                     hospitalCard.setCurrentDoctorName(doctor.getName());
                     hospitalCard.setCurrentDoctorSurname(doctor.getSurname());
@@ -615,19 +644,21 @@ public class DBManager {
         List<HospitalCard> hospitalCardList = new ArrayList<>();
         try (ResultSet resultSet = getResultSet(Constants.GET_ALL_HOSPITAL_CARDS)) {
             while (resultSet.next()) {
+                Doctor doctor = findDoctorById(resultSet.getInt("current_doctor_id"));
+
                 HospitalCard hospitalCard = new HospitalCard(resultSet.getInt("id_card"));
                 hospitalCard.setDiagnosis(resultSet.getString("diagnosis"));
                 hospitalCard.setDoctorsId(resultSet.getInt("current_doctor_id"));
                 hospitalCard.setCreateTime(resultSet.getDate("create_time").toLocalDate());
                 hospitalCard.setPatientsName(resultSet.getString("name"));
                 hospitalCard.setPatientsSurname(resultSet.getString("surname"));
-                Doctor doctor = findDoctorById(resultSet.getInt("current_doctor_id"));
+                hospitalCard.setStatus(resultSet.getString("status"));
+
                 if (doctor != null) {
                     hospitalCard.setCurrentDoctorName(doctor.getName());
                     hospitalCard.setCurrentDoctorSurname(doctor.getSurname());
                 }
                 hospitalCardList.add(hospitalCard);
-
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -641,19 +672,21 @@ public class DBManager {
         List<HospitalCard> hospitalCardList = new ArrayList<>();
         try (ResultSet resultSet = getResultSet(Constants.GET_ALL_HOSPITAL_CARDS + limit)) {
             while (resultSet.next()) {
+                Doctor doctor = findDoctorById(resultSet.getInt("current_doctor_id"));
+
                 HospitalCard hospitalCard = new HospitalCard(resultSet.getInt("id_card"));
                 hospitalCard.setDiagnosis(resultSet.getString("diagnosis"));
                 hospitalCard.setDoctorsId(resultSet.getInt("current_doctor_id"));
                 hospitalCard.setCreateTime(resultSet.getDate("create_time").toLocalDate());
                 hospitalCard.setPatientsSurname(resultSet.getString("surname"));
                 hospitalCard.setPatientsName(resultSet.getString("name"));
-                Doctor doctor = findDoctorById(resultSet.getInt("current_doctor_id"));
+                hospitalCard.setStatus(resultSet.getString("status"));
+
                 if (doctor != null) {
                     hospitalCard.setCurrentDoctorName(doctor.getName());
                     hospitalCard.setCurrentDoctorSurname(doctor.getSurname());
                 }
                 hospitalCardList.add(hospitalCard);
-
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

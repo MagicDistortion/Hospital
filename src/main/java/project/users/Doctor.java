@@ -4,7 +4,6 @@ public class Doctor {
     private int id;
     private String surname;
     private String name;
-
     private int numberOfPatients;
     private int categoryId;
     private String category;
@@ -31,6 +30,7 @@ public class Doctor {
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
+
     public int getId() {
         return id;
     }
@@ -65,6 +65,6 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "\n Doctor "+  name +" "+category + " "+getCategoryId() + " " + numberOfPatients;
+        return "\n Doctor " + name + " " + category + " " + getCategoryId() + " " + numberOfPatients;
     }
 }

@@ -28,12 +28,14 @@
              <col>
              <col>
              <col>
+             <col>
             </colgroup>
             <th style="color:#0000ff"><h4/> Appointment &nbsp</th>
             <th style="color:#ffff00"><h4/> Appointment details &nbsp</th>
             <th style="color:#0000ff"><h4/> Current Doctor &nbsp</th>
             <th style="color:#ffff00"><h4/> Patient &nbsp</th>
             <th style="color:#0000ff"><h4 />Date &nbsp</th>
+            <th style="color:#ffff00"><h4 />Set Status &nbsp</th>
               <c:forEach items="${appointments}" var="i">
                 <tr>
                   <td><h3 style="color:#fff"/>${i.getAppointment()}&nbsp</td>
@@ -41,11 +43,21 @@
                   <td><h3 style="color:#fff"/>${i.getDoctorFullName()}&nbsp</td>
                   <td><h3 style="color:#fff"/>${i.getPatientFullName()}&nbsp</td>
                   <td><h3 style="color:#fff"/>${i.getDate()} &nbsp</td>
+                <form action ="../nurses_only/update_status" method ="post">
+                  <input type="hidden" name="id" value="${i.getId()}"/>
+                  <td><select name="status">
+                         <option disabled>set status</option>
+                         <option value="in process">In process</option>
+                         <option value="done">Done</option>
+                       <input type="submit" value="Set status"/>
+                      </select></td>
+                </form>
                 </tr>
               </c:forEach>
         </table>
              <h2 style="color:#B22222">
                   <c:if  test="${not empty mes}" >${mes}</c:if>
+                  <c:if  test="${not empty message}" >${message}</c:if>
              </h2>
         </h2>
       </div>
