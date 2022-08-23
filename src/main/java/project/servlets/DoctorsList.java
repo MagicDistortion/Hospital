@@ -2,8 +2,6 @@ package project.servlets;
 
 import project.methods.DBManager;
 import project.users.Doctor;
-import project.users.User;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

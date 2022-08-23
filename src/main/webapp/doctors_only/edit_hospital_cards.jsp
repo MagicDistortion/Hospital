@@ -47,6 +47,10 @@ body {background:#000000 url(../images/Serze2.jpg)}
                   </tr>
            </c:forEach>
            </table>
+                        <h2 style="color:#B22222">
+                            <c:if  test="${not empty mes}" >${mes}</c:if>
+                        </h2>
+             <h2  style="color:#ffff00">add appoint</h2>
               <form action ="../doctors_only/insert_appoint" method ="post">
                   <input type="hidden" name="id" value="${id_card}"/>
                 <select name="appoint" required>
@@ -67,7 +71,6 @@ body {background:#000000 url(../images/Serze2.jpg)}
     	        <input type="submit" value="insert new appoint"/><br>
               </form>
              <h2 style="color:#B22222">
-                 <c:if  test="${not empty mes}" >${mes}</c:if>
                  <c:if  test="${not empty message}" >${message}</c:if>
              </h2>
         </td>
@@ -105,7 +108,7 @@ body {background:#000000 url(../images/Serze2.jpg)}
                      </tr>
                      <tr style="color:#0000ff">
                         <td>Status:</td>
-                        <td width=400>${status_patient}</td>
+                        <td>${status_patient}</td>
                      </tr>
                      <tr>
                          <td><form action ="../doctors_only/update_diagnosis" method ="post">

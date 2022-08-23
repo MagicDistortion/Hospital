@@ -32,11 +32,9 @@
                             <input type="hidden" name="id" value="${i.getId()}"/>
                              <select name="category">
                                  <option disabled>select action</option>
-                                 <option value="2">Гинеколог</option>
-                                 <option value="3">Стоматолог</option>
-                                 <option value="4">Хирург</option>
-                                 <option value="5">Педиатр</option>
-                                 <option value="6">Травмотолог</option>
+                             <c:forEach items="${categories}" var="j">
+                                <option value="${j.getId()}">${j.getName()}</option>
+                             </c:forEach>
                              </select><br>
                              <input type="submit" value="pick"/>
                          </form>

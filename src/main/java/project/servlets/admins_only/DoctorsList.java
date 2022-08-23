@@ -1,5 +1,6 @@
 package project.servlets.admins_only;
 
+import project.categories.Categories;
 import project.methods.DBManager;
 import project.users.Doctor;
 
@@ -17,9 +18,12 @@ public class DoctorsList extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Categories> allCategories = dbManager.findAllCategories();
+        req.setAttribute("categories",allCategories);
 
         List<Doctor> allDoctores = dbManager.findAllDoctores("WHERE category_id = 1 ORDER BY users.name");
         req.setAttribute("docs", allDoctores);
+
         if (allDoctores.size()==0)req.setAttribute("mes","empty");
         req.getRequestDispatcher("/admins_only/giving_a_category.jsp").forward(req, resp);
     }

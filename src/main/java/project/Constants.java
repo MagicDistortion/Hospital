@@ -17,6 +17,7 @@ public class Constants {
     public static final String UPDATE_DIAGNOS= "UPDATE hospital_card SET diagnosis = ? WHERE id_card =?";
     public static final String UPDATE_APPOINTMENT_STATUS= "UPDATE appoinment_detail SET status = ? WHERE id = ? ";
     public static final String UPDATE_HOSPITAL_CARD_STATUS= "UPDATE hospital_card SET status = ? WHERE id_card = ? ";
+    public static final String UPDATE_NUMBER_OF_PATIENTS= "UPDATE doctors SET number_of_patients = ? WHERE id = ? ";
     public static final String APPOINT_A_DOCTOR = "UPDATE hospital_card,doctors SET `current_doctor_id` = ? , doctors.number_of_patients= ? WHERE id_card = ? AND doctors.id=?";
     public static final String FROM_USERS = "SELECT * FROM users ";
     public static final String FROM_USERS_WITHOUT_ROLE = "SELECT * FROM users where id_roles is null";
@@ -26,7 +27,7 @@ public class Constants {
     public static final String FROM_PATIENTS = "SELECT * FROM patients LEFT JOIN users on id_users=id LEFT JOIN hospital_card on id_card = id ";
     public static final String FROM_CATEGORIES = "SELECT * FROM category ";
     public static final String FROM_APPOINTMENTS = "SELECT * FROM appointment ";
-    public static final String FROM_APPOINTMENT_DETAIL = "SELECT * FROM appoinment_detail left join appointment on appoinment_id = appointment.id where hospital_card_id = ?";
+    public static final String FROM_APPOINTMENT_DETAIL = "SELECT * FROM appoinment_detail left join appointment on appoinment_id = appointment.id where hospital_card_id = ? and `status`!='done'";
     public static final String FROM_APPOINTMENTS_FOR_NURSE = "SELECT * FROM appoinment_detail left join appointment on appoinment_id = appointment.id where nurse_id = ?";
     public static final String FIND_CATEGORY = "SELECT * FROM category WHERE name = ?";
     public static final String FIND_BY_LOGIN = "SELECT * FROM users WHERE login = ? ";
@@ -43,6 +44,7 @@ public class Constants {
     public static final String UPDATE_USER_PASSWORD = "UPDATE users SET `password` = ? WHERE (`id_users` = ?)";
     public static final String UPDATE_USER_TEL = "UPDATE users SET `tel` = ? WHERE (`id_users` = ?)";
     public static final String UPDATE_USER_DATE_OF_BIRTH = "UPDATE users SET `date_of_birth`= ?  WHERE `id_users` = ?";
+    public static final String DISCHARGE_PATIENT = "UPDATE hospital_card SET `current_doctor_id` = null  WHERE id_card = ?";
 
 
 }

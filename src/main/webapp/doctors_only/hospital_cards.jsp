@@ -16,15 +16,15 @@
     <div align="center" >
         <h2  style="color:#fff">Get Hospital Cards</h2>
             <form action ="../doctors_only/hospital_cards" method ="get">
-                                     <input type="text" name="pagination" pattern="[1-9]\d*"
-                                     <c:choose>
-                                        <c:when test="${not empty pagination}">value="${pagination}"
-                                        </c:when>
-                                        <c:otherwise>value="5"
-                                        </c:otherwise>
-                                    </c:choose>
-                                      placeholder="pagination" required />
-                <input type="submit" value="Get them!"/><br>
+               <input type="text" name="pagination" pattern="[1-9]\d*"
+                 <c:choose>
+                    <c:when test="${not empty pagination}">value="${pagination}"
+                    </c:when>
+                    <c:otherwise>value="5"
+                    </c:otherwise>
+                 </c:choose>
+                   placeholder="pagination" required />
+               <input type="submit" value="Get them!"/><br>
             </form>
         <h2 style="color:#B22222">
         <table border="1">

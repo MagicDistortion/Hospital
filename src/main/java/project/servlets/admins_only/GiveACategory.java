@@ -12,7 +12,6 @@ import java.io.IOException;
 @WebServlet("/admins_only/give_a_category")
 public class GiveACategory extends HttpServlet {
     DBManager dbManager = DBManager.getInstance();
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int category = Integer.parseInt(req.getParameter("category"));

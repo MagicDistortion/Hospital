@@ -23,10 +23,10 @@ public class PatientsList extends HttpServlet {
         req.setAttribute("sort", sort);
         switch (sort) {
             case "name":
-                sort = "ORDER BY name";
+                sort = "WHERE `status`!='discharged' ORDER BY name";
                 break;
             case "date":
-                sort = "ORDER BY date_of_birth";
+                sort = "WHERE `status`!='discharged' ORDER BY date_of_birth";
         }
         List<Patient> patients = dbManager.findAllPatients(sort);
         req.setAttribute("patients", patients);
@@ -57,10 +57,10 @@ public class PatientsList extends HttpServlet {
         if (sort == null) sort = "name";
         switch (sort) {
             case "name":
-                sort = "WHERE current_doctor_id is null ORDER BY name";
+                sort = "WHERE current_doctor_id is null AND `status`!='discharged' ORDER BY name";
                 break;
             case "date":
-                sort = "WHERE current_doctor_id is null ORDER BY date_of_birth";
+                sort = "WHERE current_doctor_id is null AND `status`!='discharged' ORDER BY date_of_birth";
         }
         List<Patient> patients = dbManager.findAllPatients(sort);
         List<Doctor> doctors = dbManager.findAllDoctores("Order by users.name");

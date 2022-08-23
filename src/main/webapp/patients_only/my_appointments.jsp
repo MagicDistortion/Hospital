@@ -19,8 +19,6 @@
             <form action ="../patients_only/my_appointments" method ="get">
                 <input type="submit" value="Get them!"/><br>
             </form>
-        <h2 style="color:#B22222">
-
         <table border="1" >
             <colgroup style="background-color:#87CEFA;">
              <col>
@@ -47,7 +45,47 @@
              <h2 style="color:#B22222">
                   <c:if  test="${not empty mes}" >${mes}</c:if>
              </h2>
-        </h2>
+             <h2  style="color:#fff">Get my hospitalCard</h2>
+            <form action ="../patients_only/my_hospitalcard" method ="get">
+                <input type="submit" value="Get"/><br>
+            </form>
+    </form>
+    <c:if test="${not empty diagnosis}">
+    <h3>
+        <table border="1" >
+            <colgroup style="background-color:#87CEFA;">
+             <col>
+             <col>
+             <col>
+             <col>
+             <col>
+            </colgroup>
+                     <tr style="color:#0000ff">
+                        <td>Current doctor`s Surname: &nbsp</td>
+                        <td>${current_doctorSurname}</td>
+                     </tr>
+                     <tr style="color:#ffff00">
+                        <td>Current doctor`s name: &nbsp</td>
+                        <td>${current_doctorName}</td>
+                     </tr>
+                     <tr style="color:#0000ff">
+                        <td>Current diagnosis: &nbsp</td>
+                        <td width=400>${diagnosis}</td>
+                     </tr>
+                     <tr style="color:#ffff00">
+                        <td>Status:</td>
+                        <td>${status_patient}</td>
+                     </tr>
+        </table>
+    </h3>
+    </c:if>
+             <c:if test="${status_patient.equals('discharged')}">
+                 <form action ="../patients_only/newbee_again" method ="post">
+                    <input type="submit" value="need help again"/>
+                 </form>
+             </c:if>
+              <c:if test="{not empty messtatus}">${messtatus}
+              </c:if>
       </div>
     </body>
 </html>

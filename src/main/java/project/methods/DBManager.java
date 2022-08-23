@@ -207,11 +207,19 @@ public class DBManager {
             e.printStackTrace();
         }
     }
-
     public void updateHospitalCardStatus(String status, int idCard) {
         try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_HOSPITAL_CARD_STATUS)) {
             preparedStatement.setString(1, status);
             preparedStatement.setInt(2, idCard);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void updateNumberOfPatients(int patients, int docId) {
+        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_NUMBER_OF_PATIENTS)) {
+            preparedStatement.setInt(1, patients);
+            preparedStatement.setInt(2, docId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -274,6 +282,14 @@ public class DBManager {
         try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_USER_TEL)) {
             preparedStatement.setString(1, tel);
             preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void dischargePatient(int id) {
+        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.DISCHARGE_PATIENT)) {
+            preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
