@@ -34,7 +34,7 @@ public class UpdatePatientStatus extends HttpServlet {
         }
         dbManager.updateHospitalCardStatus(status, id);
         req.getSession().setAttribute("status_patient",status);
-        req.setAttribute("messtatus", "status updated");
+        req.setAttribute("messtatus", req.getSession().getAttribute("langStatusUpdated"));
 
         req.getRequestDispatcher("/doctors_only/edit_hospital_cards.jsp").forward(req, resp);
     }

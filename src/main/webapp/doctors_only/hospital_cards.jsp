@@ -14,7 +14,7 @@
     <%@ include file="../header_doctors.jspf" %>
    <br><br>
     <div align="center" >
-        <h2  style="color:#fff">Get Hospital Cards</h2>
+        <h2  style="color:#fff">${langGetHospitalCards}</h2>
             <form action ="../doctors_only/hospital_cards" method ="get">
                <input type="text" name="pagination" pattern="[1-9]\d*"
                  <c:choose>
@@ -24,7 +24,7 @@
                     </c:otherwise>
                  </c:choose>
                    placeholder="pagination" required />
-               <input type="submit" value="Get them!"/><br>
+               <input type="submit" value="${langGetThem}"/><br>
             </form>
         <h2 style="color:#B22222">
         <table border="1">
@@ -33,17 +33,17 @@
              <col>
              <col>
             </colgroup>
-            <th style="color:#0000ff"><h4/> Patients Surname &nbsp</th>
-            <th style="color:#ffff00"><h4/> Patients Name &nbsp</th>
-            <th style="color:#0000ff"><h4 />go to Details &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${langSurname} &nbsp</th>
+            <th style="color:#ffff00"><h4/> ${langName} &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${langGoTo} &nbsp</th>
                   <c:forEach items="${cards}" var="i">
                       <tr>
-                         <td style="color:#fff"><h3/>${i.getPatientsSurname()}</td>
-                         <td style="color:#fff"><h3/>${i.getPatientsName()}</td>
+                         <td style="color:#fff"><h3/>${i.getPatientsSurname()} &nbsp</td>
+                         <td style="color:#fff"><h3/>${i.getPatientsName()} &nbsp</td>
                             <form action ="../doctors_only/edit_hospital_cards" method ="post">
                                <input type="hidden" name="id" value="${i.getId()}"/>
                                <input type="hidden" name="back" value="hospital_cards"/>
-                         <td> <input type="submit" value="get detail"> </td>
+                         <td> <input type="submit" value="${langGetDetail}"> </td>
                             </form>
                       </tr>
                   </c:forEach>

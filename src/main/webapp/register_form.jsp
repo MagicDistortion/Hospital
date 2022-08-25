@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <style>
 body {background:#000000 url(images/Serze2.jpg)}
 </style>
@@ -17,41 +17,41 @@ body {background:#000000 url(images/Serze2.jpg)}
 <div align="center" >
     <table>
          <tr>
-            <td style="color:#0000ff" /> Surname:</td>
-            <td><input name="surname" placeholder="enter Surname" pattern="^[A-Za-zА-Яа-яІіЇїєЄ]{1,32}" required/></td>
+            <td style="color:#0000ff" />${langSurname}:</td>
+            <td><input name="surname" placeholder="${langEnterSurname}" pattern="^[A-Za-zА-Яа-яІіЇїєЄ]{1,32}" required/></td>
         </tr>
         <tr>
-            <td style="color:#0000ff" /> Name:</td>
-            <td><input name="name" placeholder="enter Name" pattern="^[A-Za-zА-Яа-яІіЇїєЄ]{1,32}" required/></td>
+            <td style="color:#0000ff" />${langName}:</td>
+            <td><input name="name" placeholder="${langEnterName}" pattern="^[A-Za-zА-Яа-яІіЇїєЄ]{1,32}" required/></td>
         </tr>
         <tr>
-            <td style="color:#ffff00"/> Login:</td>
-	        <td><input name="login" placeholder="enter Login" required/></td>
+            <td style="color:#ffff00"/>${langLogin}:</td>
+	        <td><input name="login" placeholder="${langEnterLogin}" required/></td>
 
         </tr>
         <tr>
-            <td style="color:#0000ff"/> Password:</td>
-            <td><input type="password" name="password" placeholder="enter Password" required/></td>
+            <td style="color:#0000ff"/>${langPassword}:</td>
+            <td><input type="password" name="password" placeholder="${langEnterPassword}" required/></td>
         </tr>
 	    <tr>
-	        <td style="color:#ffff00"/> Re-enter Password:</td>
-	        <td><input type="password" name="repassword"  placeholder="re enter Password"required/></td>
+	        <td style="color:#ffff00"/>${langRePassword}:</td>
+	        <td><input type="password" name="repassword"  placeholder="${langRePassword}"required/></td>
 
         </tr>
         <tr>
-            <td style="color:#0000ff"/> Tel:</td>
-            <td> <input  type="number" name="tel" placeholder="enter Tel" required></td>
+            <td style="color:#0000ff"/>${langTel}:</td>
+            <td> <input  type="number" name="tel" placeholder="${langEnterTel}" required></td>
             <td style="color:#0000ff"/>Format: xxx xxx-xx-xx</td>
 
         </tr>
         <tr>
-            <td style="color:#ffff00"/> Date of Birth</td>
+            <td style="color:#ffff00"/> ${langDateOfBirth}:</td>
             <td><input type="date" name="date_of_birth" value="1900-01-01" required/></td>
-            <td style="color:#ffff00"/>Format: 1900 - today:</td>
+            <td style="color:#ffff00"/>Format: 1900 - ${langToday}:</td>
 
         </tr>
     </table>
-    	<input type="submit" value="register now!"/><br>
+    	<input type="submit" value="${langRegister}"/><br>
 
     <h2 style="color:#B22222">
         <c:if  test="${not empty mes}" >${mes}</c:if>

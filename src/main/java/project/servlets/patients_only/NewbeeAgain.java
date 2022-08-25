@@ -21,7 +21,7 @@ public class NewbeeAgain extends HttpServlet {
 
         if (status.equals("discharged")){
             dbManager.updateHospitalCardStatus("newbee", id);
-            req.setAttribute("messtatus", "status updated");
+            req.setAttribute("messtatus", req.getSession().getAttribute("langStatusUpdated"));
             req.getSession().setAttribute("status_patient","newbee");
 
         }

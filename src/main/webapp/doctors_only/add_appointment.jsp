@@ -16,10 +16,9 @@
     <div align="center" >
         <form action="../doctors_only/add_appointment" method="post">
         <table>
-            <th style="color:#0000ff"><h4/> Add Appointment &nbsp</th>
             <tr>
                 <td><input name="name" placeholder="enter a name" required/></td>
-                  <td><input type="submit" value="Add Appoinment"/></td>
+                  <td><input type="submit" value="${langAddAppointment}"/></td>
             </tr>
         </form>
         </table>

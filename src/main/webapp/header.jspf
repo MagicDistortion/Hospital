@@ -17,19 +17,19 @@
 
          <c:if  test="${user.getRolesId()==2}" >
               <br>
-            <a style="color:#0000ff" href="doctors_only/my_patients.jsp">My Patients</a>
-            <a style="color:#ffff00" href="doctors_only/hospital_cards.jsp">Hospital Cards</a>
-            <a style="color:#0000ff" href="doctors_only/add_appointment.jsp">Add appointment</a>
+            <a style="color:#0000ff" href="doctors_only/my_patients.jsp">${langMyPatients}</a>
+            <a style="color:#ffff00" href="doctors_only/hospital_cards.jsp">${langHospitalCards}</a>
+            <a style="color:#0000ff" href="doctors_only/add_appointment.jsp">${langAddAppointment}</a>
          </c:if>
 
          <c:if  test="${user.getRolesId()==3}" >
                     <br>
-            <a style="color:#0000ff" href="nurses_only/my_appointments.jsp">My Appointments</a>
+            <a style="color:#0000ff" href="nurses_only/my_appointments.jsp">${langMyAppointments}</a>
          </c:if>
 
          <c:if  test="${user.getRolesId()==4}" >
                     <br>
-             <a style="color:#0000ff" href="patients_only/my_appointments.jsp">My Appointments</a>
+             <a style="color:#0000ff" href="patients_only/my_appointments.jsp">${langMyAppointments}</a>
          </c:if>
 
      </h2>

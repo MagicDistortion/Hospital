@@ -33,10 +33,10 @@ public class Login extends HttpServlet {
             req.getSession().setAttribute("user",user);
             req.getRequestDispatcher("login.jsp").forward(req,resp);
         }if (user==null){
-            req.setAttribute("mes"," Login -> "+login+" not found");
+            req.setAttribute("mes"," Login -> "+login +req.getSession().getAttribute("langNotFound"));
             req.getRequestDispatcher("index.jsp").forward(req,resp);
         }if (user!=null&&!user.getPassword().equals(String.valueOf(password.hashCode()))){
-            req.setAttribute("mes","password is wrong");
+            req.setAttribute("mes",req.getSession().getAttribute("langWrongPassword"));
             req.getRequestDispatcher("index.jsp").forward(req,resp);
         }
     }

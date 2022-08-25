@@ -19,7 +19,7 @@ public class GetAppoinmentDetails extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = (int) req.getSession().getAttribute("id_card");
         List<AppointmentDetails> appointmentsDetails = dbManager.findAllAppointmentDetailsByID(id);
-        if (appointmentsDetails.size() == 0) req.setAttribute("mes", "empty");
+        if (appointmentsDetails.size() == 0) req.setAttribute("mes", req.getSession().getAttribute("langEmpty"));
         req.setAttribute("appointments", appointmentsDetails);
         req.getRequestDispatcher("/doctors_only/edit_hospital_cards.jsp").forward(req, resp);
     }

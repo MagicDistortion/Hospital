@@ -20,7 +20,7 @@ public class UpdateStatus extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         String status =req.getParameter("status");
         dbManager.updateAppointmentStatus(status,id);
-        req.setAttribute("message","status updated");
+        req.setAttribute("messtatus", req.getSession().getAttribute("langStatusUpdated"));
 
         req.getRequestDispatcher("/nurses_only/my_appointments.jsp").forward(req, resp);
     }

@@ -16,10 +16,10 @@ body {background:#000000 url(../images/Serze2.jpg)}
 <table align="center">
     <tr>
         <td>
-           <h2  style="color:#0000ff">Get appointments of patient</h2>
+           <h2  style="color:#0000ff">${langGetAppointmentsOfPatient}</h2>
             <form action ="../doctors_only/get_appointments" method ="get">
                 <input type="hidden" name="id" value="${id_card}"/>
-                <input type="submit" value="Get them!"/>
+                <input type="submit" value="${langGetThem}"/>
             </form>
            <table >
             <colgroup style="background-color:#87CEFA;">
@@ -30,12 +30,12 @@ body {background:#000000 url(../images/Serze2.jpg)}
              <col>
              <col>
             </colgroup>
-               <th style="color:#0000ff"><h3/> Appointment &nbsp</th>
-               <th style="color:#ffff00"><h3/> Appointment details &nbsp</th>
-               <th style="color:#0000ff"><h3/> Current Doctor &nbsp</th>
-               <th style="color:#ffff00"><h3 />Designated Nurse &nbsp</th>
-               <th style="color:#0000ff"><h3 />Date &nbsp&nbsp&nbsp</th>
-               <th style="color:#ffff00"><h3 />Status &nbsp&nbsp&nbsp</th>
+               <th style="color:#0000ff"><h3/> ${langAppointment} &nbsp</th>
+               <th style="color:#ffff00"><h3/> ${langAppointmentDetails}</th>
+               <th style="color:#0000ff"><h3/> ${langCurrentDoctor}</th>
+               <th style="color:#ffff00"><h3/> ${langDesignatedNurse}</th>
+               <th style="color:#0000ff"><h3/> ${langDate} &nbsp&nbsp&nbsp</th>
+               <th style="color:#ffff00"><h3/> ${langStatus} &nbsp</th>
            <c:forEach items="${appointments}" var="i">
                   <tr>
                     <td><h3 style="color:#fff"/>${i.getAppointment()}&nbsp</td>
@@ -50,25 +50,25 @@ body {background:#000000 url(../images/Serze2.jpg)}
                         <h2 style="color:#B22222">
                             <c:if  test="${not empty mes}" >${mes}</c:if>
                         </h2>
-             <h2  style="color:#ffff00">add appoint</h2>
+             <h2  style="color:#ffff00">${langAddAppointment}</h2>
               <form action ="../doctors_only/insert_appoint" method ="post">
                   <input type="hidden" name="id" value="${id_card}"/>
                 <select name="appoint" required>
-                    <option disabled>pick a appoint</option>
+                    <option disabled>${langPickAPoint}</option>
                    <c:forEach items="${appoints}" var="j">
                     <option value="${j.getId()}">${j.getName()}</option>
                    </c:forEach>
                 </select>
-                  <input name="text" placeholder="details" required/>
+                  <input name="text" placeholder="${langDetails}" required/>
                 <select name="nurse" >
-                    <option disabled>pick a nurse</option>
+                    <option disabled>${langPickANurse}</option>
                    <c:forEach items="${nurses}" var="i">
                     <option value="${i.getId()}">${i.getSurname()} ${i.getName()}</option>
                    </c:forEach>
                 </select>
 
                 <input type="date" name="date" value="${today}" required/>
-    	        <input type="submit" value="insert new appoint"/><br>
+    	        <input type="submit" value="${langInsertNewAppointment}"/><br>
               </form>
              <h2 style="color:#B22222">
                  <c:if  test="${not empty message}" >${message}</c:if>
@@ -83,46 +83,46 @@ body {background:#000000 url(../images/Serze2.jpg)}
                   </colgroup>
                 <br><br>
                      <tr style="color:#0000ff">
-                         <td>Patient Surname:</td>
+                         <td>${langPatientSurname}:</td>
                          <td>${patient_surname}</td>
                      </tr>
                      <tr style="color:#ffff00">
-                         <td>Patient Name:</td>
+                         <td>${langPatientName}:</td>
                          <td>${patient_name}</td>
                      </tr>
                      <tr style="color:#0000ff">
-                        <td/>Date of registration:</td>
+                        <td/>${langDateOfRegistration}:</td>
 	                    <td>${create_time}</td>
                      </tr>
                      <tr style="color:#ffff00">
-                        <td>Current doctor`s Surname:</td>
+                        <td>${langDoctorSurname}:</td>
                         <td>${current_doctorSurname}</td>
                      </tr>
                      <tr style="color:#0000ff">
-                        <td>Current doctor`s name:</td>
+                        <td>${langDoctorName}:</td>
                         <td>${current_doctorName}</td>
                      </tr>
                      <tr style="color:#ffff00">
-                        <td>Current diagnosis:</td>
+                        <td>${langCurrentDiagnosis}:</td>
                         <td width=400>${diagnosis}</td>
                      </tr>
                      <tr style="color:#0000ff">
-                        <td>Status:</td>
+                        <td>${langStatus}:</td>
                         <td>${status_patient}</td>
                      </tr>
                      <tr>
                          <td><form action ="../doctors_only/update_diagnosis" method ="post">
                            <input type="hidden" name="id" value="${id_card}"/>
-    	                   <input type="submit" value="change diagnosis"/><br>
-    	                   <input name="diagnosis" placeholder="Enter new diagnosis"/><br>
+    	                   <input type="submit" value="${langChangeDiagnosis}"/><br>
+    	                   <input name="diagnosis" placeholder="${langEnterNewDiagnosis}"/><br>
                          </form></td>
                          <td><form action ="../doctors_only/update_status" method ="post">
                              <select name="status">
-                             <option disabled>set status</option>
+                             <option disabled>${langSetStatus}</option>
                              <option value="is being treated">is being treated</option>
                              <option value="cured">cured</option>
                              <option value="discharged">discharged</option>
-                             <input type="submit" value="Set status"/>
+                             <input type="submit" value="${langSetStatus}"/>
                              </select></form></td>
                      </tr>
             </table>
@@ -134,7 +134,7 @@ body {background:#000000 url(../images/Serze2.jpg)}
     </tr>
 </table>
 <div align="center">
-<input type="submit" value="back to Hospital Cards"  onclick="window.location='${back}.jsp';"/>
+<input type="submit" value="${langGoBack}"  onclick="window.location='${back}.jsp';"/>
 </div>
 
 </body>

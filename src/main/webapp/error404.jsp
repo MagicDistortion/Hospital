@@ -10,9 +10,16 @@
               body {background:#000000 url(<c:url value="/images/Serze2.jpg"/>)}
         </style>
          <div align="center" style="color:#fff">
-           <h1>Error 404</h1><br/>
-           <h2 class="text-center">Ooops. Something went wrong. Go to Login.</h2> <br/>
-           <h1> <a style="color:#fff" href="/Hospital/">go to Login</a> </h1>
+       <c:if test="${lang=='UA'}">
+            <h2 align="center">Помилка 404</h2>
+            <h2 align="center">Ууупс. Щось пішло не так. Поверніться на головну </h2>
+        </c:if>
+        <c:if test="${lang=='EN'}">
+            <h2 align="center">Error 404</h2>
+            <h2 align="center">Ooops. Something went wrong. Go to Login> </h2>
+        </c:if>
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+           <h1> <a style="color:#fff" href="/Hospital/">${langGoToLogin}</a> </h1>
          </div>
     </body>
 </html>

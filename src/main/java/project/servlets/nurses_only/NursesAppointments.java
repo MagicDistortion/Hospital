@@ -20,7 +20,7 @@ public class NursesAppointments extends HttpServlet {
         int id = (int) req.getSession().getAttribute("id");
         List<AppointmentDetails> appointments = dbManager.findAllAppointmentsForNurse(id);
         req.setAttribute("appointments", appointments);
-        if (appointments.size() == 0) req.setAttribute("mes", "empty");
+        if (appointments.size() == 0)  req.setAttribute("mes", req.getSession().getAttribute("langEmpty"));
         req.getRequestDispatcher("/nurses_only/my_appointments.jsp").forward(req, resp);
     }
 }

@@ -14,7 +14,7 @@
     <%@ include file="../header_doctors.jspf" %>
    <br><br>
     <div align="center" >
-        <h2  style="color:#fff">Get my Patients</h2>
+        <h2  style="color:#fff">${langGetMyPatients}</h2>
             <form action ="../doctors_only/my_patients" method ="get">
                          <input type="text" name="pagination" pattern="[1-9]\d*"
                          <c:choose>
@@ -25,10 +25,10 @@
                         </c:choose>
                           placeholder="pagination" required />
                 <select name="sort">
-                   <option disabled>sorted by</option>
-                   <option value="name">by Name</option>
-                   <option value="date">by Date of Birth</option>
-                <input type="submit" value="Get them!"/><br>
+                   <option disabled>${langSorted}</option>
+                   <option value="surname">${langBySurname}</option>
+                   <option value="date">${langByDateOfBirth}</option>
+                <input type="submit" value="${langGetThem}"/><br>
             </form>
         <h2 style="color:#B22222">
         <table border="1">
@@ -38,19 +38,19 @@
              <col>
              <col>
             </colgroup>
-            <th style="color:#0000ff"><h4/> Patients Surname &nbsp</th>
-            <th style="color:#ffff00"><h4/> Patients Name &nbsp</th>
-            <th style="color:#0000ff"><h4 />Date of Birth &nbsp</th>
-            <th style="color:#ffff00"><h4 />go to &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${langSurname} &nbsp</th>
+            <th style="color:#ffff00"><h4/> ${langName} &nbsp</th>
+            <th style="color:#0000ff"><h4 /> ${langDateOfBirth} &nbsp</th>
+            <th style="color:#ffff00"><h4 /> ${langGoTo} &nbsp</th>
                   <c:forEach items="${patientlist}" var="i">
                       <tr>
-                         <td style="color:#fff"><h3/>${i.getSurname()}</td>
-                         <td style="color:#fff"><h3/>${i.getName()}</td>
-                         <td style="color:#fff" align="center"><h3/>${i.getDateOfBitrth()}</td>
+                         <td style="color:#fff"><h3/>${i.getSurname()} &nbsp</td>
+                         <td style="color:#fff"><h3/>${i.getName()} &nbsp</td>
+                         <td style="color:#fff" align="center"><h3/>${i.getDateOfBirth()} &nbsp</td>
                             <form action ="../doctors_only/edit_hospital_cards" method ="post">
                                <input type="hidden" name="id" value="${i.getId()}"/>
                                <input type="hidden" name="back" value="my_patients"/>
-                         <td> <input type="submit" value="get detail"> </td>
+                         <td> <input type="submit" value="${langGetDetail}"> </td>
                             </form>
 
                       </tr>

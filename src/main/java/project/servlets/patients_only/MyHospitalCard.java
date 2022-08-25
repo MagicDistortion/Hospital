@@ -24,14 +24,14 @@ public class MyHospitalCard extends HttpServlet {
         req.getSession().setAttribute("status_patient", hospitalCard.getStatus());
         if (hospitalCard.getDiagnosis() != null) {
             req.getSession().setAttribute("diagnosis", hospitalCard.getDiagnosis());
-        } else req.getSession().setAttribute("diagnosis", "not exist yet");
+        } else req.getSession().setAttribute("diagnosis", req.getSession().getAttribute("langNotExistYet"));
 
         if (hospitalCard.getCurrentDoctorName() != null && hospitalCard.getCurrentDoctorSurname() != null) {
             req.getSession().setAttribute("current_doctorSurname", hospitalCard.getCurrentDoctorSurname());
             req.getSession().setAttribute("current_doctorName", hospitalCard.getCurrentDoctorName());
         } else {
-            req.getSession().setAttribute("current_doctorSurname", "not assigned");
-            req.getSession().setAttribute("current_doctorName", "not assigned");
+            req.getSession().setAttribute("current_doctorSurname", req.getSession().getAttribute("langNotAssigned"));
+            req.getSession().setAttribute("current_doctorName", req.getSession().getAttribute("langNotAssigned"));
         }
 
         req.setAttribute("myhospitalcard", hospitalCard);

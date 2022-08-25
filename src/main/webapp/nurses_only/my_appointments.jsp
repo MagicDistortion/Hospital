@@ -15,11 +15,11 @@
     <%@ include file="../header_nurses.jspf" %>
    <br><br>
     <div align="center" >
-        <h2  style="color:#fff">Get my appointments</h2>
+        <h2  style="color:#fff">${langGetMyAppointments}</h2>
             <form action ="../nurses_only/nurses_appointments" method ="get">
-                <input type="submit" value="Get them!"/><br>
+                <input type="submit" value="${langGetThem}"/><br>
             </form>
-        <h2 style="color:#B22222">
+        <h4 style="color:#B22222">
 
         <table border="1" >
             <colgroup style="background-color:#87CEFA;">
@@ -30,26 +30,26 @@
              <col>
              <col>
             </colgroup>
-            <th style="color:#0000ff"><h4/> Appointment &nbsp</th>
-            <th style="color:#ffff00"><h4/> Appointment details &nbsp</th>
-            <th style="color:#0000ff"><h4/> Current Doctor &nbsp</th>
-            <th style="color:#ffff00"><h4/> Patient &nbsp</th>
-            <th style="color:#0000ff"><h4 />Date &nbsp</th>
-            <th style="color:#ffff00"><h4 />Set Status &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${langAppointment} &nbsp</th>
+            <th style="color:#ffff00"><h4/> ${langAppointmentDetails} &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${langCurrentDoctor} &nbsp</th>
+            <th style="color:#ffff00"><h4/> ${langPatient} &nbsp</th>
+            <th style="color:#0000ff"><h4 />${langDate} &nbsp</th>
+            <th style="color:#ffff00"><h4 />${langSetStatus} &nbsp</th>
               <c:forEach items="${appointments}" var="i">
                 <tr>
-                  <td><h3 style="color:#fff"/>${i.getAppointment()}&nbsp</td>
-                  <td><h3 style="color:#fff"/>${i.getText()}&nbsp</td>
-                  <td><h3 style="color:#fff"/>${i.getDoctorFullName()}&nbsp</td>
-                  <td><h3 style="color:#fff"/>${i.getPatientFullName()}&nbsp</td>
-                  <td><h3 style="color:#fff"/>${i.getDate()} &nbsp</td>
+                  <td><h4 style="color:#fff"/>${i.getAppointment()}&nbsp</td>
+                  <td><h4 style="color:#fff"/>${i.getText()}&nbsp</td>
+                  <td><h4 style="color:#fff"/>${i.getDoctorFullName()}&nbsp</td>
+                  <td><h4 style="color:#fff"/>${i.getPatientFullName()}&nbsp</td>
+                  <td><h4 style="color:#fff"/>${i.getDate()} &nbsp</td>
                 <form action ="../nurses_only/update_status" method ="post">
                   <input type="hidden" name="id" value="${i.getId()}"/>
                   <td><select name="status">
-                         <option disabled>set status</option>
+                         <option disabled>${langSetStatus}</option>
                          <option value="in process">In process</option>
                          <option value="done">Done</option>
-                       <input type="submit" value="Set status"/>
+                       <input type="submit" value="${langSetStatus}"/>
                       </select></td>
                 </form>
                 </tr>
@@ -57,9 +57,9 @@
         </table>
              <h2 style="color:#B22222">
                   <c:if  test="${not empty mes}" >${mes}</c:if>
-                  <c:if  test="${not empty message}" >${message}</c:if>
+                  <c:if  test="${not empty messtatus}" >${messtatus}</c:if>
              </h2>
-        </h2>
+        </h4>
       </div>
     </body>
 </html>

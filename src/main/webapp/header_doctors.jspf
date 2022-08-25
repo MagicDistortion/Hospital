@@ -1,25 +1,25 @@
        <h2 align="center"  >
-                <a style="color:#0000ff" href="../index.jsp">Main</a>
-                <a style="color:#ffff00" href="../about_us.jsp">About Us</a>
-                <a style="color:#0000ff" href="../contacts.jsp">Contacts</a>
-                <a style="color:#ffff00" href="../doctors.jsp">Doctors</a>
+              <a style="color:#0000ff" href="../index.jsp">${langMain}</a>
+              <a style="color:#ffff00" href="../about_us.jsp">${langAboutUs}</a>
+              <a style="color:#0000ff" href="../contacts.jsp">${langContacts}</a>
+              <a style="color:#ffff00" href="../doctors.jsp">${langDoctors}</a>
                     <br>
-                <a style="color:#0000ff" href="my_patients.jsp">My Patients</a>
-                <a style="color:#ffff00" href="hospital_cards.jsp">Hospital Cards</a>
-                <a style="color:#0000ff" href="add_appointment.jsp">Add appointment</a>
+            <a style="color:#0000ff" href="my_patients.jsp">${langMyPatients}</a>
+            <a style="color:#ffff00" href="hospital_cards.jsp">${langHospitalCards}</a>
+            <a style="color:#0000ff" href="add_appointment.jsp">${langAddAppointment}</a>
        </h2>
                       <form align="right" action="../lang" method="post">
                          <select name="lang">
-                         <option value="UA">Ukrainian</option>
-                         <option value="EN">English</option>
+                         <option value="UA">${langUkrainian}</option>
+                         <option value="EN">${langEnglish}</option>
                          </select>
-                         <input type="submit" value="set Language"/>
+                         <input type="submit" value="${langSetLanguage}"/>
                       </form>
          <div align="right" >
              <form action="../edit_profile.jsp" method="post">
-                <input type="submit" value="Edit My Profile"/>
+                <input type="submit" value="${langEMP}"/>
              </form>
              <form action="../logout" method="get">
-                <input type="submit" value="Log out"/>
+                <input type="submit" value="${langLogOut}"/>
              </form>
          </div>

@@ -22,8 +22,8 @@ public class MyPatients extends HttpServlet {
         String sort = req.getParameter("sort");
         req.setAttribute("sort", sort);
         switch (sort) {
-            case "name":
-                sort = "WHERE current_doctor_id ="+id+" ORDER BY name";
+            case "surname":
+                sort = "WHERE current_doctor_id ="+id+" ORDER BY surname";
                 break;
             case "date":
                 sort = "WHERE current_doctor_id ="+id+" ORDER BY date_of_birth";
@@ -48,7 +48,7 @@ public class MyPatients extends HttpServlet {
 
         List<Patient> patientList = dbManager.findPatientsWithLimit(sort, page, pagination);
         req.setAttribute("patientlist", patientList);
-        if (patientList.size()==0)req.setAttribute("mes","empty");
+        if (patientList.size()==0) req.setAttribute("mes", req.getSession().getAttribute("langEmpty"));
 
         req.getRequestDispatcher("/doctors_only/my_patients.jsp").forward(req, resp);
     }

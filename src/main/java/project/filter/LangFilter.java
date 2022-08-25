@@ -16,10 +16,10 @@ public class LangFilter implements Filter {
             lang = "UA";
         }
         if (lang.toString().equals("UA")) {
-            httpServlet.getSession().setAttribute("langSysAdmin", "системний адміністратор");
-            httpServlet.getSession().setAttribute("langDoctor", "лікар");
-            httpServlet.getSession().setAttribute("langNurse", "медсестра");
-            httpServlet.getSession().setAttribute("langPatient", "пацієнт");
+            httpServlet.getSession().setAttribute("langSysAdmin", "Системний адміністратор");
+            httpServlet.getSession().setAttribute("langDoctor", "Лікар");
+            httpServlet.getSession().setAttribute("langNurse", "Медсестра");
+            httpServlet.getSession().setAttribute("langPatient", "Пацієнт");
             httpServlet.getSession().setAttribute("langEmpty", "порожньо");
             httpServlet.getSession().setAttribute("langSetLanguage", "Мова");
             httpServlet.getSession().setAttribute("langUkrainian", "Українська");
@@ -61,11 +61,61 @@ public class LangFilter implements Filter {
             httpServlet.getSession().setAttribute("langGetUsers", "Отримати користувачів");
             httpServlet.getSession().setAttribute("langGetAllPatients", "Отримати всіх пацієнтів");
             httpServlet.getSession().setAttribute("langDateOfBirth", "Дата народження");
+            httpServlet.getSession().setAttribute("langMyPatients", "Мої пацієнти");
+            httpServlet.getSession().setAttribute("langHospitalCards", "Лікарняні карти");
+            httpServlet.getSession().setAttribute("langAddAppointment", "Додати призначення");
+            httpServlet.getSession().setAttribute("langGetMyPatients", "Мої пацієнти");
+            httpServlet.getSession().setAttribute("langGetDetail", "Детальніше");
+            httpServlet.getSession().setAttribute("langGoTo", "перейти");
+            httpServlet.getSession().setAttribute("langGetHospitalCards", "Отримати лікарняні карти");
+            httpServlet.getSession().setAttribute("langGetAppointmentsOfPatient", "Отримати призначення пацієнта");
+            httpServlet.getSession().setAttribute("langAppointment", "Призначення");
+            httpServlet.getSession().setAttribute("langAppointmentDetails", "Деталі Призначення");
+            httpServlet.getSession().setAttribute("langCurrentDoctor", "Поточний Лікар");
+            httpServlet.getSession().setAttribute("langDesignatedNurse", "Призначена Медсестра");
+            httpServlet.getSession().setAttribute("langDate", "Дата");
+            httpServlet.getSession().setAttribute("langStatus", "Статус");
+            httpServlet.getSession().setAttribute("langStatusUpdated", "Статус оновлено");
+            httpServlet.getSession().setAttribute("langPickAPoint", "Обрати призначення");
+            httpServlet.getSession().setAttribute("langDetails", "Деталі");
+            httpServlet.getSession().setAttribute("langInsertNewAppointment", "Додати нове призначення");
+            httpServlet.getSession().setAttribute("langPickANurse", "Обрати медсестру");
+            httpServlet.getSession().setAttribute("langPatientSurname", "Прізвище пацієнта");
+            httpServlet.getSession().setAttribute("langPatientName", "Ім'я пацієнта");
+            httpServlet.getSession().setAttribute("langDateOfRegistration", "Дата Реєстрації");
+            httpServlet.getSession().setAttribute("langDoctorSurname", "Прізвище лікаря");
+            httpServlet.getSession().setAttribute("langDoctorName", "Ім'я лікаря");
+            httpServlet.getSession().setAttribute("langCurrentDiagnosis", "Поточний діагноз");
+            httpServlet.getSession().setAttribute("langChangeDiagnosis", "Змінити діагноз");
+            httpServlet.getSession().setAttribute("langEnterNewDiagnosis", "Введіть новий діагноз");
+            httpServlet.getSession().setAttribute("langSetStatus", "Встановити статус");
+            httpServlet.getSession().setAttribute("langGoBack", "Повернутись");
+            httpServlet.getSession().setAttribute("langMyAppointments", "Мої призначення");
+            httpServlet.getSession().setAttribute("langGetMyAppointments", "Отримати мої призначення");
+            httpServlet.getSession().setAttribute("langGoToLogin", "Повернутись на головну");
+            httpServlet.getSession().setAttribute("langNotExistYet", "Ще не встановлено");
+            httpServlet.getSession().setAttribute("langNotAssigned", "Не призначено");
+            httpServlet.getSession().setAttribute("langGetMyHospitalCard", "Отримати мою лікарняну карту");
+            httpServlet.getSession().setAttribute("langGet", "Отримати");
+            httpServlet.getSession().setAttribute("langNeedHelpAgain", "Знову потрібна допомга");
+            httpServlet.getSession().setAttribute("langNotFound", "не знайдено");
+            httpServlet.getSession().setAttribute("langWrongPassword", "пароль некорректний");
+            httpServlet.getSession().setAttribute("langNewPassword", "Новий пароль");
+            httpServlet.getSession().setAttribute("langRePassword", "Повторіть пароль");
+            httpServlet.getSession().setAttribute("langTel", "Телефон");
+            httpServlet.getSession().setAttribute("langEditNow", "Редагувати зараз!");
+            httpServlet.getSession().setAttribute("langBackToMain", "Повернутись на головну");
+            httpServlet.getSession().setAttribute("langToday", "сьогодні");
+            httpServlet.getSession().setAttribute("langEnterSurname", "Введіть Прізвище");
+            httpServlet.getSession().setAttribute("langEnterName", "Введіть Ім'я");
+            httpServlet.getSession().setAttribute("langEnterLogin", "Введіть Логін");
+            httpServlet.getSession().setAttribute("langEnterPassword", "Введіть пароль");
+            httpServlet.getSession().setAttribute("langEnterTel", "Введіть телефон");
         } else {
-            httpServlet.getSession().setAttribute("langSysAdmin", "system administrator");
-            httpServlet.getSession().setAttribute("langDoctor", "doctor");
-            httpServlet.getSession().setAttribute("langNurse", "nurse");
-            httpServlet.getSession().setAttribute("langPatient", "patient");
+            httpServlet.getSession().setAttribute("langSysAdmin", "System administrator");
+            httpServlet.getSession().setAttribute("langDoctor", "Doctor");
+            httpServlet.getSession().setAttribute("langNurse", "Nurse");
+            httpServlet.getSession().setAttribute("langPatient", "Patient");
             httpServlet.getSession().setAttribute("langEmpty", "empty");
             httpServlet.getSession().setAttribute("langSetLanguage", "Language");
             httpServlet.getSession().setAttribute("langUkrainian", "Ukrainian");
@@ -107,12 +157,58 @@ public class LangFilter implements Filter {
             httpServlet.getSession().setAttribute("langGetUsers", "Get users");
             httpServlet.getSession().setAttribute("langGetAllPatients", "Get All Patients");
             httpServlet.getSession().setAttribute("langDateOfBirth", "Date of Birth");
-
-
-
-
-
+            httpServlet.getSession().setAttribute("langMyPatients", "My patients");
+            httpServlet.getSession().setAttribute("langHospitalCards", "Hospital cards");
+            httpServlet.getSession().setAttribute("langAddAppointment", "add Appointment");
+            httpServlet.getSession().setAttribute("langGetMyPatients", "My patients");
+            httpServlet.getSession().setAttribute("langGetDetail", "get Detail");
+            httpServlet.getSession().setAttribute("langGoTo", "go to");
+            httpServlet.getSession().setAttribute("langGetHospitalCards", "Get Hospital cards");
+            httpServlet.getSession().setAttribute("langGetAppointmentsOfPatient", "Get Appointments of Patient");
+            httpServlet.getSession().setAttribute("langAppointment", "Appointment");
+            httpServlet.getSession().setAttribute("langAppointmentDetails", "Appointment Details");
+            httpServlet.getSession().setAttribute("langCurrentDoctor", "Current Doctor");
+            httpServlet.getSession().setAttribute("langDesignatedNurse", "Designated Nurse");
+            httpServlet.getSession().setAttribute("langDate", "Date");
+            httpServlet.getSession().setAttribute("langStatus", "Status");
+            httpServlet.getSession().setAttribute("langStatusUpdated", "Status updated");
+            httpServlet.getSession().setAttribute("langPickAPoint", "Pick appointment");
+            httpServlet.getSession().setAttribute("langDetails", "Details");
+            httpServlet.getSession().setAttribute("langInsertNewAppointment", "Insert new Appointment");
+            httpServlet.getSession().setAttribute("langPickANurse", "Pick a nurse");
+            httpServlet.getSession().setAttribute("langPatientSurname", "Patient`s Surname");
+            httpServlet.getSession().setAttribute("langPatientName", "Patient`s Name");
+            httpServlet.getSession().setAttribute("langDateOfRegistration", "Date of Registration");
+            httpServlet.getSession().setAttribute("langDoctorSurname", "Doctor`s Surname");
+            httpServlet.getSession().setAttribute("langDoctorName", "Doctor`s Name");
+            httpServlet.getSession().setAttribute("langCurrentDiagnosis", "Current Diagnosis");
+            httpServlet.getSession().setAttribute("langChangeDiagnosis", "Change Diagnosis");
+            httpServlet.getSession().setAttribute("langEnterNewDiagnosis", "Enter New Diagnosis");
+            httpServlet.getSession().setAttribute("langSetStatus", "Set status");
+            httpServlet.getSession().setAttribute("langGoBack", "go back");
+            httpServlet.getSession().setAttribute("langMyAppointments", "My appointments");
+            httpServlet.getSession().setAttribute("langGetMyAppointments", "Get my appointments");
+            httpServlet.getSession().setAttribute("langGoToLogin", "Go to Login");
+            httpServlet.getSession().setAttribute("langNotExistYet", "Not exist yet");
+            httpServlet.getSession().setAttribute("langNotAssigned", "Not assigned");
+            httpServlet.getSession().setAttribute("langGetMyHospitalCard", "Get my hospital card");
+            httpServlet.getSession().setAttribute("langGet", "Get");
+            httpServlet.getSession().setAttribute("langNeedHelpAgain", "Need help again");
+            httpServlet.getSession().setAttribute("langNotFound", "not found");
+            httpServlet.getSession().setAttribute("langWrongPassword", "password is wrong");
+            httpServlet.getSession().setAttribute("langNewPassword", "New Password");
+            httpServlet.getSession().setAttribute("langRePassword", "Re-enter Password");
+            httpServlet.getSession().setAttribute("langTel", "Tel");
+            httpServlet.getSession().setAttribute("langEditNow", "Edit now!");
+            httpServlet.getSession().setAttribute("langBackToMain", "Back to Main");
+            httpServlet.getSession().setAttribute("langToday", "today");
+            httpServlet.getSession().setAttribute("langEnterSurname", "Enter Surname");
+            httpServlet.getSession().setAttribute("langEnterName", "Enter Name");
+            httpServlet.getSession().setAttribute("langEnterLogin", "Enter Login");
+            httpServlet.getSession().setAttribute("langEnterPassword", "Enter Password");
+            httpServlet.getSession().setAttribute("langEnterTel", "Enter Tel");
         }
+
         filterChain.doFilter(servletRequest, servletResponse);
 
     }

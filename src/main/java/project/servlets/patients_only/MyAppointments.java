@@ -23,7 +23,7 @@ public class MyAppointments extends HttpServlet {
 
 
         req.setAttribute("appointments", appointments);
-        if (appointments.size() == 0) req.setAttribute("mes", "empty");
+        if (appointments.size() == 0)  req.setAttribute("mes", req.getSession().getAttribute("langEmpty"));
         req.getRequestDispatcher("/patients_only/my_appointments.jsp").forward(req, resp);
     }
 }

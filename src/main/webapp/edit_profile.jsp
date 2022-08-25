@@ -17,41 +17,41 @@
                     <div align="center" >
                      <table>
                        <tr>
-                         <td style="color:#0000ff"/> Surname:</td>
+                         <td style="color:#0000ff"/>${langSurname}:</td>
                          <td><input name="surname"  pattern="^[A-Za-zА-Яа-яІіЇїєЄ]{1,32}" value="${surname}"/></td>
                        </tr>
                        <tr>
-                         <td style="color:#0000ff"/> Name:</td>
+                         <td style="color:#0000ff"/>${langName}:</td>
                          <td><input name="name"  pattern="^[A-Za-zА-Яа-яІіЇїєЄ]{1,32}" value="${name}"/></td>
                        </tr>
                        <tr>
-                         <td style="color:#ffff00"/> Login:</td>
+                         <td style="color:#ffff00"/>${langLogin}:</td>
 	                     <td><input name="login" value="${login}" ></td>
                        </tr>
                        <tr>
-                         <td style="color:#0000ff"/>New Password:</td>
-                         <td><input type="password" placeholder="enter new Password" name="password" /></td>
+                         <td style="color:#0000ff"/>${langNewPassword}:</td>
+                         <td><input type="password" placeholder="${langNewPassword}" name="password" /></td>
                        </tr>
 	                   <tr>
-	                     <td style="color:#ffff00"/> Re-enter Password:</td>
-	                     <td><input type="password" placeholder="re enter Password" name="repassword" /></td>
+	                     <td style="color:#ffff00"/>${langRePassword}:</td>
+	                     <td><input type="password" placeholder="${langRePassword}" name="repassword" /></td>
                        </tr>
                        <tr>
-                         <td style="color:#0000ff"/> Tel:</td>
+                         <td style="color:#0000ff"/>${langTel}:</td>
                          <td> <input  type="number" name="tel" value="${tel}" ></td>
                          <td style="color:#0000ff"/>Format: xxx xxx-xx-xx</td>
                        </tr>
                        <tr>
-                         <td style="color:#ffff00"/> Date of Birth</td>
+                         <td style="color:#ffff00"/>${langDateOfBirth}</td>
                          <td><input type="date" name="date_of_birth" value="${date_of_birth}" /></td>
-                         <td style="color:#ffff00"/>Format: 1900 - today:</td>
+                         <td style="color:#ffff00"/>Format: 1900 - ${langToday}</td>
                        </tr>
                       </table>
-                    	<input type="submit" value="edit now!"/><br>
+                    	<input type="submit" value="${langEditNow}"/><br>
                            <h2 style="color:#B22222">
                              <c:if  test="${not empty mes}" >${mes}</c:if><br>
                              <c:if  test="${not empty meserror}" >${meserror}</c:if>
-                                <a style="color:#0000ff" href="index.jsp">back to Main</a>
+                                <a style="color:#0000ff" href="index.jsp">${langBackToMain}</a>
                            </h2>
                     </div>
                 </form>
