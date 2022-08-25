@@ -14,30 +14,29 @@
     <%@ include file="../header_admins.jspf" %>
              <br><br>
     <div align="center" >
-        <h2 style="color:#fff">Give a Role for User</h2>
+        <h2 style="color:#fff">${langGivingARole}</h2>
             <form action ="../admins_only/users_list" method ="post">
-                <input type="submit" value="Get all Users!"/><br>
+                <input type="submit" value="${langGetUsers}"/><br>
             </form>
         <h2 style="color:#B22222">
         <table border="1">
-            <th style="color:#0000ff"><h4/> User`s Surname</th>
-            <th style="color:#ffff00"><h4/> User`s name</th>
-            <th style="color:#0000ff"><h4/> Pick a role</th>
+            <th style="color:#0000ff"><h4/> ${langSurname} &nbsp</th>
+            <th style="color:#ffff00"><h4/> ${langName} &nbsp </th>
+            <th style="color:#0000ff"><h4/> ${langPickARole} &nbsp</th>
                   <c:forEach items="${userList}" var="i">
                       <tr>
-                         <td style="color:#fff"><h4/>${i.getSurname()}</td>
-                         <td style="color:#fff"><h4/>${i.getName()}</td>
+                         <td style="color:#fff"><h4/>${i.getSurname()} &nbsp</td>
+                         <td style="color:#fff"><h4/>${i.getName()} &nbsp</td>
                          <td ><h4/>
                          <form action ="../admins_only/give_a_role" method ="post">
                             <input type="hidden" name="id" value="${i.getId()}"/>
                              <select name="role">
-                                 <option disabled>select action</option>
-                                 <option value="1">Sys Admin</option>
-                                 <option value="2">Doctor</option>
-                                 <option value="3">Nurse</option>
-                                 <option value="4">Patient</option>
-                             </select><br>
-                             <input type="submit" value="pick"/>
+                                 <option value="1">${langSysAdmin}</option>
+                                 <option value="2">${langDoctor}</option>
+                                 <option value="3">${langNurse}</option>
+                                 <option value="4">${langPatient}</option>
+                             </select>
+                             <input type="submit" value="${langPick}"/>
                          </form>
                          </td>
                       </tr>

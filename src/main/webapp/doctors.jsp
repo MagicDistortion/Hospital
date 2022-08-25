@@ -14,7 +14,7 @@
     <%@ include file="header.jspf" %>
      <br><br>
         <div align="center" >
-        <h2  style="color:#fff">Get All Doctors</h2>
+        <h2  style="color:#fff">${langDoctors}</h2>
             <form action ="doctors_sortlist" method ="get">
              <input type="text" name="pagination" pattern="[1-9]\d*"
              <c:choose>
@@ -25,11 +25,11 @@
             </c:choose>
               placeholder="pagination" required />
                 <select name="sort">
-                   <option disabled>sorted by</option>
-                   <option value="name">by Name</option>
-                   <option value="category">by Category</option>
-                   <option value="patients">by Number of Patients</option>
-                <input type="submit" value="Get them!"/><br>
+                   <option disabled>${langSorted}</option>
+                   <option value="Surname">${langBySurname}</option>
+                   <option value="category">${langByCategory}</option>
+                   <option value="patients">${langByNOP}</option>
+                <input type="submit" value="${langGetThem}"/><br>
             </form>
         <h2 style="color:#B22222">
         <table border="1">
@@ -39,10 +39,10 @@
              <col>
              <col>
             </colgroup>
-            <th style="color:#0000ff"><h4/> Doctor`s Surname &nbsp</th>
-            <th style="color:#ffff00"><h4/> Doctor`s name &nbsp</th>
-            <th style="color:#0000ff"><h4 align="center"/>Category &nbsp</th>
-            <th style="color:#ffff00"><h4/>Number of patients &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${langSurname} &nbsp</th>
+            <th style="color:#ffff00"><h4/> ${langName} &nbsp</th>
+            <th style="color:#0000ff"><h4 align="center"/>${langCategory} &nbsp</th>
+            <th style="color:#ffff00"><h4/>${langNOP} &nbsp</th>
                   <c:forEach items="${docList}" var="i">
                       <tr>
                          <td style="color:#fff"><h3/>${i.getSurname()}</td>

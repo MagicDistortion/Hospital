@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-
+ /* єтот сервлет возвращает список врачей */
 @WebServlet("/doctors_sortlist")
 public class DoctorsList extends HttpServlet {
     DBManager dbManager = DBManager.getInstance();
@@ -19,8 +19,8 @@ public class DoctorsList extends HttpServlet {
         String sort = req.getParameter("sort");
         req.setAttribute("sort", sort);
         switch (sort) {
-            case "name":
-                sort = "ORDER BY users.name";
+            case "Surname":
+                sort = "ORDER BY users.Surname";
                 break;
             case "category":
                 sort = "ORDER BY category_id";
@@ -45,7 +45,6 @@ public class DoctorsList extends HttpServlet {
         int page = 1;
         if (req.getParameter("page") != null)
             page = Integer.parseInt(req.getParameter("page"));
-
         List<Doctor> doctores = dbManager.findDoctoresWithLimit(sort, page, pagination);
         req.setAttribute("docList", doctores);
         req.getRequestDispatcher("doctors.jsp").forward(req, resp);

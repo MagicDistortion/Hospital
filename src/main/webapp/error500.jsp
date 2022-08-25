@@ -10,7 +10,7 @@
             body {background:#000000 url(<c:url value="/images/Serze2.jpg"/>)}
         </style>
          <div align="center" style="color:#fff">
-           <h2 class="text-center">Ooops. Something went wrong. Go to Login.</h2> <br/>
+           <h2 class="text-center">Ooops. Something went wrong. Go to Login. And try again Later</h2> <br/>
            <h1> <a style="color:#fff" href="/Hospital/">go to Login</a> </h1>
          </div>
     </body>

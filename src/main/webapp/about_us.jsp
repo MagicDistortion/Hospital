@@ -14,8 +14,14 @@
 
     <%@ include file="header.jspf" %>
         <div style="color:#fff"/>
+        <c:if test="${lang=='UA'}">
             <h2 align="center">О Нас</h2>
-            <h3 align="center">Ми лікуємо навіть від рашизму, робимо щеплення від рюского миру, навіть якщо ваша русобофія недостатня </h3>
+            <h3 align="center">Ми найкраща лікарня у місті Одеса </h3>
+        </c:if>
+        <c:if test="${lang=='EN'}">
+            <h2 align="center">About us</h2>
+            <h3 align="center">We are the best hospital in Odesa city </h3
+        </c:if>
         </div>
     </body>
 </html>

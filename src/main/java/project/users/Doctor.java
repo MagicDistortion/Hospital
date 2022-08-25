@@ -19,16 +19,16 @@ public class Doctor {
         return categoryId;
     }
 
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
     public String getCategory() {
         return category;
     }
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
     }
 
     public int getId() {
@@ -65,6 +65,6 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "\n Doctor " + name + " " + category + " " + getCategoryId() + " " + numberOfPatients;
+        return "Doctor "+surname+" " + name + " " + category + " " + getCategoryId() + " " + numberOfPatients;
     }
 }

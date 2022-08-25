@@ -26,6 +26,6 @@ public class Categories {
 
     @Override
     public String toString() {
-        return name;
+        return "Category "+ name;
     }
 }

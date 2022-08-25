@@ -1,17 +1,18 @@
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
      <h2 align="center">
-              <a style="color:#0000ff" href="index.jsp">Main</a>
-              <a style="color:#ffff00" href="about_us.jsp">About Us</a>
-              <a style="color:#0000ff" href="contacts.jsp">Contacts</a>
-              <a style="color:#ffff00" href="doctors.jsp">Doctors</a>
+              <a style="color:#0000ff" href="index.jsp">${langMain}</a>
+              <a style="color:#ffff00" href="about_us.jsp">${langAboutUs}</a>
+              <a style="color:#0000ff" href="contacts.jsp">${langContacts}</a>
+              <a style="color:#ffff00" href="doctors.jsp">${langDoctors}</a>
 
          <c:if  test="${user.getRolesId()==1}" >
                     <br>
-                <a style="color:#0000ff" href="admins_only/giving_a_role.jsp">Giving a role</a>
-                <a style="color:#ffff00" href="admins_only/giving_a_category.jsp">Giving a category</a>
-                <a style="color:#0000ff" href="admins_only/patients.jsp">Patients</a>
-                <a style="color:#ffff00" href="admins_only/appoint_a_doctor.jsp">Appoint a doctor</a>
-                <a style="color:#0000ff" href="admins_only/add_category.jsp">Add Category</a>
+                <a style="color:#0000ff" href="admins_only/giving_a_role.jsp">${langGivingARole}</a>
+                <a style="color:#ffff00" href="admins_only/giving_a_category.jsp">${langGivingACategory}</a>
+                <a style="color:#0000ff" href="admins_only/patients.jsp">${langPatients}</a>
+                <a style="color:#ffff00" href="admins_only/appoint_a_doctor.jsp">${langAppointADoctor}</a>
+                <a style="color:#0000ff" href="admins_only/add_category.jsp">${langAddCategory}</a>
          </c:if>
 
          <c:if  test="${user.getRolesId()==2}" >
@@ -32,23 +33,31 @@
          </c:if>
 
      </h2>
+                      <form align="right" action="lang" method="post">
+                         <select name="lang">
+                         <option value="UA">${langUkrainian}</option>
+                         <option value="EN">${langEnglish}</option>
+                         </select>
+                         <input type="hidden" name="url" value=url />
+                         <input type="submit" value="${langSetLanguage}"/>
+                      </form>
                     <c:choose>
                         <c:when test="${empty user}">
                             <div align="right" >
                                  <form action="register_form.jsp" method="post">
-                                      <input type="submit" value="Register now"/>
+                                      <input type="submit" value="${langRegister}"/>
                                  </form>
-                                 <input type="submit" value="to Login"
+                                 <input type="submit" value="${langLogIn}"
                                   onclick="window.location='index.jsp';"/>
                             </div>
                         </c:when>
                         <c:otherwise>
                            <div align="right" >
                                    <form action="edit_profile.jsp" method="post">
-                                       <input type="submit" value="Edit My Profile"/>
+                                       <input type="submit" value="${langEMP}"/>
                                    </form>
                                    <form action="logout" method="get">
-                                       <input type="submit" value="Log out"/>
+                                       <input type="submit" value="${langLogOut}"/>
                                    </form>
                            </div>
                         </c:otherwise>

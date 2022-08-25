@@ -11,11 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet("/logout")
-public class Logout extends HttpServlet {
+@WebServlet("/lang")
+public class Language extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().invalidate();
-        req.getRequestDispatcher("login.jsp").forward(req, resp);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+      String lang = req.getParameter("lang");
+      req.getSession().setAttribute("lang",lang);
+      req.getRequestDispatcher("login.jsp").forward(req,resp);
     }
 }

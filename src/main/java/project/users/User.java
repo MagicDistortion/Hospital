@@ -105,7 +105,7 @@ public class User implements Serializable {
     }
     @Override
     public String toString() {
-        return "\n User "+ id + " " + name + " " + login + " "  + getTel() + " " + dateOfBirth;
+        return "User "+ surname + " " + name + " " + login + " "  + getTel() + " " + dateOfBirth;
     }
 
 

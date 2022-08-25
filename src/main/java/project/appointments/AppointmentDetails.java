@@ -3,12 +3,12 @@ package project.appointments;
 import java.time.LocalDate;
 
 public class AppointmentDetails {
-    int id;
+    private int id;
     private String text;
-    int nurseId;
-    int appointmentId;
-    int doctorsId;
-    int hospitalCardId;
+    private int nurseId;
+    private int appointmentId;
+    private int doctorsId;
+    private int hospitalCardId;
     private String doctorFullName;
     private String nurseFullName;
     private String patientFullName;
@@ -74,16 +74,16 @@ public class AppointmentDetails {
         return doctorFullName;
     }
 
+    public void setDoctorFullName(String doctorFullName) {
+        this.doctorFullName = doctorFullName;
+    }
+
     public String getAppointment() {
         return appointment;
     }
 
     public void setAppointment(String appointment) {
         this.appointment = appointment;
-    }
-
-    public void setDoctorFullName(String doctorFullName) {
-        this.doctorFullName = doctorFullName;
     }
 
     public String getNurseFullName() {
@@ -120,6 +120,6 @@ public class AppointmentDetails {
 
     @Override
     public String toString() {
-        return "Appointment{" + text + '}';
+        return "Appointment " + text;
     }
 }

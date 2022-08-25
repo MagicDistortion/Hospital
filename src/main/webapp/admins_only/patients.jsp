@@ -14,7 +14,7 @@
     <%@ include file="../header_admins.jspf" %>
    <br><br>
     <div align="center" >
-        <h2  style="color:#fff">Get All Patients</h2>
+        <h2  style="color:#fff">${langGetAllPatients}</h2>
             <form action ="../admins_only/patients_sortlist" method ="get">
               <input type="text" name="pagination" pattern="[1-9]\d*"
               <c:choose>
@@ -25,21 +25,21 @@
              </c:choose>
                placeholder="pagination" required />
                 <select name="sort">
-                   <option disabled>sorted by</option>
-                   <option value="name">by Name</option>
-                   <option value="date">by Date of Birth</option>
-                <input type="submit" value="Get them!"/><br>
+                   <option disabled>${langSorted}</option>
+                   <option value="surname">${langBySurname}</option>
+                   <option value="date">${langByDateOfBirth}</option>
+                <input type="submit" value="${langGetThem}"/><br>
             </form>
         <h2 style="color:#B22222">
         <table border="1">
-            <th style="color:#0000ff"><h4/> Patients Surname</th>
-            <th style="color:#ffff00"><h4/> Patients name</th>
-            <th style="color:#0000ff"><h4 />Date of Birth</th>
+            <th style="color:#0000ff"><h4/> ${langSurname} &nbsp</th>
+            <th style="color:#ffff00"><h4/> ${langName} &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${langDateOfBirth} &nbsp</th>
                   <c:forEach items="${patientlist}" var="i">
                       <tr>
-                         <td style="color:#fff"><h3/>${i.getSurname()}</td>
-                         <td style="color:#fff"><h3/>${i.getName()}</td>
-                         <td style="color:#fff" align="center"><h3/>${i.getDateOfBitrth()}</td>
+                         <td style="color:#fff"><h3/>${i.getSurname()} &nbsp</td>
+                         <td style="color:#fff"><h3/>${i.getName()} &nbsp</td>
+                         <td style="color:#fff" align="center"><h3/>${i.getDateOfBirth()} &nbsp</td>
                       </tr>
                   </c:forEach>
         </table>

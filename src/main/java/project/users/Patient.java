@@ -1,20 +1,22 @@
 package project.users;
 
 import java.time.LocalDate;
+
 public class Patient {
 
     private int id;
     private String surname;
     private String name;
-    private LocalDate dateOfBitrth;
+    private LocalDate dateOfBirth;
     private int currentDoctorId;
 
-    public Patient( User user) {
+    public Patient(User user) {
         this.id = user.getId();
         this.surname = user.getSurname();
         this.name = user.getName();
-        this.dateOfBitrth = user.getDateOfBirth();
+        this.dateOfBirth = user.getDateOfBirth();
     }
+
     public int getId() {
         return id;
     }
@@ -39,12 +41,12 @@ public class Patient {
         this.name = name;
     }
 
-    public LocalDate getDateOfBitrth() {
-        return dateOfBitrth;
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDateOfBitrth(LocalDate dateOfBitrth) {
-        this.dateOfBitrth = dateOfBitrth;
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public int getCurrentDoctorId() {
@@ -57,6 +59,6 @@ public class Patient {
 
     @Override
     public String toString() {
-        return "\n Patient " +name+" "+ dateOfBitrth;
+        return "Patient " + surname + " " + name + " " + dateOfBirth;
     }
 }

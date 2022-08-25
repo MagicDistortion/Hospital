@@ -1,21 +1,29 @@
 
        <h2 align="center"  >
-                <a style="color:#0000ff" href="../index.jsp">Main</a>
-                <a style="color:#ffff00" href="../about_us.jsp">About Us</a>
-                <a style="color:#0000ff" href="../contacts.jsp">Contacts</a>
-                <a style="color:#ffff00" href="../doctors.jsp">Doctors</a>
+              <a style="color:#0000ff" href="../index.jsp">${langMain}</a>
+              <a style="color:#ffff00" href="../about_us.jsp">${langAboutUs}</a>
+              <a style="color:#0000ff" href="../contacts.jsp">${langContacts}</a>
+              <a style="color:#ffff00" href="../doctors.jsp">${langDoctors}</a>
                     <br>
-                <a style="color:#0000ff" href="giving_a_role.jsp">Giving a role</a>
-                <a style="color:#ffff00" href="giving_a_category.jsp">Giving a category</a>
-                <a style="color:#0000ff" href="patients.jsp">Patients</a>
-                <a style="color:#ffff00" href="appoint_a_doctor.jsp">Appoint a doctor</a>
-                <a style="color:#0000ff" href="add_category.jsp">Add Category</a>
+                <a style="color:#0000ff" href="giving_a_role.jsp">${langGivingARole}</a>
+                <a style="color:#ffff00" href="giving_a_category.jsp">${langGivingACategory}</a>
+                <a style="color:#0000ff" href="patients.jsp">${langPatients}</a>
+                <a style="color:#ffff00" href="appoint_a_doctor.jsp">${langAppointADoctor}</a>
+                <a style="color:#0000ff" href="add_category.jsp">${langAddCategory}</a>
        </h2>
+                      <form align="right" action="../lang" method="post">
+                         <select name="lang">
+                         <option value="UA">${langUkrainian}</option>
+                         <option value="EN">${langEnglish}</option>
+                         </select>
+                         <input type="hidden" name="url" value=url />
+                         <input type="submit" value="${langSetLanguage}"/>
+                      </form>
          <div align="right" >
              <form action="../edit_profile.jsp" method="post">
-                <input type="submit" value="Edit My Profile"/>
+                <input type="submit" value="${langEMP}"/>
              </form>
              <form action="../logout" method="get">
-                <input type="submit" value="Log out"/>
+                <input type="submit" value="${langLogOut}"/>
              </form>
          </div>

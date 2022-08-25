@@ -37,6 +37,6 @@ public class Nurse {
 
     @Override
     public String toString() {
-        return "\n Nurse " + name;
+        return "Nurse " + surname + " " + name;
     }
 }

@@ -12,12 +12,12 @@
                 </style>
     <body>
     <%@ include file="../header_admins.jspf" %>
-<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
 
              <form action ="../admins_only/add_category" method ="post">
              <div align="center" >
-                    <input name="category" placeholder="add new category" required/>
-                    <input type="submit" value="add category!"/><br>
+                    <input name="category" placeholder="${langAddCategory} " required/>
+                    <input type="submit" value="${langAddCategory}"/><br>
                     <h2 style="color:#B22222">
                         <c:if  test="${not empty mes}" >${mes}</c:if>
                     </h2>

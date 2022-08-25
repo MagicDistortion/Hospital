@@ -14,33 +14,33 @@
     <%@ include file="../header_admins.jspf" %>
    <br><br>
     <div align="center" >
-              <h2 style="color:#fff">Appoint a Doctor for patient</h2>
+              <h2 style="color:#fff">${langAppointADoctorForPatient}</h2>
                         <form action ="../admins_only/patients_sortlist" method ="post">
                         <select name="sort">
-                             <option disabled>sorted by</option>
-                             <option value="name">by Name</option>
-                             <option value="date">by Date of Birth</option>
-                            <input type="submit" value="Get Patients witchout a Doctor!"/><br>
+                             <option disabled>${langSorted}</option>
+                             <option value="surname">${langBySurname}</option>
+                             <option value="date">${langByDateOfBirth}</option>
+                            <input type="submit" value="${langGetPatientsWithOutADoctor}"/><br>
                         </form>
 <h2 style="color:#B22222">
         <table border="1">
-            <th style="color:#0000ff"><h4/> Patient`s Surname</th>
-            <th style="color:#ffff00"><h4/> Patient`s name</th>
-            <th style="color:#0000ff"><h4/> Pick a Doctor</th>
+            <th style="color:#0000ff"><h4/> ${langSurname}&nbsp</th>
+            <th style="color:#ffff00"><h4/> ${langName}&nbsp</th>
+            <th style="color:#0000ff"><h4/> ${langPickADoctor}&nbsp</th>
                   <c:forEach items="${patients}" var="i">
                       <tr>
-                         <td style="color:#fff"><h4/>${i.getSurname()}</td>
-                         <td style="color:#fff"><h4/>${i.getName()}</td>
+                         <td style="color:#fff"><h4/>${i.getSurname()} &nbsp</td>
+                         <td style="color:#fff"><h4/>${i.getName()} &nbsp</td>
                          <td style="color:#fff"><h4/>
                          <form action ="../admins_only/give_a_doctor" method ="post">
                              <input type="hidden" name="id" value="${i.getId()}"/>
                              <select name="doctor">
-                                     <option disabled>pick a doctor</option>
+                                     <option disabled>${langPickADoctor}&nbsp</option>
                                  <c:forEach items="${doctors}" var="j">
                                      <option value="${j.getId()}">${j.getSurname()} ${j.getName()} ${j.getCategory()}</option>
                                  </c:forEach>
-                             </select><br>
-                             <input type="submit" value="pick"/>
+                             </select>
+                             <input type="submit" value="${langPick}"/>
                          </form>
                          </td>
                       </tr>

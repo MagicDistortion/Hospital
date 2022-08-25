@@ -19,7 +19,7 @@ public class UsersList extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<User> allUsers = dbManager.findUsersWitchOutRole();
         req.setAttribute("userList", allUsers);
-        if (allUsers.size()==0)req.setAttribute("mes","empty");
+        if (allUsers.size()==0) req.setAttribute("mes", req.getSession().getAttribute("langEmpty"));
         req.getRequestDispatcher("/admins_only/giving_a_role.jsp").forward(req, resp);
     }
 }

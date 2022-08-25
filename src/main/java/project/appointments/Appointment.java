@@ -26,6 +26,6 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "Appointment{" + name + '}';
+        return "Appointment" + name ;
     }
 }

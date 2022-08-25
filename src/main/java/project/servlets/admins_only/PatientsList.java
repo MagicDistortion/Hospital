@@ -22,8 +22,8 @@ public class PatientsList extends HttpServlet {
         String sort = req.getParameter("sort");
         req.setAttribute("sort", sort);
         switch (sort) {
-            case "name":
-                sort = "WHERE `status`!='discharged' ORDER BY name";
+            case "surname":
+                sort = "WHERE `status`!='discharged' ORDER BY surname";
                 break;
             case "date":
                 sort = "WHERE `status`!='discharged' ORDER BY date_of_birth";
@@ -48,23 +48,23 @@ public class PatientsList extends HttpServlet {
 
         List<Patient> patientList = dbManager.findPatientsWithLimit(sort, page, pagination);
         req.setAttribute("patientlist", patientList);
-        if (patientList.size()==0)req.setAttribute("mes","empty");
+        if (patientList.size()==0) req.setAttribute("mes", req.getSession().getAttribute("langEmpty"));
         req.getRequestDispatcher("/admins_only/patients.jsp").forward(req, resp);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sort = req.getParameter("sort");
-        if (sort == null) sort = "name";
+        if (sort == null) sort = "surname";
         switch (sort) {
-            case "name":
-                sort = "WHERE current_doctor_id is null AND `status`!='discharged' ORDER BY name";
+            case "surname":
+                sort = "WHERE current_doctor_id is null AND `status`!='discharged' ORDER BY surname";
                 break;
             case "date":
                 sort = "WHERE current_doctor_id is null AND `status`!='discharged' ORDER BY date_of_birth";
         }
         List<Patient> patients = dbManager.findAllPatients(sort);
-        List<Doctor> doctors = dbManager.findAllDoctores("Order by users.name");
-        if (patients.size()==0)req.setAttribute("mes","empty");
+        List<Doctor> doctors = dbManager.findAllDoctores("Order by users.surname");
+        if (patients.size()==0) req.setAttribute("mes", req.getSession().getAttribute("langEmpty"));
         req.setAttribute("doctors", doctors);
         req.setAttribute("patients", patients);
         req.getRequestDispatcher("/admins_only/appoint_a_doctor.jsp").forward(req, resp);

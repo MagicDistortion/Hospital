@@ -37,7 +37,7 @@ public class SysAdmin {
 
     @Override
     public String toString() {
-        return "\n SysAdmin "+ name;
+        return "SysAdmin "+ surname+" "+ name;
     }
 
 }

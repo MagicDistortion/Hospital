@@ -13,9 +13,16 @@
     <body>
 	 <%@ include file="header.jspf" %>
         <div style="color:#fff"/>
+        <c:if test="${lang=='UA'}">
             <h2 align="center">Наші контакти</h2>
-            <h2 align="center"> ви завжди можете зв`язатись з нами по телефону +380(66)225-20-39</h2>
+            <h2 align="center"> Ви завжди можете зв`язатись з нами по телефону +380(66)225-20-39</h2>
             <h2 align="center"> або за електронною поштою magicdistortion@gmail.com</h2>
+        </c:if>
+        <c:if test="${lang=='EN'}">
+            <h2 align="center">Our Contacts</h2>
+            <h2 align="center"> You can always contact Us by phone+380(66)225-20-39</h2>
+            <h2 align="center"> or by e-mail magicdistortion@gmail.com</h2>
+        </c:if>
         </div>
     </body>
 </html>

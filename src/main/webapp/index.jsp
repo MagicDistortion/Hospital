@@ -14,21 +14,21 @@
     <%@ include file="header.jspf" %>
      <c:choose>
         <c:when test="${empty user}">
-           <br><br><br><br><br><br><br><br><br><br><br>
+           <br><br><br><br><br><br><br><br><br>
                <form action ="login" method ="post">
                    <div align="center" >
                         <table >
                             <tr>
-	                          <td style="color:#0000ff">Login:</td>
+	                          <td style="color:#0000ff">${langLogin}:</td>
 	                          <td><input  name="login" placeholder="enter Login" required/></td>
                             </tr>
                             <tr>
-    	                      <td style="color:#ffff00" />Password:</td>
+    	                      <td style="color:#ffff00" />${langPassword}:</td>
 	                          <td><input type="password" name="password" placeholder="enter Password" required/></td>
 	                        </tr>
 
                         </table>
-    	                <input type="submit" value="Go!"/><br>
+    	                <input type="submit" value=${langGo} /><br>
                            <h2 style="color:#B22222">
                              <c:if  test="${not empty mes}" >${mes}</c:if>
                            </h2>
