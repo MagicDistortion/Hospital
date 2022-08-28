@@ -15,7 +15,7 @@
              <br><br>
     <div align="center" >
         <h2 style="color:#fff">${langGivingARole}</h2>
-            <form action ="../admins_only/users_list" method ="post">
+            <form action ="../admins_only/users_list" method ="get">
                 <input type="submit" value="${langGetUsers}"/><br>
             </form>
         <h2 style="color:#B22222">

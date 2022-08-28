@@ -2,6 +2,7 @@ package project.filter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class PatientFilter implements Filter {
@@ -12,9 +13,10 @@ public class PatientFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServlet = (HttpServletRequest) servletRequest;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
         int role = 0;
         if (httpServlet.getSession().getAttribute("role") != null) role = (int) httpServlet.getSession().getAttribute("role");
-        if (role !=4) servletRequest.getRequestDispatcher("../before_index.jsp").forward(servletRequest,servletResponse);
+        if (role !=4) httpServletResponse.sendRedirect("../index.jsp");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

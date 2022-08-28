@@ -20,13 +20,7 @@
                 <input type="submit" value="${langGetThem}"/><br>
             </form>
         <table border="1" >
-            <colgroup style="background-color:#87CEFA;">
-             <col>
-             <col>
-             <col>
-             <col>
-             <col>
-            </colgroup>
+
             <th style="color:#0000ff"><h4/> ${langAppointment} &nbsp</th>
             <th style="color:#ffff00"><h4/> ${langAppointmentDetails} &nbsp</th>
             <th style="color:#0000ff"><h4/> ${langCurrentDoctor} &nbsp</th>
@@ -50,31 +44,28 @@
                 <input type="submit" value="${langGet}"/><br>
             </form>
     </form>
-    <c:if test="${not empty diagnosis}">
+    <c:if test="${not empty myhospitalcard}">
     <h3>
         <table border="1" >
             <colgroup style="background-color:#87CEFA;">
              <col>
              <col>
-             <col>
-             <col>
-             <col>
             </colgroup>
                      <tr style="color:#0000ff">
                         <td>${langDoctorSurname}: &nbsp</td>
-                        <td>${current_doctorSurname}</td>
+                        <td>${myhospitalcard.getCurrentDoctorSurname()}</td>
                      </tr>
                      <tr style="color:#ffff00">
                         <td>${langDoctorName}: &nbsp</td>
-                        <td>${current_doctorName}</td>
+                        <td>${myhospitalcard.getCurrentDoctorName()}</td>
                      </tr>
                      <tr style="color:#0000ff">
                         <td>${langCurrentDiagnosis}: &nbsp</td>
-                        <td width=400>${diagnosis}</td>
+                        <td>${myhospitalcard.getDiagnosis()}</td>
                      </tr>
                      <tr style="color:#ffff00">
                         <td>${langStatus}:</td>
-                        <td>${status_patient}</td>
+                        <td>${myhospitalcard.getStatus()}</td>
                      </tr>
         </table>
     </h3>

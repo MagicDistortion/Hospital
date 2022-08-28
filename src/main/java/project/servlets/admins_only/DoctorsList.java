@@ -27,12 +27,4 @@ public class DoctorsList extends HttpServlet {
         if (allDoctores.size() == 0) req.setAttribute("mes", req.getSession().getAttribute("langEmpty"));
         req.getRequestDispatcher("/admins_only/giving_a_category.jsp").forward(req, resp);
     }
-
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        List<Doctor> allDoctores = dbManager.findAllDoctores("WHERE category_id = 1 ORDER BY users.name");
-        req.setAttribute("docs", allDoctores);
-        if (allDoctores.size() == 0) req.setAttribute("mes", req.getSession().getAttribute("langEmpty"));
-        req.getRequestDispatcher("/admins_only/giving_a_category.jsp").forward(req, resp);
-    }
 }

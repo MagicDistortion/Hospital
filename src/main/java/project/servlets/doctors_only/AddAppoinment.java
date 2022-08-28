@@ -20,8 +20,8 @@ public class AddAppoinment extends HttpServlet {
         String name = req.getParameter("name");
         if (dbManager.findAppointmentByName(name) == null) {
             dbManager.insertAppointment(new Appointment(name));
-            req.setAttribute("mes", "appointment successfully added");
-        }else req.setAttribute("mes", "appointment is already exist");
+            req.setAttribute("mes", req.getSession().getAttribute("langSuccessfulAdd"));
+        } else req.setAttribute("mes", req.getSession().getAttribute("langAllReadyExist"));
         req.getRequestDispatcher("/doctors_only/add_appointment.jsp").forward(req, resp);
     }
 }

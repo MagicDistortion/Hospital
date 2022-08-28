@@ -28,6 +28,6 @@ public class GiveARole extends HttpServlet {
                break;
            case 4 : dbManager.insertPatient(user);
        }
-       req.getRequestDispatcher("/admins_only/users_list").forward(req,resp);
+       resp.sendRedirect("users_list");
     }
 }

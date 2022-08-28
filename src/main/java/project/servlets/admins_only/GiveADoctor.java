@@ -4,6 +4,8 @@ import project.controller.DBManager;
 import project.users.Doctor;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletRequestWrapper;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +22,6 @@ public class GiveADoctor extends HttpServlet {
         int patientId = Integer.parseInt(req.getParameter("id"));
         Doctor doctor= dbManager.findDoctorById(doctorId);
         dbManager.appointADoctor(doctor, patientId);
-        req.getRequestDispatcher("/admins_only/patients_sortlist").forward(req, resp);
-
-
+        req.getRequestDispatcher("/admins_only/patients_sortlist").forward(req,resp);
     }
 }

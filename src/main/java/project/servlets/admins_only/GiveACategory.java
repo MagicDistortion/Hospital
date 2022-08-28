@@ -17,6 +17,6 @@ public class GiveACategory extends HttpServlet {
         int category = Integer.parseInt(req.getParameter("category"));
         int id = Integer.parseInt(req.getParameter("id"));
         dbManager.updateDoctorCategory(category, id);
-        req.getRequestDispatcher("/admins_only/doctors_list").forward(req, resp);
+        resp.sendRedirect("doctors_list");
     }
 }

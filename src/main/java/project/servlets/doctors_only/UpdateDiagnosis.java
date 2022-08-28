@@ -23,7 +23,8 @@ public class UpdateDiagnosis extends HttpServlet {
             dbManager.updateDiagnos(diagnosis, id);
             req.getSession().setAttribute("diagnosis",diagnosis);
         }
-        req.getRequestDispatcher("/doctors_only/edit_hospital_cards.jsp").forward(req, resp);
+        resp.sendRedirect("edit_hospital_cards.jsp");
+
     }
 }
 

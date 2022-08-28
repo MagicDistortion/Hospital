@@ -19,8 +19,6 @@ public class MyAppointments extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = (int) req.getSession().getAttribute("id");
         List<AppointmentDetails> appointments = dbManager.findAllAppointmentDetailsByID(id);
-
-
         req.setAttribute("appointments", appointments);
         if (appointments.size() == 0)  req.setAttribute("mes", req.getSession().getAttribute("langEmpty"));
         req.getRequestDispatcher("/patients_only/my_appointments.jsp").forward(req, resp);

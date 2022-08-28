@@ -30,7 +30,6 @@
                         </table>
     	                <input type="submit" value=${langGo} /><br>
                            <h2 style="color:#B22222">
-                           ${langAccessDenied}
                              <c:if  test="${not empty mes}" >${mes}</c:if>
                            </h2>
                    </div>

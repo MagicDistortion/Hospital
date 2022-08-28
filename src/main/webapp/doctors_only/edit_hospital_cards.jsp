@@ -12,7 +12,7 @@
 <style>
 body {background:#000000 url(../images/Serze2.jpg)}
 </style>
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
 <table align="center">
     <tr>
         <td>
@@ -21,15 +21,8 @@ body {background:#000000 url(../images/Serze2.jpg)}
                 <input type="hidden" name="id" value="${id_card}"/>
                 <input type="submit" value="${langGetThem}"/>
             </form>
-           <table >
-            <colgroup style="background-color:#87CEFA;">
-             <col>
-             <col>
-             <col>
-             <col>
-             <col>
-             <col>
-            </colgroup>
+           <table border=1 >
+
                <th style="color:#0000ff"><h3/> ${langAppointment} &nbsp</th>
                <th style="color:#ffff00"><h3/> ${langAppointmentDetails}</th>
                <th style="color:#0000ff"><h3/> ${langCurrentDoctor}</th>
@@ -75,12 +68,9 @@ body {background:#000000 url(../images/Serze2.jpg)}
              </h2>
         </td>
         <td>
-            <h3>
+            <h2>
                 <table>
-                  <colgroup style="background-color:#87CEFA;">
-                    <col>
-                    <col>
-                  </colgroup>
+
                 <br><br>
                      <tr style="color:#0000ff">
                          <td>${langPatientSurname}:</td>
@@ -104,7 +94,7 @@ body {background:#000000 url(../images/Serze2.jpg)}
                      </tr>
                      <tr style="color:#ffff00">
                         <td>${langCurrentDiagnosis}:</td>
-                        <td width=400>${diagnosis}</td>
+                        <td>${diagnosis}</td>
                      </tr>
                      <tr style="color:#0000ff">
                         <td>${langStatus}:</td>
@@ -129,7 +119,7 @@ body {background:#000000 url(../images/Serze2.jpg)}
              <h2 style="color:#B22222">
                  <c:if  test="${not empty messtatus}" >${messtatus}</c:if>
              </h2>
-            </h3>
+            </h2>
         </td>
     </tr>
 </table>

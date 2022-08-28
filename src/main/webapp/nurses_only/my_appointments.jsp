@@ -29,13 +29,15 @@
              <col>
              <col>
              <col>
+             <col>
             </colgroup>
             <th style="color:#0000ff"><h4/> ${langAppointment} &nbsp</th>
             <th style="color:#ffff00"><h4/> ${langAppointmentDetails} &nbsp</th>
             <th style="color:#0000ff"><h4/> ${langCurrentDoctor} &nbsp</th>
             <th style="color:#ffff00"><h4/> ${langPatient} &nbsp</th>
             <th style="color:#0000ff"><h4 />${langDate} &nbsp</th>
-            <th style="color:#ffff00"><h4 />${langSetStatus} &nbsp</th>
+            <th style="color:#ffff00"><h4 />${langStatus} &nbsp</th>
+            <th style="color:#0000ff"><h4 />${langSetStatus} &nbsp</th>
               <c:forEach items="${appointments}" var="i">
                 <tr>
                   <td><h4 style="color:#fff"/>${i.getAppointment()}&nbsp</td>
@@ -43,14 +45,16 @@
                   <td><h4 style="color:#fff"/>${i.getDoctorFullName()}&nbsp</td>
                   <td><h4 style="color:#fff"/>${i.getPatientFullName()}&nbsp</td>
                   <td><h4 style="color:#fff"/>${i.getDate()} &nbsp</td>
+                  <td><h4 style="color:#fff"/>${i.getStatus()} &nbsp</td>
                 <form action ="../nurses_only/update_status" method ="post">
                   <input type="hidden" name="id" value="${i.getId()}"/>
                   <td><select name="status">
                          <option disabled>${langSetStatus}</option>
+                         <option value="waiting">waiting</option>
                          <option value="in process">In process</option>
-                         <option value="done">Done</option>
+                         <option value="done">Done</option> </select><br>
                        <input type="submit" value="${langSetStatus}"/>
-                      </select></td>
+                  </td>
                 </form>
                 </tr>
               </c:forEach>

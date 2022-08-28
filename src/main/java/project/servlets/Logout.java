@@ -13,6 +13,6 @@ public class Logout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().invalidate();
-        req.getRequestDispatcher("login.jsp").forward(req, resp);
+        resp.sendRedirect("index.jsp");
     }
 }
