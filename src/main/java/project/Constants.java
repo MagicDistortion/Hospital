@@ -1,8 +1,6 @@
 package project;
 
 public class Constants {
-    public static final String URL = "jdbc:mysql://localhost:3306/mydb?user=root&password=root";
-
     public static final String INSERT_USERS = "INSERT INTO users (surname,name, login, password,tel,date_of_birth) VALUES (?,?,?,?,?,?)";
     public static final String INSERT_SYS_ADMIN = "INSERT INTO sys_admin (id) VALUES (?)";
     public static final String INSERT_DOCTORS = "INSERT INTO doctors (id) VALUES (?)";

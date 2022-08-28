@@ -7,10 +7,11 @@ import project.Constants;
 import project.hospitalcard.HospitalCard;
 import project.users.*;
 
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 public class DBManager {
     static DBManager instance;
 
-    public DBManager() {
+    private DBManager() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -31,13 +32,25 @@ public class DBManager {
         return instance;
     }
 
+    public Connection getConnection(){
+        Context ctx;
+        Connection c = null;
+        try {
+            ctx = new InitialContext();
+            DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/myConnectionPool");
+            c = ds.getConnection();
+        } catch (NamingException | SQLException e) {
+            e.printStackTrace();
+        }
+        return c;
+    }
 
     public ResultSet getResultSet(String url) throws SQLException {
-        return DriverManager.getConnection(Constants.URL).prepareStatement(url).executeQuery();
+        return getConnection().prepareStatement(url).executeQuery();
     }
 
     public PreparedStatement getPreparedStatement(String url) throws SQLException {
-        return DriverManager.getConnection(Constants.URL).prepareStatement(url, PreparedStatement.RETURN_GENERATED_KEYS);
+        return getConnection().prepareStatement(url, PreparedStatement.RETURN_GENERATED_KEYS);
     }
 
     private static User getUser(ResultSet resultSet) throws SQLException {

@@ -20,11 +20,11 @@
                         <table >
                             <tr>
 	                          <td style="color:#0000ff">${langLogin}:</td>
-	                          <td><input  name="login" placeholder="enter Login" required/></td>
+	                          <td><input  name="login" placeholder="${langEnterLogin}" required/></td>
                             </tr>
                             <tr>
     	                      <td style="color:#ffff00" />${langPassword}:</td>
-	                          <td><input type="password" name="password" placeholder="enter Password" required/></td>
+	                          <td><input type="password" name="password" placeholder="${langEnterPassword}" required/></td>
 	                        </tr>
 
                         </table>
