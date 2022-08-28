@@ -1,6 +1,6 @@
 package project.servlets.admins_only;
 
-import project.methods.DBManager;
+import project.controller.DBManager;
 import project.users.User;
 
 import javax.servlet.ServletException;

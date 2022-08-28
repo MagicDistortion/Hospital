@@ -207,6 +207,7 @@ public class LangFilter implements Filter {
             httpServlet.getSession().setAttribute("langEnterLogin", "Enter Login");
             httpServlet.getSession().setAttribute("langEnterPassword", "Enter Password");
             httpServlet.getSession().setAttribute("langEnterTel", "Enter Tel");
+
         }
 
         filterChain.doFilter(servletRequest, servletResponse);

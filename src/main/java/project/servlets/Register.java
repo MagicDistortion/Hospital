@@ -3,7 +3,7 @@ package project.servlets;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
-import project.methods.DBManager;
+import project.controller.DBManager;
 import project.users.User;
 
 
@@ -20,11 +20,6 @@ import java.time.format.DateTimeFormatter;
 @WebServlet("/register")
 public class Register extends HttpServlet {
     DBManager dbManager = DBManager.getInstance();
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -77,7 +72,7 @@ public class Register extends HttpServlet {
                 req.getSession().setAttribute("role", user.getRolesId());
                 req.getSession().setAttribute("id", user.getId());
                 req.getSession().setAttribute("user", user);
-                req.getRequestDispatcher("login.jsp").forward(req, resp);
+                resp.sendRedirect("index.jsp");
             }
         }
     }

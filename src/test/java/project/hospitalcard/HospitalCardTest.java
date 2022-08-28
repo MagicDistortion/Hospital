@@ -2,11 +2,8 @@ package project.hospitalcard;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import project.methods.DBManager;
 
 import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class HospitalCardTest {
 

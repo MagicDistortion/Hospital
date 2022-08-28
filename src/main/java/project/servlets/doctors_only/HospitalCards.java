@@ -1,9 +1,7 @@
 package project.servlets.doctors_only;
 
 import project.hospitalcard.HospitalCard;
-import project.methods.DBManager;
-import project.users.Doctor;
-import project.users.Patient;
+import project.controller.DBManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -83,6 +83,4 @@
         <url-pattern>/nurses_only/*</url-pattern>
     </filter-mapping>
 
-
-
 </web-app>

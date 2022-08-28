@@ -1,8 +1,7 @@
 package project.servlets.admins_only;
 
 import project.categories.Categories;
-import project.methods.DBManager;
-import project.users.User;
+import project.controller.DBManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

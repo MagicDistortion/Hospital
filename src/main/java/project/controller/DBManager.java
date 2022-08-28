@@ -1,4 +1,4 @@
-package project.methods;
+package project.controller;
 
 import project.appointments.Appointment;
 import project.appointments.AppointmentDetails;
@@ -66,6 +66,7 @@ public class DBManager {
             user.setId(generatedKeys.getInt(1));
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -78,6 +79,7 @@ public class DBManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -90,6 +92,7 @@ public class DBManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -102,6 +105,7 @@ public class DBManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -115,6 +119,7 @@ public class DBManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -127,6 +132,7 @@ public class DBManager {
             category.setId(generatedKeys.getInt(1));
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -136,6 +142,7 @@ public class DBManager {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -148,6 +155,7 @@ public class DBManager {
             appoinment.setId(generatedKeys.getInt(1));
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -165,6 +173,7 @@ public class DBManager {
             appointmentDetails.setId(generatedKeys.getInt(1));
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -175,6 +184,7 @@ public class DBManager {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -185,6 +195,7 @@ public class DBManager {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -195,6 +206,7 @@ public class DBManager {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -205,8 +217,10 @@ public class DBManager {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
+
     public void updateHospitalCardStatus(String status, int idCard) {
         try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_HOSPITAL_CARD_STATUS)) {
             preparedStatement.setString(1, status);
@@ -214,8 +228,10 @@ public class DBManager {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
+
     public void updateNumberOfPatients(int patients, int docId) {
         try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_NUMBER_OF_PATIENTS)) {
             preparedStatement.setInt(1, patients);
@@ -223,6 +239,7 @@ public class DBManager {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -235,6 +252,7 @@ public class DBManager {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -245,6 +263,7 @@ public class DBManager {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -255,6 +274,7 @@ public class DBManager {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -265,6 +285,7 @@ public class DBManager {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -275,6 +296,7 @@ public class DBManager {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -285,14 +307,17 @@ public class DBManager {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
+
     public void dischargePatient(int id) {
         try (PreparedStatement preparedStatement = getPreparedStatement(Constants.DISCHARGE_PATIENT)) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -303,6 +328,7 @@ public class DBManager {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -315,6 +341,7 @@ public class DBManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return userList;
     }
@@ -328,6 +355,7 @@ public class DBManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return userList;
     }
@@ -341,6 +369,7 @@ public class DBManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return sysAdminesList;
     }
@@ -357,6 +386,7 @@ public class DBManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return DoctoresList;
     }
@@ -373,9 +403,9 @@ public class DBManager {
                 doctor.setCategory(resultSet.getString("category.name"));
                 DoctoresList.add(doctor);
             }
-        } catch (
-                SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return DoctoresList;
     }
@@ -390,6 +420,7 @@ public class DBManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return nurseList;
     }
@@ -404,6 +435,7 @@ public class DBManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return patientList;
     }
@@ -420,6 +452,7 @@ public class DBManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return patientList;
     }
@@ -434,6 +467,7 @@ public class DBManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return categoriesList;
     }
@@ -448,6 +482,7 @@ public class DBManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return appointmentList;
     }
@@ -480,6 +515,7 @@ public class DBManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return appointmentDetailsList;
     }
@@ -514,6 +550,7 @@ public class DBManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return appointmentDetailsList;
     }
@@ -530,6 +567,7 @@ public class DBManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return category;
     }
@@ -544,6 +582,7 @@ public class DBManager {
                 user = getUser(resultSet);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         return user;
@@ -560,6 +599,7 @@ public class DBManager {
                 appointment.setId(resultSet.getInt("id"));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         return appointment;
@@ -575,6 +615,7 @@ public class DBManager {
                 user = getUser(resultSet);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         return user;
@@ -593,6 +634,7 @@ public class DBManager {
                 doctor.setCategory(resultSet.getString("category.name"));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         return doctor;
@@ -608,6 +650,7 @@ public class DBManager {
                 patient = new Patient(getUser(resultSet));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         return patient;
@@ -623,6 +666,7 @@ public class DBManager {
                 nurse = new Nurse(getUser(resultSet));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         return nurse;
@@ -651,6 +695,7 @@ public class DBManager {
                 }
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         return hospitalCard;
@@ -678,6 +723,7 @@ public class DBManager {
 
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         return hospitalCardList;
@@ -707,6 +753,7 @@ public class DBManager {
 
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         return hospitalCardList;

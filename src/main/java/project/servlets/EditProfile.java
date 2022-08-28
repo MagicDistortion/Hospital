@@ -3,7 +3,7 @@ package project.servlets;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
-import project.methods.DBManager;
+import project.controller.DBManager;
 import project.users.User;
 
 import javax.servlet.ServletException;

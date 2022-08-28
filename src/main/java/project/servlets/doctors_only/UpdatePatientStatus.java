@@ -1,17 +1,14 @@
 package project.servlets.doctors_only;
 
-import project.appointments.AppointmentDetails;
-import project.methods.DBManager;
+import project.controller.DBManager;
 import project.users.Doctor;
 
-import javax.print.Doc;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/doctors_only/update_status")
 public class UpdatePatientStatus extends HttpServlet {

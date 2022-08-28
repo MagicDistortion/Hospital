@@ -1,8 +1,7 @@
 package project.servlets.doctors_only;
 
-import project.appointments.Appointment;
 import project.appointments.AppointmentDetails;
-import project.methods.DBManager;
+import project.controller.DBManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,7 +1,6 @@
 package project.servlets.doctors_only;
 
-import project.methods.DBManager;
-import project.users.Doctor;
+import project.controller.DBManager;
 import project.users.Patient;
 
 import javax.servlet.ServletException;

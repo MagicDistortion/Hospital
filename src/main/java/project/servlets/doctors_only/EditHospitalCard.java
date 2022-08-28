@@ -3,7 +3,7 @@ package project.servlets.doctors_only;
 
 import project.appointments.Appointment;
 import project.hospitalcard.HospitalCard;
-import project.methods.DBManager;
+import project.controller.DBManager;
 import project.users.Nurse;
 
 import javax.servlet.ServletException;

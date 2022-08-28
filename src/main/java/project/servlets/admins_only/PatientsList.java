@@ -1,6 +1,6 @@
 package project.servlets.admins_only;
 
-import project.methods.DBManager;
+import project.controller.DBManager;
 import project.users.Doctor;
 import project.users.Patient;
 
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/admins_only/patients_sortlist")

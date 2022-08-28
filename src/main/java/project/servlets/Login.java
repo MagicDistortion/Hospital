@@ -1,6 +1,6 @@
 package project.servlets;
 
-import project.methods.DBManager;
+import project.controller.DBManager;
 import project.users.User;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +31,7 @@ public class Login extends HttpServlet {
             req.getSession().setAttribute("role",user.getRolesId());
             req.getSession().setAttribute("id",user.getId());
             req.getSession().setAttribute("user",user);
-            req.getRequestDispatcher("login.jsp").forward(req,resp);
+                        resp.sendRedirect("index.jsp");
         }if (user==null){
             req.setAttribute("mes"," Login -> "+login +req.getSession().getAttribute("langNotFound"));
             req.getRequestDispatcher("index.jsp").forward(req,resp);

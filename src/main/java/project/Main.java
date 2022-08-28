@@ -1,10 +1,6 @@
 package project;
 
-import project.appointments.AppointmentDetails;
-import project.methods.DBManager;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import project.controller.DBManager;
 
 
 public class Main {

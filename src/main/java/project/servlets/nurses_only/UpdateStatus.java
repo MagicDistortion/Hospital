@@ -1,7 +1,6 @@
 package project.servlets.nurses_only;
 
-import project.appointments.AppointmentDetails;
-import project.methods.DBManager;
+import project.controller.DBManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/nurses_only/update_status")
 public class UpdateStatus extends HttpServlet {
