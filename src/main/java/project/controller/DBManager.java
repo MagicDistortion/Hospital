@@ -1,5 +1,6 @@
 package project.controller;
 
+
 import project.appointments.Appointment;
 import project.appointments.AppointmentDetails;
 import project.categories.Categories;
@@ -17,14 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBManager {
+
+
     static DBManager instance;
 
     private DBManager() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public static synchronized DBManager getInstance() {
@@ -32,25 +30,18 @@ public class DBManager {
         return instance;
     }
 
-    public Connection getConnection(){
+    public Connection getConnection() {
         Context ctx;
         Connection c = null;
+        DataSource ds;
         try {
             ctx = new InitialContext();
-            DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/myConnectionPool");
+            ds = (DataSource) ctx.lookup("java:comp/env/jdbc/myConnectionPool");
             c = ds.getConnection();
         } catch (NamingException | SQLException e) {
             e.printStackTrace();
         }
         return c;
-    }
-
-    public ResultSet getResultSet(String url) throws SQLException {
-        return getConnection().prepareStatement(url).executeQuery();
-    }
-
-    public PreparedStatement getPreparedStatement(String url) throws SQLException {
-        return getConnection().prepareStatement(url, PreparedStatement.RETURN_GENERATED_KEYS);
     }
 
     private static User getUser(ResultSet resultSet) throws SQLException {
@@ -66,7 +57,11 @@ public class DBManager {
     }
 
     public void insertUser(User user) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.INSERT_USERS)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement
+                     = connection.prepareStatement(Constants.INSERT_USERS, PreparedStatement.RETURN_GENERATED_KEYS))
+//                PreparedStatement preparedStatement = getPreparedStatement(Constants.INSERT_USERS))
+        {
             preparedStatement.setString(1, user.getSurname());
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getLogin());
@@ -84,7 +79,8 @@ public class DBManager {
     }
 
     public void insertSysAdmin(User user) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.INSERT_SYS_ADMIN)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_SYS_ADMIN)) {
             if (user.getRolesId() == 0) {
                 preparedStatement.setInt(1, user.getId());
                 preparedStatement.executeUpdate();
@@ -97,7 +93,8 @@ public class DBManager {
     }
 
     public void insertDoctor(User user) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.INSERT_DOCTORS)) {
+        try (Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_DOCTORS)) {
             if (user.getRolesId() == 0) {
                 preparedStatement.setInt(1, user.getId());
                 preparedStatement.executeUpdate();
@@ -110,7 +107,8 @@ public class DBManager {
     }
 
     public void insertNurse(User user) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.INSERT_NURSE)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_NURSE)) {
             if (user.getRolesId() == 0) {
                 preparedStatement.setInt(1, user.getId());
                 preparedStatement.executeUpdate();
@@ -123,7 +121,8 @@ public class DBManager {
     }
 
     public void insertPatient(User user) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.INSERT_PATIENTS)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_PATIENTS)) {
             if (user.getRolesId() == 0) {
                 preparedStatement.setInt(1, user.getId());
                 preparedStatement.executeUpdate();
@@ -137,7 +136,9 @@ public class DBManager {
     }
 
     public void insertCategory(Categories category) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.INSERT_CATEGORY)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement
+                     = connection.prepareStatement(Constants.INSERT_CATEGORY, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, category.getName());
             preparedStatement.executeUpdate();
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
@@ -150,7 +151,8 @@ public class DBManager {
     }
 
     public void insertHospitalCard(int patientId) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.INSERT_HOSPITAL_CARD)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_HOSPITAL_CARD)) {
             preparedStatement.setInt(1, patientId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -160,7 +162,9 @@ public class DBManager {
     }
 
     public void insertAppointment(Appointment appoinment) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.INSERT_APPOINMENT)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement
+                     = connection.prepareStatement(Constants.INSERT_APPOINMENT, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, appoinment.getName());
             preparedStatement.executeUpdate();
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
@@ -173,7 +177,9 @@ public class DBManager {
     }
 
     public void insertAppointmentDetails(AppointmentDetails appointmentDetails) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.INSERT_APPOINTMENT_DETAIL)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement
+                     = connection.prepareStatement(Constants.INSERT_APPOINTMENT_DETAIL, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, appointmentDetails.getText());
             preparedStatement.setInt(2, appointmentDetails.getNurseId());
             preparedStatement.setInt(3, appointmentDetails.getAppointmentId());
@@ -191,7 +197,8 @@ public class DBManager {
     }
 
     public void updateUserRole(int role, int id) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_USER_ROLE)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_ROLE)) {
             preparedStatement.setInt(1, role);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
@@ -202,7 +209,8 @@ public class DBManager {
     }
 
     public void updateDoctorCategory(int categoryId, int id) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_DOCTOR_CATEGORY)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_DOCTOR_CATEGORY)) {
             preparedStatement.setInt(1, categoryId);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
@@ -213,7 +221,8 @@ public class DBManager {
     }
 
     public void updateDiagnos(String diagnos, int id) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_DIAGNOS)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_ROLE)) {
             preparedStatement.setString(1, diagnos);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
@@ -224,7 +233,8 @@ public class DBManager {
     }
 
     public void updateAppointmentStatus(String status, int id) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_APPOINTMENT_STATUS)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_APPOINTMENT_STATUS)) {
             preparedStatement.setString(1, status);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
@@ -235,7 +245,8 @@ public class DBManager {
     }
 
     public void updateHospitalCardStatus(String status, int idCard) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_HOSPITAL_CARD_STATUS)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_HOSPITAL_CARD_STATUS)) {
             preparedStatement.setString(1, status);
             preparedStatement.setInt(2, idCard);
             preparedStatement.executeUpdate();
@@ -246,7 +257,8 @@ public class DBManager {
     }
 
     public void updateNumberOfPatients(int patients, int docId) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_NUMBER_OF_PATIENTS)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_NUMBER_OF_PATIENTS)) {
             preparedStatement.setInt(1, patients);
             preparedStatement.setInt(2, docId);
             preparedStatement.executeUpdate();
@@ -257,7 +269,8 @@ public class DBManager {
     }
 
     public void appointADoctor(Doctor doctor, int id) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.APPOINT_A_DOCTOR)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.APPOINT_A_DOCTOR)) {
             preparedStatement.setInt(1, doctor.getId());
             preparedStatement.setInt(2, doctor.getNumberOfPatients() + 1);
             preparedStatement.setInt(3, id);
@@ -270,7 +283,8 @@ public class DBManager {
     }
 
     public void updateUseSurname(String surname, int id) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_USER_SURNAME)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_SURNAME)) {
             preparedStatement.setString(1, surname);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
@@ -281,7 +295,8 @@ public class DBManager {
     }
 
     public void updateUserName(String name, int id) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_USER_NAME)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_NAME)) {
             preparedStatement.setString(1, name);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
@@ -292,7 +307,8 @@ public class DBManager {
     }
 
     public void updateUserLogin(String login, int id) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_USER_LOGIN)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_LOGIN)) {
             preparedStatement.setString(1, login);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
@@ -303,7 +319,8 @@ public class DBManager {
     }
 
     public void updateUserPassword(String password, int id) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_USER_PASSWORD)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_PASSWORD)) {
             preparedStatement.setString(1, String.valueOf(password.hashCode()));
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
@@ -314,7 +331,8 @@ public class DBManager {
     }
 
     public void updateUserTel(String tel, int id) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_USER_TEL)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_TEL)) {
             preparedStatement.setString(1, tel);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
@@ -325,7 +343,8 @@ public class DBManager {
     }
 
     public void dischargePatient(int id) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.DISCHARGE_PATIENT)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.DISCHARGE_PATIENT)) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -335,7 +354,8 @@ public class DBManager {
     }
 
     public void updateUserDateOfBirth(LocalDate dateOfBtirth, int id) {
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.UPDATE_USER_DATE_OF_BIRTH)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_DATE_OF_BIRTH)) {
             preparedStatement.setObject(1, dateOfBtirth);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
@@ -347,7 +367,8 @@ public class DBManager {
 
     public List<User> findAllUsers() {
         List<User> userList = new ArrayList<>();
-        try (ResultSet resultSet = getResultSet(Constants.FROM_USERS)) {
+        try (Connection connection = getConnection();
+             ResultSet resultSet = connection.prepareStatement(Constants.FROM_USERS).executeQuery()) {
             while (resultSet.next()) {
                 User user = getUser(resultSet);
                 userList.add(user);
@@ -361,7 +382,8 @@ public class DBManager {
 
     public List<User> findUsersWitchOutRole() {
         List<User> userList = new ArrayList<>();
-        try (ResultSet resultSet = getResultSet(Constants.FROM_USERS_WITHOUT_ROLE)) {
+        try (Connection connection = getConnection();
+             ResultSet resultSet = connection.prepareStatement(Constants.FROM_USERS_WITHOUT_ROLE).executeQuery()) {
             while (resultSet.next()) {
                 User user = getUser(resultSet);
                 userList.add(user);
@@ -375,7 +397,8 @@ public class DBManager {
 
     public List<SysAdmin> findAllSysAdmins() {
         List<SysAdmin> sysAdminesList = new ArrayList<>();
-        try (ResultSet resultSet = getResultSet(Constants.FROM_SYS_ADMIN)) {
+        try (Connection connection = getConnection();
+             ResultSet resultSet = connection.prepareStatement(Constants.FROM_SYS_ADMIN).executeQuery()) {
             while (resultSet.next()) {
                 SysAdmin sysAdmin = new SysAdmin(getUser(resultSet));
                 sysAdminesList.add(sysAdmin);
@@ -389,7 +412,8 @@ public class DBManager {
 
     public List<Doctor> findAllDoctores(String sorted) {
         List<Doctor> DoctoresList = new ArrayList<>();
-        try (ResultSet resultSet = getResultSet(Constants.FROM_DOCTORS + sorted)) {
+        try (Connection connection = getConnection();
+             ResultSet resultSet = connection.prepareStatement(Constants.FROM_DOCTORS + sorted).executeQuery()) {
             while (resultSet.next()) {
                 Doctor doctor = new Doctor(getUser(resultSet));
                 doctor.setCategoryId(resultSet.getInt("category_id"));
@@ -408,7 +432,8 @@ public class DBManager {
         start = (start - 1) * total;
         String limit = " limit " + start + "," + total;
         List<Doctor> DoctoresList = new ArrayList<>();
-        try (ResultSet resultSet = getResultSet(Constants.FROM_DOCTORS + sorted + limit)) {
+        try (Connection connection = getConnection();
+             ResultSet resultSet = connection.prepareStatement(Constants.FROM_DOCTORS + sorted + limit).executeQuery()) {
             while (resultSet.next()) {
                 Doctor doctor = new Doctor(getUser(resultSet));
                 doctor.setCategoryId(resultSet.getInt("category_id"));
@@ -426,7 +451,8 @@ public class DBManager {
 
     public List<Nurse> findAllNurse() {
         List<Nurse> nurseList = new ArrayList<>();
-        try (ResultSet resultSet = getResultSet(Constants.FROM_NURSE)) {
+        try (Connection connection = getConnection();
+             ResultSet resultSet = connection.prepareStatement(Constants.FROM_NURSE).executeQuery()) {
             while (resultSet.next()) {
                 Nurse nurse = new Nurse(getUser(resultSet));
                 nurseList.add(nurse);
@@ -440,7 +466,8 @@ public class DBManager {
 
     public List<Patient> findAllPatients(String sorted) {
         List<Patient> patientList = new ArrayList<>();
-        try (ResultSet resultSet = getResultSet(Constants.FROM_PATIENTS + sorted)) {
+        try (Connection connection = getConnection();
+             ResultSet resultSet = connection.prepareStatement(Constants.FROM_PATIENTS+sorted).executeQuery()) {
             while (resultSet.next()) {
                 Patient patient = new Patient(getUser(resultSet));
                 patient.setCurrentDoctorId(resultSet.getInt("current_doctor_id"));
@@ -457,7 +484,8 @@ public class DBManager {
         start = (start - 1) * total;
         String limit = " limit " + start + "," + total;
         List<Patient> patientList = new ArrayList<>();
-        try (ResultSet resultSet = getResultSet(Constants.FROM_PATIENTS + sorted + limit)) {
+        try (Connection connection = getConnection();
+             ResultSet resultSet = connection.prepareStatement(Constants.FROM_PATIENTS + sorted + limit).executeQuery()) {
             while (resultSet.next()) {
                 Patient patient = new Patient(getUser(resultSet));
                 patient.setCurrentDoctorId(resultSet.getInt("current_doctor_id"));
@@ -472,7 +500,8 @@ public class DBManager {
 
     public List<Categories> findAllCategories() {
         List<Categories> categoriesList = new ArrayList<>();
-        try (ResultSet resultSet = getResultSet(Constants.FROM_CATEGORIES)) {
+        try (Connection connection = getConnection();
+             ResultSet resultSet = connection.prepareStatement(Constants.FROM_CATEGORIES).executeQuery()) {
             while (resultSet.next()) {
                 Categories category = new Categories(resultSet.getString("name"));
                 category.setId(resultSet.getInt("id"));
@@ -487,7 +516,8 @@ public class DBManager {
 
     public List<Appointment> findAllAppointments() {
         List<Appointment> appointmentList = new ArrayList<>();
-        try (ResultSet resultSet = getResultSet(Constants.FROM_APPOINTMENTS)) {
+        try (Connection connection = getConnection();
+             ResultSet resultSet = connection.prepareStatement(Constants.FROM_APPOINTMENTS).executeQuery()) {
             while (resultSet.next()) {
                 Appointment appointment = new Appointment(resultSet.getString("name"));
                 appointment.setId(resultSet.getInt("id"));
@@ -502,7 +532,8 @@ public class DBManager {
 
     public List<AppointmentDetails> findAllAppointmentDetailsByID(int hospitalCardId) {
         List<AppointmentDetails> appointmentDetailsList = new ArrayList<>();
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.FROM_APPOINTMENT_DETAIL)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.FROM_APPOINTMENT_DETAIL)) {
             preparedStatement.setInt(1, hospitalCardId);
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getResultSet();
@@ -535,7 +566,8 @@ public class DBManager {
 
     public List<AppointmentDetails> findAllAppointmentsForNurse(int nurseId) {
         List<AppointmentDetails> appointmentDetailsList = new ArrayList<>();
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.FROM_APPOINTMENTS_FOR_NURSE)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.FROM_APPOINTMENTS_FOR_NURSE)) {
             preparedStatement.setInt(1, nurseId);
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getResultSet();
@@ -570,7 +602,8 @@ public class DBManager {
 
     public Categories findCategory(String name) {
         Categories category = null;
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.FIND_CATEGORY)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.FIND_CATEGORY)) {
             preparedStatement.setString(1, name);
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getResultSet();
@@ -587,7 +620,8 @@ public class DBManager {
 
     public User findUserByLogin(String login) {
         User user = null;
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.FIND_BY_LOGIN)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.FIND_BY_LOGIN)) {
             preparedStatement.setString(1, login);
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getResultSet();
@@ -603,7 +637,8 @@ public class DBManager {
 
     public Appointment findAppointmentByName(String name) {
         Appointment appointment = null;
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.FIND_APPOINTMENT)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.FIND_APPOINTMENT)) {
             preparedStatement.setString(1, name);
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getResultSet();
@@ -620,7 +655,8 @@ public class DBManager {
 
     public User findUserByID(int id) {
         User user = null;
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.FIND_BY_ID)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.FIND_BY_ID)) {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getResultSet();
@@ -636,7 +672,8 @@ public class DBManager {
 
     public Doctor findDoctorById(int id) {
         Doctor doctor = null;
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.FIND_DOCTOR_BY_ID)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.FIND_DOCTOR_BY_ID)) {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getResultSet();
@@ -655,7 +692,8 @@ public class DBManager {
 
     public Patient findPatientById(int id) {
         Patient patient = null;
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.FIND_PATIENT_BY_ID)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.FIND_PATIENT_BY_ID)) {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getResultSet();
@@ -671,7 +709,8 @@ public class DBManager {
 
     public Nurse findNurseById(int id) {
         Nurse nurse = null;
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.FIND_NURSE_BY_ID)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.FIND_NURSE_BY_ID)) {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getResultSet();
@@ -687,7 +726,8 @@ public class DBManager {
 
     public HospitalCard getHospitalCard(int id) {
         HospitalCard hospitalCard = null;
-        try (PreparedStatement preparedStatement = getPreparedStatement(Constants.GET_A_HOSPITAL_CARD)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.GET_A_HOSPITAL_CARD)) {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getResultSet();
@@ -716,7 +756,8 @@ public class DBManager {
 
     public List<HospitalCard> getAllHospitalCards() {
         List<HospitalCard> hospitalCardList = new ArrayList<>();
-        try (ResultSet resultSet = getResultSet(Constants.GET_ALL_HOSPITAL_CARDS)) {
+        try (Connection connection = getConnection();
+             ResultSet resultSet = connection.prepareStatement(Constants.GET_ALL_HOSPITAL_CARDS).executeQuery()) {
             while (resultSet.next()) {
                 Doctor doctor = findDoctorById(resultSet.getInt("current_doctor_id"));
 
@@ -746,7 +787,8 @@ public class DBManager {
         start = (start - 1) * total;
         String limit = " limit " + start + "," + total;
         List<HospitalCard> hospitalCardList = new ArrayList<>();
-        try (ResultSet resultSet = getResultSet(Constants.GET_ALL_HOSPITAL_CARDS + limit)) {
+        try (Connection connection = getConnection();
+             ResultSet resultSet = connection.prepareStatement(Constants.GET_ALL_HOSPITAL_CARDS + limit).executeQuery()) {
             while (resultSet.next()) {
                 Doctor doctor = findDoctorById(resultSet.getInt("current_doctor_id"));
 

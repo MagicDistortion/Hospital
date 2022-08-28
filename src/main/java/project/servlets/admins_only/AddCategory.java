@@ -20,8 +20,9 @@ public class AddCategory extends HttpServlet {
         String category = req.getParameter("category");
         if (dbManager.findCategory(category) != null) {
             req.setAttribute("mes", "category already exists");
-        req.getRequestDispatcher("/admins_only/add_category.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admins_only/add_category.jsp").forward(req, resp);
         } else {
+            dbManager.insertCategory(new Categories(category));
             req.setAttribute("mes", "category added");
             resp.sendRedirect("add_category.jsp");
         }
