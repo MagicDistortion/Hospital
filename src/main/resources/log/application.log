@@ -1,0 +1,2 @@
+2022-08-29 15:47:45 ERROR [http-nio-8080-exec-1]: java.sql.SQLException: Cannot create PoolableConnectionFactory (Could not create connection to database server. Attempted reconnect 3 times. Giving up.)
+
