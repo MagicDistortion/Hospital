@@ -24,6 +24,7 @@ public class DBManager {
     static DBManager instance;
 
     private DBManager() {
+
     }
 
     public static synchronized DBManager getInstance() {
@@ -36,10 +37,15 @@ public class DBManager {
         Connection c = null;
         DataSource ds;
         try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            c = DriverManager.getConnection(Constants.URL);
+
             ctx = new InitialContext();
             ds = (DataSource) ctx.lookup("java:comp/env/jdbc/myConnectionPool");
             c = ds.getConnection();
-        } catch (NamingException | SQLException e) {
+
+        } catch (NamingException ignored) {
+        } catch (SQLException | ClassNotFoundException e) {
             logger.error(e);
         }
         return c;
@@ -60,7 +66,7 @@ public class DBManager {
     public void insertUser(User user) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement
-                     = connection.prepareStatement(Constants.INSERT_USERS, PreparedStatement.RETURN_GENERATED_KEYS)){
+                     = connection.prepareStatement(Constants.INSERT_USERS, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, user.getSurname());
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getLogin());
@@ -93,7 +99,7 @@ public class DBManager {
 
     public void insertDoctor(User user) {
         try (Connection connection = getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_DOCTORS)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_DOCTORS)) {
             if (user.getRolesId() == 0) {
                 preparedStatement.setInt(1, user.getId());
                 preparedStatement.executeUpdate();
@@ -452,7 +458,7 @@ public class DBManager {
     public List<Patient> findAllPatients(String sorted) {
         List<Patient> patientList = new ArrayList<>();
         try (Connection connection = getConnection();
-             ResultSet resultSet = connection.prepareStatement(Constants.FROM_PATIENTS+sorted).executeQuery()) {
+             ResultSet resultSet = connection.prepareStatement(Constants.FROM_PATIENTS + sorted).executeQuery()) {
             while (resultSet.next()) {
                 Patient patient = new Patient(getUser(resultSet));
                 patient.setCurrentDoctorId(resultSet.getInt("current_doctor_id"));

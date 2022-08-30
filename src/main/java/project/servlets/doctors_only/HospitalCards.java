@@ -21,7 +21,7 @@ public class HospitalCards extends HttpServlet {
         req.setAttribute("hospital_cards", hospitalCardList);
 
         int pagination;
-        if (Integer.parseInt(req.getParameter("pagination")) <= 0) {
+        if (req.getParameter("pagination")==null|| Integer.parseInt(req.getParameter("pagination")) <= 0) {
             pagination = 5;
         } else
             pagination = Integer.parseInt(req.getParameter("pagination"));

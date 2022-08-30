@@ -1,2 +1,1 @@
-2022-08-29 15:47:45 ERROR [http-nio-8080-exec-1]: java.sql.SQLException: Cannot create PoolableConnectionFactory (Could not create connection to database server. Attempted reconnect 3 times. Giving up.)
-
+2022-08-29 15:47:45 ERROR [http-nio-8080-exec-1]: java.sql.SQLException: Cannot create PoolableConnectionFactory (Could not create connection to database server. Attempted reconnect 3 times. Giving up.)2022-08-30 12:13:19 ERROR [main]: javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
