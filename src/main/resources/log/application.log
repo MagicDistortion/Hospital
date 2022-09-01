@@ -1,1 +1,13 @@
-2022-08-29 15:47:45 ERROR [http-nio-8080-exec-1]: java.sql.SQLException: Cannot create PoolableConnectionFactory (Could not create connection to database server. Attempted reconnect 3 times. Giving up.)2022-08-30 12:13:19 ERROR [main]: javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+2022-08-29 15:47:45 ERROR [http-nio-8080-exec-1]: java.sql.SQLException: Cannot create PoolableConnectionFactory (Could not create connection to database server. Attempted reconnect 3 times. Giving up.)2022-08-30 12:13:19 ERROR [main]: javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial2022-08-30 22:29:05 ERROR [http-nio-8080-exec-16]: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2022-08-30 22:29:07 ERROR [http-nio-8080-exec-13]: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2022-08-30 22:50:23 ERROR [http-nio-8080-exec-2]: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2022-08-30 22:50:25 ERROR [http-nio-8080-exec-4]: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2022-09-01 14:33:47 ERROR [http-nio-8080-exec-9]: java.sql.SQLException: Incorrect integer value: 'Гострий апендицит' for column 'id_roles' at row 1

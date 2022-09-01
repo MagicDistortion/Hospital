@@ -1,5 +1,4 @@
 package project;
-
 public class Constants {
     public static final String URL = "jdbc:mysql://localhost:3306/mydb?user=root&password=root";
 
@@ -45,6 +44,4 @@ public class Constants {
     public static final String UPDATE_USER_TEL = "UPDATE users SET `tel` = ? WHERE (`id_users` = ?)";
     public static final String UPDATE_USER_DATE_OF_BIRTH = "UPDATE users SET `date_of_birth`= ?  WHERE `id_users` = ?";
     public static final String DISCHARGE_PATIENT = "UPDATE hospital_card SET `current_doctor_id` = null  WHERE id_card = ?";
-
-
 }

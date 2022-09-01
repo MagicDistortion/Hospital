@@ -227,7 +227,7 @@ public class DBManager {
 
     public void updateDiagnos(String diagnos, int id) {
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_ROLE)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_DIAGNOS)) {
             preparedStatement.setString(1, diagnos);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
@@ -347,22 +347,21 @@ public class DBManager {
         }
     }
 
-    public void dischargePatient(int id) {
+    public void updateUserDateOfBirth(LocalDate dateOfBtirth, int id) {
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(Constants.DISCHARGE_PATIENT)) {
-            preparedStatement.setInt(1, id);
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_DATE_OF_BIRTH)) {
+            preparedStatement.setObject(1, dateOfBtirth);
+            preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             logger.error(e);
             throw new RuntimeException(e);
         }
     }
-
-    public void updateUserDateOfBirth(LocalDate dateOfBtirth, int id) {
+    public void dischargePatient(int id) {
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_DATE_OF_BIRTH)) {
-            preparedStatement.setObject(1, dateOfBtirth);
-            preparedStatement.setInt(2, id);
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.DISCHARGE_PATIENT)) {
+            preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             logger.error(e);
