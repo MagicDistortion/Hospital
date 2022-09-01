@@ -39,7 +39,7 @@ public class DBManager {
 
             ctx = new InitialContext();
             ds = (DataSource) ctx.lookup("java:comp/env/jdbc/myConnectionPool");
-            /* якщо є можливість зв'язатись з пулом тмокату то конекшен переписується*/
+            /* якщо є можливість зв'язатись з пулом томкату то конекшен переписується*/
             c = ds.getConnection();
 
         } catch (NamingException ignored) {

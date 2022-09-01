@@ -13,7 +13,7 @@ public class Constants {
     public static final String INSERT_APPOINMENT= "INSERT INTO appointment (name) VALUES (?)";
     public static final String INSERT_APPOINTMENT_DETAIL = "INSERT INTO appoinment_detail (text,nurse_id,appoinment_id,doctors_id,hospital_card_id,date) VALUES (?,?,?,?,?,?)";
     public static final String UPDATE_USER_ROLE = "UPDATE users SET `id_roles` = ? WHERE (`id_users` = ?)";
-    public static final String UPDATE_DOCTOR_CATEGORY = "UPDATE doctors SET `category_id` = ? WHERE (`id` = ?)";
+    public static final String UPDATE_DOCTOR_CATEGORY = "UPDATE doctors SET `category_id` = ? ORDER by id WHERE (`id` = ?) ";
     public static final String UPDATE_DIAGNOS= "UPDATE hospital_card SET diagnosis = ? WHERE id_card =?";
     public static final String UPDATE_APPOINTMENT_STATUS= "UPDATE appoinment_detail SET status = ? WHERE id = ? ";
     public static final String UPDATE_HOSPITAL_CARD_STATUS= "UPDATE hospital_card SET status = ? WHERE id_card = ? ";
@@ -25,8 +25,8 @@ public class Constants {
     public static final String FROM_DOCTORS = "SELECT * FROM doctors LEFT JOIN users on id_users=id LEFT JOIN category on category_id=category.id ";
     public static final String FROM_NURSE = "SELECT * FROM nurse LEFT JOIN users on id_users=id ";
     public static final String FROM_PATIENTS = "SELECT * FROM patients LEFT JOIN users on id_users=id LEFT JOIN hospital_card on id_card = id ";
-    public static final String FROM_CATEGORIES = "SELECT * FROM category ";
-    public static final String FROM_APPOINTMENTS = "SELECT * FROM appointment ";
+    public static final String FROM_CATEGORIES = "SELECT * FROM category Order by id ";
+    public static final String FROM_APPOINTMENTS = "SELECT * FROM appointment order by id ";
     public static final String FROM_APPOINTMENT_DETAIL = "SELECT * FROM appoinment_detail left join appointment on appoinment_id = appointment.id where hospital_card_id = ? and `status`!='done'";
     public static final String FROM_APPOINTMENTS_FOR_NURSE = "SELECT * FROM appoinment_detail left join appointment on appoinment_id = appointment.id where nurse_id = ?";
     public static final String FIND_CATEGORY = "SELECT * FROM category WHERE name = ?";
