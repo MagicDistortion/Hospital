@@ -3,6 +3,7 @@ package project.filter;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+/* фільтр для всіх сторінок для перемикання мов */
 
 public class LangFilter implements Filter {
 

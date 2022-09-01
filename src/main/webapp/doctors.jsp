@@ -25,10 +25,10 @@
             </c:choose>
               placeholder="pagination" required />
                 <select name="sort">
-                   <option disabled>${langSorted}</option>
-                   <option value="Surname">${langBySurname}</option>
-                   <option value="category">${langByCategory}</option>
-                   <option value="patients">${langByNOP}</option>
+                   <option disabled>${langSorted} &nbsp</option>
+                   <option value="Surname">${langBySurname} &nbsp</option>
+                   <option value="category">${langByCategory} &nbsp</option>
+                   <option value="patients">${langByNOP} &nbsp</option>
                 <input type="submit" value="${langGetThem}"/><br>
             </form>
         <h2 style="color:#B22222">
@@ -45,10 +45,10 @@
             <th style="color:#ffff00"><h4/>${langNOP} &nbsp</th>
                   <c:forEach items="${docList}" var="i">
                       <tr>
-                         <td style="color:#fff"><h3/>${i.getSurname()}</td>
-                         <td style="color:#fff"><h3/>${i.getName()}</td>
-                         <td style="color:#fff" align="center"><h3/>${i.getCategory()}</td>
-                         <td style="color:#fff" align="center"><h3/>${i.getNumberOfPatients()}</td>
+                         <td style="color:#fff"><h3/>${i.getSurname()} &nbsp</td>
+                         <td style="color:#fff"><h3/>${i.getName()} &nbsp</td>
+                         <td style="color:#fff" align="center"><h3/>${i.getCategory()} &nbsp</td>
+                         <td style="color:#fff" align="center"><h3/>${i.getNumberOfPatients()} &nbsp</td>
                       </tr>
                   </c:forEach>
         </table>

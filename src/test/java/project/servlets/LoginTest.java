@@ -24,7 +24,7 @@ class LoginTest {
         final RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 
         when(request.getSession()).thenReturn(session);
-        when(request.getParameter("login")).thenReturn("Porox");
+        when(request.getParameter("login")).thenReturn("Doctor");
         when(request.getParameter("password")).thenReturn("9582");
 
         servlet.doPost(request, response);

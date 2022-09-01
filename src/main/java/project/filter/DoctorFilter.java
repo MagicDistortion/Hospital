@@ -4,6 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+/* фільтр до сторінок для лікарів*/
 
 public class DoctorFilter implements Filter {
     @Override

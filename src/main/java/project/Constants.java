@@ -1,4 +1,5 @@
 package project;
+/* Клас з запитами до БД */
 public class Constants {
     public static final String URL = "jdbc:mysql://localhost:3306/mydb?user=root&password=root";
 
@@ -20,7 +21,7 @@ public class Constants {
     public static final String APPOINT_A_DOCTOR = "UPDATE hospital_card,doctors SET `current_doctor_id` = ? , doctors.number_of_patients= ? WHERE id_card = ? AND doctors.id=?";
     public static final String FROM_USERS = "SELECT * FROM users ";
     public static final String FROM_USERS_WITHOUT_ROLE = "SELECT * FROM users where id_roles is null";
-    public static final String FROM_SYS_ADMIN = "SELECT * FROM sys_admin LEFT JOIN users on id_users=id ";
+
     public static final String FROM_DOCTORS = "SELECT * FROM doctors LEFT JOIN users on id_users=id LEFT JOIN category on category_id=category.id ";
     public static final String FROM_NURSE = "SELECT * FROM nurse LEFT JOIN users on id_users=id ";
     public static final String FROM_PATIENTS = "SELECT * FROM patients LEFT JOIN users on id_users=id LEFT JOIN hospital_card on id_card = id ";

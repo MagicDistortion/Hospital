@@ -1,5 +1,5 @@
 package project.appointments;
-
+/* Клас медичних призначень */
 public class Appointment {
     private int id;
     private String name;

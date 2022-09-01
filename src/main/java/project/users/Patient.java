@@ -2,6 +2,8 @@ package project.users;
 
 import java.time.LocalDate;
 
+/* Клас пацієнтів */
+
 public class Patient {
 
     private int id;

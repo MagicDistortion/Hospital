@@ -1,7 +1,7 @@
 package project.appointments;
 
 import java.time.LocalDate;
-
+/* Клас додаткової інформації до призначень */
 public class AppointmentDetails {
     private int id;
     private String text;

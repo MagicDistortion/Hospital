@@ -8,6 +8,8 @@ import com.google.i18n.phonenumbers.Phonenumber;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/* Клас користувачів */
+
 public class User implements Serializable {
     private int id;
     private String surname;
@@ -57,9 +59,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    /* метод отримання номеру телефону у вигляді строки - код країни + номер телефону */
     public String getTel() {
         return tel.getCountryCode()+""+ tel.getNationalNumber();
     }
+
+    /* метод призначення номера телефона,приймає строку та записує як клас "телефонний номер"  */
 
     public void setTel(String tel) {
         PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();

@@ -1,4 +1,5 @@
 package project.users;
+/* Клас лікарів */
 
 public class Doctor {
     private int id;

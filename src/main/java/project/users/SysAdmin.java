@@ -1,5 +1,7 @@
 package project.users;
 
+/* Клас сістемних адміністраторів */
+
 public class SysAdmin {
     private int id;
     private String surname;

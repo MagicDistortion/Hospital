@@ -26,7 +26,7 @@ class AddCategoryTest {
         final RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 
         when(request.getRequestDispatcher(path)).thenReturn(dispatcher);
-        when(request.getParameter("category")).thenReturn("Хирург");
+        when(request.getParameter("category")).thenReturn("Хірург");
 
         servlet.doPost(request, response);
 

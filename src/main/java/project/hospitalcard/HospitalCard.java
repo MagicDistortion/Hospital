@@ -1,7 +1,7 @@
 package project.hospitalcard;
 
 import java.time.LocalDate;
-
+/* Клас лікарняних карт */
 public class HospitalCard {
     private int id;
     private int doctorsId;

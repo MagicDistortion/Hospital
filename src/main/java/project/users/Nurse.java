@@ -1,5 +1,7 @@
 package project.users;
 
+/* Клас медсестр */
+
 public class Nurse {
     private int id;
     private String surname;

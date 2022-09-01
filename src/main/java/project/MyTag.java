@@ -5,7 +5,10 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 import java.time.LocalDate;
+/* Клас з кастомним тегом */
 public class MyTag extends TagSupport{
+
+    /* Видає поточну дату */
     @Override
     public int doStartTag() throws JspException {
         JspWriter out = pageContext.getOut();

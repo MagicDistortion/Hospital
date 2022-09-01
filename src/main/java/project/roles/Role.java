@@ -1,5 +1,5 @@
 package project.roles;
-
+/* Клас ролей користувачів */
 public class Role {
     private int id;
     private String name;

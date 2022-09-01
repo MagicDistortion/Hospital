@@ -11,3 +11,6 @@ The last packet sent successfully to the server was 0 milliseconds ago. The driv
 
 The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
 2022-09-01 14:33:47 ERROR [http-nio-8080-exec-9]: java.sql.SQLException: Incorrect integer value: 'Гострий апендицит' for column 'id_roles' at row 1
+2022-09-01 14:46:08 ERROR [http-nio-8080-exec-6]: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.

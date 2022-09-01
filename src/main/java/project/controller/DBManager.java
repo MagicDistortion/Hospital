@@ -1,6 +1,5 @@
 package project.controller;
 
-
 import org.apache.log4j.Logger;
 import project.appointments.Appointment;
 import project.appointments.AppointmentDetails;
@@ -8,7 +7,6 @@ import project.categories.Categories;
 import project.Constants;
 import project.hospitalcard.HospitalCard;
 import project.users.*;
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -18,20 +16,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/* Клас для роботи з БД*/
 public class DBManager {
 
     final static Logger logger = Logger.getLogger(DBManager.class);
     static DBManager instance;
 
     private DBManager() {
-
     }
-
     public static synchronized DBManager getInstance() {
         if (instance == null) instance = new DBManager();
         return instance;
     }
-
+    /* метод отримання зв'язку з бд */
     public Connection getConnection() {
         Context ctx;
         Connection c = null;
@@ -42,6 +39,7 @@ public class DBManager {
 
             ctx = new InitialContext();
             ds = (DataSource) ctx.lookup("java:comp/env/jdbc/myConnectionPool");
+            /* якщо є можливість зв'язатись з пулом тмокату то конекшен переписується*/
             c = ds.getConnection();
 
         } catch (NamingException ignored) {
@@ -50,7 +48,7 @@ public class DBManager {
         }
         return c;
     }
-
+    /* метод отримання користувача з різалтсету */
     private static User getUser(ResultSet resultSet) throws SQLException {
         User user = new User(resultSet.getString("surname")
                 , resultSet.getString("name")
@@ -62,7 +60,7 @@ public class DBManager {
         user.setRolesId(resultSet.getInt("id_roles"));
         return user;
     }
-
+    /* метод додавання користувача  */
     public void insertUser(User user) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement
@@ -82,7 +80,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод додавання сіс адміна  */
     public void insertSysAdmin(User user) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_SYS_ADMIN)) {
@@ -96,7 +94,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод додавання лікаря */
     public void insertDoctor(User user) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_DOCTORS)) {
@@ -110,7 +108,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод додавання медсестри  */
     public void insertNurse(User user) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_NURSE)) {
@@ -124,7 +122,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод додавання пацієнта  */
     public void insertPatient(User user) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_PATIENTS)) {
@@ -139,7 +137,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод додавання нової категорії  */
     public void insertCategory(Categories category) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement
@@ -155,6 +153,7 @@ public class DBManager {
         }
     }
 
+    /* метод створення лікарняної карти для пацієнта  */
     public void insertHospitalCard(int patientId) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_HOSPITAL_CARD)) {
@@ -165,7 +164,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод додавання нового призначення  */
     public void insertAppointment(Appointment appoinment) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement
@@ -180,7 +179,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод додавання додаткової інформації для поточного призначення  */
     public void insertAppointmentDetails(AppointmentDetails appointmentDetails) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement
@@ -200,7 +199,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод оновлення ролі користувача  */
     public void updateUserRole(int role, int id) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_ROLE)) {
@@ -212,7 +211,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод оновлення категорії лікаря  */
     public void updateDoctorCategory(int categoryId, int id) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_DOCTOR_CATEGORY)) {
@@ -224,7 +223,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод оновлення діагнозу пацієнта у лікарняній картці  */
     public void updateDiagnos(String diagnos, int id) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_DIAGNOS)) {
@@ -236,7 +235,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод оновлення статусу призначення  */
     public void updateAppointmentStatus(String status, int id) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_APPOINTMENT_STATUS)) {
@@ -248,6 +247,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+    /* метод оновлення статусу лікарняної карти пацієнта  */
 
     public void updateHospitalCardStatus(String status, int idCard) {
         try (Connection connection = getConnection();
@@ -260,6 +260,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+    /* метод оновлення кількості пацієнтів лікаря  */
 
     public void updateNumberOfPatients(int patients, int docId) {
         try (Connection connection = getConnection();
@@ -272,6 +273,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+    /* метод призначення поточного лікаря пацієнту  */
 
     public void appointADoctor(Doctor doctor, int id) {
         try (Connection connection = getConnection();
@@ -286,7 +288,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод оновлення Прізвища користувача  */
     public void updateUseSurname(String surname, int id) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_SURNAME)) {
@@ -298,7 +300,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод оновлення Імені користувача */
     public void updateUserName(String name, int id) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_NAME)) {
@@ -310,7 +312,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод оновлення Логіну користувача */
     public void updateUserLogin(String login, int id) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_LOGIN)) {
@@ -322,7 +324,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод оновлення Паролю користувача */
     public void updateUserPassword(String password, int id) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_PASSWORD)) {
@@ -334,7 +336,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод оновлення Номера Телефона користувача */
     public void updateUserTel(String tel, int id) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_TEL)) {
@@ -346,7 +348,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод оновлення Дати народження користувача */
     public void updateUserDateOfBirth(LocalDate dateOfBtirth, int id) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_DATE_OF_BIRTH)) {
@@ -358,6 +360,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+    /* метод виписки пацієнта з лікарні */
     public void dischargePatient(int id) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.DISCHARGE_PATIENT)) {
@@ -368,7 +371,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
-
+    /* метод отримання списку всіх користувачів */
     public List<User> findAllUsers() {
         List<User> userList = new ArrayList<>();
         try (Connection connection = getConnection();
@@ -383,7 +386,7 @@ public class DBManager {
         }
         return userList;
     }
-
+    /* метод отримання списку користувачів без ролі */
     public List<User> findUsersWitchOutRole() {
         List<User> userList = new ArrayList<>();
         try (Connection connection = getConnection();
@@ -398,7 +401,7 @@ public class DBManager {
         }
         return userList;
     }
-
+    /* метод отримання списку всіх лікарів за сортуванням */
 
     public List<Doctor> findAllDoctores(String sorted) {
         List<Doctor> DoctoresList = new ArrayList<>();
@@ -417,6 +420,7 @@ public class DBManager {
         }
         return DoctoresList;
     }
+    /* метод отримання списку лікарів за сортуванням та пагінацією */
 
     public List<Doctor> findDoctoresWithLimit(String sorted, int start, int total) {
         start = (start - 1) * total;
@@ -438,6 +442,7 @@ public class DBManager {
         return DoctoresList;
     }
 
+    /* метод отримання списку всіх мед сестр */
 
     public List<Nurse> findAllNurse() {
         List<Nurse> nurseList = new ArrayList<>();
@@ -454,6 +459,8 @@ public class DBManager {
         return nurseList;
     }
 
+    /* метод отримання списку всіх пацієнтів за сортуванням */
+
     public List<Patient> findAllPatients(String sorted) {
         List<Patient> patientList = new ArrayList<>();
         try (Connection connection = getConnection();
@@ -469,6 +476,7 @@ public class DBManager {
         }
         return patientList;
     }
+    /* метод отримання списку пацієнтів за сортуванням та пагінацією */
 
     public List<Patient> findPatientsWithLimit(String sorted, int start, int total) {
         start = (start - 1) * total;
@@ -487,6 +495,7 @@ public class DBManager {
         }
         return patientList;
     }
+    /* метод отримання списку всіх категорій лікарів */
 
     public List<Categories> findAllCategories() {
         List<Categories> categoriesList = new ArrayList<>();
@@ -503,6 +512,7 @@ public class DBManager {
         }
         return categoriesList;
     }
+    /* метод отримання списку всіх медичних призначень */
 
     public List<Appointment> findAllAppointments() {
         List<Appointment> appointmentList = new ArrayList<>();
@@ -519,6 +529,7 @@ public class DBManager {
         }
         return appointmentList;
     }
+    /* метод отримання списку невиконаних та не просрочених за датою призначень у лікарняній картці по id картки  */
 
     public List<AppointmentDetails> findAllAppointmentDetailsByID(int hospitalCardId) {
         List<AppointmentDetails> appointmentDetailsList = new ArrayList<>();
@@ -553,6 +564,7 @@ public class DBManager {
         }
         return appointmentDetailsList;
     }
+    /* метод отримання списку невиконаних та не просрочених за датою призначень назначених для поточної медсестри  */
 
     public List<AppointmentDetails> findAllAppointmentsForNurse(int nurseId) {
         List<AppointmentDetails> appointmentDetailsList = new ArrayList<>();
@@ -590,6 +602,8 @@ public class DBManager {
         return appointmentDetailsList;
     }
 
+    /* метод пошуку лікарської категорії за назвою */
+
     public Categories findCategory(String name) {
         Categories category = null;
         try (Connection connection = getConnection();
@@ -607,6 +621,7 @@ public class DBManager {
         }
         return category;
     }
+    /* метод пошуку користувача по логіну */
 
     public User findUserByLogin(String login) {
         User user = null;
@@ -624,6 +639,7 @@ public class DBManager {
         }
         return user;
     }
+    /* метод пошуку медичного призначення по назві */
 
     public Appointment findAppointmentByName(String name) {
         Appointment appointment = null;
@@ -642,6 +658,7 @@ public class DBManager {
         }
         return appointment;
     }
+    /* метод пошуку користувача по id */
 
     public User findUserByID(int id) {
         User user = null;
@@ -659,6 +676,7 @@ public class DBManager {
         }
         return user;
     }
+    /* метод пошуку лікаря по id */
 
     public Doctor findDoctorById(int id) {
         Doctor doctor = null;
@@ -679,6 +697,7 @@ public class DBManager {
         }
         return doctor;
     }
+    /* метод пошуку пацієнта по id */
 
     public Patient findPatientById(int id) {
         Patient patient = null;
@@ -696,6 +715,7 @@ public class DBManager {
         }
         return patient;
     }
+    /* метод пошуку медсестри по id */
 
     public Nurse findNurseById(int id) {
         Nurse nurse = null;
@@ -713,6 +733,7 @@ public class DBManager {
         }
         return nurse;
     }
+    /* метод отримання лікарняної карти по id */
 
     public HospitalCard getHospitalCard(int id) {
         HospitalCard hospitalCard = null;
@@ -743,6 +764,8 @@ public class DBManager {
         }
         return hospitalCard;
     }
+    /* метод отримання списку лікарняних карт без статусу "виписано"*/
+
 
     public List<HospitalCard> getAllHospitalCards() {
         List<HospitalCard> hospitalCardList = new ArrayList<>();
@@ -772,6 +795,7 @@ public class DBManager {
         }
         return hospitalCardList;
     }
+    /* метод отримання списку лікарняних карт з пагінацією */
 
     public List<HospitalCard> getHospitalCardsWithLimit(int start, int total) {
         start = (start - 1) * total;

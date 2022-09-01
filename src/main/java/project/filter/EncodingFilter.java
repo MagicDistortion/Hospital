@@ -2,6 +2,7 @@ package project.filter;
 
 import javax.servlet.*;
 import java.io.IOException;
+/* фільтр для всіх сторінок для налаштування кодування*/
 
 public class EncodingFilter implements Filter {
     @Override

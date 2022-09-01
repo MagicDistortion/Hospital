@@ -1,4 +1,5 @@
 package project.categories;
+/* Клас категорій лікарів */
 
 public class Categories {
     private int id;
