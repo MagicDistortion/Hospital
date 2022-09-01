@@ -12,7 +12,6 @@
           </style>
     <body>
     <%@ include file="header.jspf" %>
-     <br><br>
         <div align="center" >
         <h2  style="color:#fff">${langDoctors}</h2>
             <form action ="doctors_sortlist" method ="get">
@@ -32,13 +31,8 @@
                 <input type="submit" value="${langGetThem}"/><br>
             </form>
         <h2 style="color:#B22222">
-        <table border="1">
-            <colgroup style="background-color:#87CEFA;">
-             <col>
-             <col>
-             <col>
-             <col>
-            </colgroup>
+        <table class="table">
+
             <th style="color:#0000ff"><h4/> ${langSurname} &nbsp</th>
             <th style="color:#ffff00"><h4/> ${langName} &nbsp</th>
             <th style="color:#0000ff"><h4 align="center"/>${langCategory} &nbsp</th>

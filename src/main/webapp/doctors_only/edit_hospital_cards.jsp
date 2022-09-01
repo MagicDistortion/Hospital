@@ -13,7 +13,7 @@
 body {background:#000000 url(../images/Serze2.jpg)}
 </style>
 <br><br><br><br><br><br>
-<table align="center">
+  <table class="table">
     <tr>
         <td>
            <h2  style="color:#0000ff">${langGetAppointmentsOfPatient}</h2>
@@ -21,7 +21,7 @@ body {background:#000000 url(../images/Serze2.jpg)}
                 <input type="hidden" name="id" value="${id_card}"/>
                 <input type="submit" value="${langGetThem}"/>
             </form>
-           <table border=1 >
+             <table border=1 class="table">
 
                <th style="color:#0000ff"><h3/> ${langAppointment} &nbsp</th>
                <th style="color:#ffff00"><h3/> ${langAppointmentDetails}</th>
@@ -69,7 +69,7 @@ body {background:#000000 url(../images/Serze2.jpg)}
         </td>
         <td>
             <h2>
-                <table>
+                  <table class="table">
 
                 <br><br>
                      <tr style="color:#0000ff">

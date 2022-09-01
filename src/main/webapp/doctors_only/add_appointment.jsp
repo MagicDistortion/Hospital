@@ -12,7 +12,7 @@
                 </style>
     <body>
     <%@ include file="../header_doctors.jspf" %>
-            <br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br>
     <div align="center" >
         <form action="../doctors_only/add_appointment" method="post">
         <table>

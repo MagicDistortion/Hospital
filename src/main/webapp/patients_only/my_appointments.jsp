@@ -13,13 +13,12 @@
         <body>
 
     <%@ include file="../header_patients.jspf" %>
-   <br><br>
     <div align="center" >
         <h2  style="color:#fff">${langGetMyAppointments}</h2>
             <form action ="../patients_only/my_appointments" method ="get">
                 <input type="submit" value="${langGetThem}"/><br>
             </form>
-        <table border="1" >
+ <table class="table">
 
             <th style="color:#0000ff"><h4/> ${langAppointment} &nbsp</th>
             <th style="color:#ffff00"><h4/> ${langAppointmentDetails} &nbsp</th>

@@ -12,7 +12,7 @@
                 </style>
     <body>
     <%@ include file="../header_admins.jspf" %>
-<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br>
 
              <form action ="../admins_only/add_category" method ="post">
              <div align="center" >

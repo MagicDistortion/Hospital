@@ -13,7 +13,6 @@
         <body>
 
     <%@ include file="../header_nurses.jspf" %>
-   <br><br>
     <div align="center" >
         <h2  style="color:#fff">${langGetMyAppointments}</h2>
             <form action ="../nurses_only/nurses_appointments" method ="get">
@@ -21,16 +20,7 @@
             </form>
         <h4 style="color:#B22222">
 
-        <table border="1" >
-            <colgroup style="background-color:#87CEFA;">
-             <col>
-             <col>
-             <col>
-             <col>
-             <col>
-             <col>
-             <col>
-            </colgroup>
+         <table class="table">
             <th style="color:#0000ff"><h4/> ${langAppointment} &nbsp</th>
             <th style="color:#ffff00"><h4/> ${langAppointmentDetails} &nbsp</th>
             <th style="color:#0000ff"><h4/> ${langCurrentDoctor} &nbsp</th>

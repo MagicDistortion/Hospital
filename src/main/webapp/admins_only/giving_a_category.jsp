@@ -12,14 +12,13 @@
                 </style>
     <body>
     <%@ include file="../header_admins.jspf" %>
-   <br><br>
     <div align="center" >
               <h2 style="color:#fff">${langGiveACategoryForDoctor}</h2>
                         <form action ="../admins_only/doctors_list" method ="get">
                             <input type="submit" value="${langGetADoctors}"/><br>
                         </form>
         <h2 style="color:#B22222">
-          <table border="1">
+          <table class="table">
             <th style="color:#0000ff"><h4/> ${langSurname} &nbsp</th>
             <th style="color:#ffff00"><h4/> ${langName} &nbsp</th>
             <th style="color:#0000ff"><h4/> ${langPickACategory} &nbsp</th>

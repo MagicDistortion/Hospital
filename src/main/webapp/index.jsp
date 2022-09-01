@@ -8,7 +8,7 @@
              <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
      </head>
           <style>
-               body {background:#000000 url(images/Serze2.jpg)}
+               body {background:#000000 url(images/Serze2.jpg) }height: auto; max-width: 100%;
           </style>
     <body>
     <%@ include file="header.jspf" %>
@@ -20,15 +20,15 @@
                         <table >
                             <tr>
 	                          <td style="color:#0000ff">${langLogin}:</td>
-	                          <td><input  name="login" placeholder="${langEnterLogin}" required/></td>
+	                          <td><input  name="login" class="form-control" placeholder="${langEnterLogin}"  required/></td>
                             </tr>
                             <tr>
     	                      <td style="color:#ffff00" />${langPassword}:</td>
-	                          <td><input type="password" name="password" placeholder="${langEnterPassword}" required/></td>
+	                          <td><input type="password" class="form-control" name="password" placeholder="${langEnterPassword}" required/></td>
 	                        </tr>
 
                         </table>
-    	                <input type="submit" value=${langGo} /><br>
+    	                <input type="submit" class="btn btn-primary" value=${langGo} /><br>
                            <h2 style="color:#B22222">
                              <c:if  test="${not empty mes}" >${mes}</c:if>
                            </h2>
