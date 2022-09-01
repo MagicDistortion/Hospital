@@ -115,6 +115,7 @@ public class LangFilter implements Filter {
             httpServlet.getSession().setAttribute("langAccessDenied", "В доступі відмовлено");
             httpServlet.getSession().setAttribute("langSuccessfulAdd", "Успішно додано");
             httpServlet.getSession().setAttribute("langAllReadyExist", "призначення вже є");
+            httpServlet.getSession().setAttribute("langHi", "Привіт, ");
 
         } else {
             httpServlet.getSession().setAttribute("langSysAdmin", "System administrator");
@@ -215,6 +216,8 @@ public class LangFilter implements Filter {
             httpServlet.getSession().setAttribute("langAccessDenied", "Access Denied");
             httpServlet.getSession().setAttribute("langSuccessfulAdd", "appointment successfully added");
             httpServlet.getSession().setAttribute("langAllReadyExist", "appointment is already exist");
+            httpServlet.getSession().setAttribute("langHi", "Hi, ");
+            httpServlet.getSession().getAttribute("langHi");
         }
 
         filterChain.doFilter(servletRequest, servletResponse);

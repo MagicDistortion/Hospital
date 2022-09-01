@@ -22,7 +22,6 @@ class LoginTest {
         final HttpServletRequest request = mock(HttpServletRequest.class);
         final HttpServletResponse response = mock(HttpServletResponse.class);
         final RequestDispatcher dispatcher = mock(RequestDispatcher.class);
-
         when(request.getSession()).thenReturn(session);
         when(request.getParameter("login")).thenReturn("Doctor");
         when(request.getParameter("password")).thenReturn("9582");

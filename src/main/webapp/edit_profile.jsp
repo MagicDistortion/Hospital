@@ -50,7 +50,7 @@
                     	<input type="submit" value="${langEditNow}"/><br>
                            <h2 style="color:#B22222">
                              <c:if  test="${not empty mes}" >${mes}</c:if><br>
-                             <c:if  test="${not empty meserror}" >${meserror}</c:if>
+                             <c:if  test="${not empty meserror}" >${meserror}</c:if><br>
                                 <a style="color:#0000ff" href="index.jsp">${langBackToMain}</a>
                            </h2>
                     </div>

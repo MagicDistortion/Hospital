@@ -1,4 +1,6 @@
-
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="tf" tagdir="/WEB-INF/tags"%>
+<%@ taglib uri="mytaglib" prefix="mt" %>
        <h2 align="center"  >
               <a style="color:#0000ff" href="../index.jsp">${langMain}</a>
               <a style="color:#ffff00" href="../about_us.jsp">${langAboutUs}</a>
@@ -7,6 +9,10 @@
                     <br>
                 <a style="color:#0000ff" href="my_appointments.jsp">${langMyAppointments}</a>
        </h2>
+                           <h5 align="right" style="color:#0000ff"><mt:myTag/></h5>
+                            <c:if  test="${user.getRolesId()!=null}" >
+                             <h5 align="right" style="color:#ffff00"><tf:user message="${langHi}${user.getName()}"/></h5>
+                           </c:if>
                       <form align="right" action="../lang" method="post">
                          <select name="lang">
                          <option value="UA">${langUkrainian}</option>

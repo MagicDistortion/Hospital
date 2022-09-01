@@ -70,7 +70,7 @@ public class EditProfile extends HttpServlet {
         if (!String.valueOf(user.getPassword().hashCode()).equals(oldUser.getPassword())
                 && !user.getPassword().isEmpty()) {
             if (user.getPassword().equals(req.getParameter("repassword"))
-                    && user.getPassword().length() > 4) {
+                    && user.getPassword().length() >= 4) {
                 dbManager.updateUserPassword(user.getPassword(), user.getId());
                 req.getSession().setAttribute("password", user.getPassword());
                 req.setAttribute("mes", "changes saved");
