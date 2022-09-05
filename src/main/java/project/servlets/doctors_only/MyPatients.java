@@ -2,6 +2,7 @@ package project.servlets.doctors_only;
 
 import project.controller.DBManager;
 import project.users.Patient;
+import project.users.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +18,7 @@ public class MyPatients extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = (int) req.getSession().getAttribute("id");
+        int id = ((User)req.getSession().getAttribute("user")).getId();
         String sort = req.getParameter("sort");
         req.setAttribute("sort", sort);
         switch (sort) {
