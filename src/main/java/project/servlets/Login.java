@@ -23,14 +23,6 @@ public class Login extends HttpServlet {
         password = req.getParameter("password");
         User user = dbManager.findUserByLogin(login);
         if (user != null && user.getPassword().equals(String.valueOf(password.hashCode()))) {
-            req.getSession().setAttribute("surname", user.getSurname());
-            req.getSession().setAttribute("name", user.getName());
-            req.getSession().setAttribute("login", user.getLogin());
-            req.getSession().setAttribute("tel", user.getTel());
-            req.getSession().setAttribute("date_of_birth", user.getDateOfBirth());
-            req.getSession().setAttribute("password", user.getPassword());
-            req.getSession().setAttribute("role", user.getRolesId());
-            req.getSession().setAttribute("id", user.getId());
             req.getSession().setAttribute("user", user);
             resp.sendRedirect("index.jsp");
         }

@@ -29,7 +29,7 @@ class LoginTest {
         servlet.doPost(request, response);
 
         verify(response, times(1)).sendRedirect(path);
-        verify(request, times(9)).getSession();
+        verify(request, times(1)).getSession();
         verify(dispatcher,never()).forward(request, response);
     }
     @Test

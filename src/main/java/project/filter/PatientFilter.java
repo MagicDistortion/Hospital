@@ -1,5 +1,7 @@
 package project.filter;
 
+import project.users.User;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +18,8 @@ public class PatientFilter implements Filter {
         HttpServletRequest httpServlet = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
         int role = 0;
-        if (httpServlet.getSession().getAttribute("role") != null) role = (int) httpServlet.getSession().getAttribute("role");
+        if (httpServlet.getSession().getAttribute("user") != null)
+            role = ((User) httpServlet.getSession().getAttribute("user")).getRolesId();
         if (role !=4) httpServletResponse.sendRedirect("../index.jsp");
         filterChain.doFilter(servletRequest, servletResponse);
     }
