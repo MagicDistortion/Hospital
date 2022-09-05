@@ -12,7 +12,6 @@ public class ConfigurationManager {
     private static ConfigurationManager instance;
     private static final Map<String, String> config = new HashMap<>();
     final static Logger logger = Logger.getLogger(ConfigurationManager.class);
-
     private ConfigurationManager() {
         try (InputStream stream = ConfigurationManager.class.getClassLoader().getResourceAsStream("config.properties")) {
             if (stream != null) {

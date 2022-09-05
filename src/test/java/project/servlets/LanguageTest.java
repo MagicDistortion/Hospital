@@ -25,6 +25,6 @@ class LanguageTest {
         servlet.doPost(request,response);
 
         verify(request,times(1)).getSession();
-        verify(response,times(1)).sendRedirect(path);
+        verify(response,never()).sendRedirect(path);
     }
 }

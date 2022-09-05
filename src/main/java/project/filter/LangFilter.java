@@ -18,7 +18,7 @@ import java.util.Properties;
 public class LangFilter implements Filter {
     private static final String[] LANGS = {"UA", "EN"};
     private final Map<String, Map<String, String>> localizations = new HashMap<>();
-    private static final String DEFAULT_LANGUAGE = "UA";
+    public static final String DEFAULT_LANGUAGE = "UA";
     final static Logger logger = Logger.getLogger(LangFilter.class);
 
     @Override

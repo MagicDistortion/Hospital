@@ -7,11 +7,6 @@ import javax.servlet.http.HttpSessionListener;
 public class Listener implements HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent se) {
-        System.out.println("Session created");
-    }
-
-    @Override
-    public void sessionDestroyed(HttpSessionEvent se) {
-        System.out.println("Session destroyed");
+        se.getSession().setAttribute("lang", LangFilter.DEFAULT_LANGUAGE);
     }
 }

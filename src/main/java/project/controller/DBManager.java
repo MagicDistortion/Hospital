@@ -21,6 +21,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 /* Клас для роботи з БД*/
 public class DBManager {
@@ -59,6 +60,36 @@ public class DBManager {
     public Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
+
+    public void inTransaction(Consumer<Connection> action) {
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            connection.setAutoCommit(false);
+            action.accept(connection);
+            connection.commit();
+        } catch (Exception e) {
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException ex) {
+                    logger.error("failed to rollback connection", e);
+                }
+            }
+            if (e instanceof RuntimeException) throw (RuntimeException) e;
+            throw new RuntimeException(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    logger.error("failed to close connection", e);
+                }
+            }
+        }
+
+    }
+
     /* метод отримання користувача з різалтсету */
     private static User getUser(ResultSet resultSet) throws SQLException {
         User user = new User(resultSet.getString("surname")
@@ -95,17 +126,29 @@ public class DBManager {
 
     /* метод додавання сіс адміна  */
     public void insertSysAdmin(User user) {
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_SYS_ADMIN)) {
-            if (user.getRolesId() == 0) {
-                preparedStatement.setInt(1, user.getId());
-                preparedStatement.executeUpdate();
-                updateUserRole(1, user.getId());
+        inTransaction(connection -> {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_SYS_ADMIN)) {
+                if (user.getRolesId() == 0) {
+                    preparedStatement.setInt(1, user.getId());
+                    preparedStatement.executeUpdate();
+                    updateUserRole(connection, 1, user.getId());
+                }
+            } catch (SQLException e) {
+                logger.error(e);
+                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            logger.error(e);
-            throw new RuntimeException(e);
-        }
+        });
+//        try (Connection connection = getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_SYS_ADMIN)) {
+//            if (user.getRolesId() == 0) {
+//                preparedStatement.setInt(1, user.getId());
+//                preparedStatement.executeUpdate();
+//                updateUserRole(1, user.getId());
+//            }
+//        } catch (SQLException e) {
+//            logger.error(e);
+//            throw new RuntimeException(e);
+//        }
     }
 
     /* метод додавання лікаря */
@@ -223,6 +266,18 @@ public class DBManager {
     public void updateUserRole(int role, int id) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_ROLE)) {
+            preparedStatement.setInt(1, role);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            logger.error(e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateUserRole(Connection connection, int role, int id) {
+        try (
+                PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_ROLE)) {
             preparedStatement.setInt(1, role);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
