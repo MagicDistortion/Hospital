@@ -11,10 +11,6 @@ import project.categories.Categories;
 import project.Constants;
 import project.hospitalcard.HospitalCard;
 import project.users.*;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.time.LocalDate;
@@ -28,7 +24,7 @@ public class DBManager {
 
     final static Logger logger = Logger.getLogger(DBManager.class);
     static DBManager instance;
-    private DataSource dataSource;
+    private final DataSource dataSource;
 
     private DBManager() {
         ConfigurationManager configInstance = ConfigurationManager.getInstance();

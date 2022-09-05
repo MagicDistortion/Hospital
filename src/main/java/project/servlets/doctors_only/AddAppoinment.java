@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 
 @WebServlet("/doctors_only/add_appointment")
@@ -20,8 +21,8 @@ public class AddAppoinment extends HttpServlet {
         String name = req.getParameter("name");
         if (dbManager.findAppointmentByName(name) == null) {
             dbManager.insertAppointment(new Appointment(name));
-            req.setAttribute("mes", req.getSession().getAttribute("langSuccessfulAdd"));
-        } else req.setAttribute("mes", req.getSession().getAttribute("langAllReadyExist"));
+            req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langSuccessfulAdd"));
+        } else req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langAllReadyExist"));
         req.getRequestDispatcher("/doctors_only/add_appointment.jsp").forward(req, resp);
     }
 }

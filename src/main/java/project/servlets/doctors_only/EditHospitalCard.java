@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 
 @WebServlet("/doctors_only/edit_hospital_cards")
@@ -27,7 +28,6 @@ public class EditHospitalCard extends HttpServlet {
 
         List<Nurse> allNurse = dbManager.findAllNurse();
         req.getSession().setAttribute("nurses", allNurse);
-
         req.getSession().setAttribute("today", LocalDate.now());
 
         int patientId = Integer.parseInt(req.getParameter("id"));
@@ -42,14 +42,15 @@ public class EditHospitalCard extends HttpServlet {
 
         if (hospitalCard.getDiagnosis() != null) {
             req.getSession().setAttribute("diagnosis", hospitalCard.getDiagnosis());
-        } else req.getSession().setAttribute("diagnosis", "not exist yet");
+        } else
+            req.getSession().setAttribute("diagnosis", ((Map<?, ?>) req.getAttribute("phrases")).get("langNotExistYet"));
 
         if (hospitalCard.getCurrentDoctorName() != null && hospitalCard.getCurrentDoctorSurname() != null) {
             req.getSession().setAttribute("current_doctorSurname", hospitalCard.getCurrentDoctorSurname());
             req.getSession().setAttribute("current_doctorName", hospitalCard.getCurrentDoctorName());
         } else {
-            req.getSession().setAttribute("current_doctorSurname", "not assigned");
-            req.getSession().setAttribute("current_doctorName", "not assigned");
+            req.getSession().setAttribute("current_doctorSurname", ((Map<?, ?>) req.getAttribute("phrases")).get("langNotAssigned"));
+            req.getSession().setAttribute("current_doctorName", ((Map<?, ?>) req.getAttribute("phrases")).get("langNotAssigned"));
         }
         req.getRequestDispatcher("/doctors_only/edit_hospital_cards.jsp").forward(req, resp);
     }

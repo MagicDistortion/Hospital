@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/doctors_only/my_patients")
 public class MyPatients extends HttpServlet {
@@ -48,7 +49,7 @@ public class MyPatients extends HttpServlet {
 
         List<Patient> patientList = dbManager.findPatientsWithLimit(sort, page, pagination);
         req.setAttribute("patientlist", patientList);
-        if (patientList.size()==0) req.setAttribute("mes", req.getSession().getAttribute("langEmpty"));
+        if (patientList.size()==0)  req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));
 
         req.getRequestDispatcher("/doctors_only/my_patients.jsp").forward(req, resp);
     }

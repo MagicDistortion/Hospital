@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/doctors_only/get_appointments")
 public class GetAppoinmentDetails extends HttpServlet {
@@ -19,7 +20,7 @@ public class GetAppoinmentDetails extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = (int) req.getSession().getAttribute("id_card");
         List<AppointmentDetails> appointmentsDetails = dbManager.findAllAppointmentDetailsByID(id);
-        if (appointmentsDetails.size() == 0) req.setAttribute("mes", req.getSession().getAttribute("langEmpty"));
+        if (appointmentsDetails.size() == 0)  req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));
         req.setAttribute("appointments", appointmentsDetails);
         req.getRequestDispatcher("/doctors_only/edit_hospital_cards.jsp").forward(req, resp);
     }

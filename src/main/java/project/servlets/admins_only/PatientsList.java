@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/admins_only/patients_sortlist")
 public class PatientsList extends HttpServlet {
@@ -47,7 +48,7 @@ public class PatientsList extends HttpServlet {
 
         List<Patient> patientList = dbManager.findPatientsWithLimit(sort, page, pagination);
         req.setAttribute("patientlist", patientList);
-        if (patientList.size()==0) req.setAttribute("mes", req.getSession().getAttribute("langEmpty"));
+        if (patientList.size()==0)  req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));
         req.getRequestDispatcher("/admins_only/patients.jsp").forward(req, resp);
     }
 
@@ -63,7 +64,7 @@ public class PatientsList extends HttpServlet {
         }
         List<Patient> patients = dbManager.findAllPatients(sort);
         List<Doctor> doctors = dbManager.findAllDoctores("Order by users.surname");
-        if (patients.size()==0) req.setAttribute("mes", req.getSession().getAttribute("langEmpty"));
+        if (patients.size()==0)  req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));
         req.setAttribute("doctors", doctors);
         req.setAttribute("patients", patients);
         req.getRequestDispatcher("/admins_only/appoint_a_doctor.jsp").forward(req, resp);

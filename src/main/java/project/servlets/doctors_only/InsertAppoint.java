@@ -2,6 +2,7 @@ package project.servlets.doctors_only;
 
 import project.appointments.AppointmentDetails;
 import project.controller.DBManager;
+import project.users.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +25,7 @@ public class InsertAppoint extends HttpServlet {
             AppointmentDetails appointmentDetails = new AppointmentDetails(req.getParameter("text"), date);
             appointmentDetails.setAppointmentId(Integer.parseInt(req.getParameter("appoint")));
             appointmentDetails.setNurseId(Integer.parseInt(req.getParameter("nurse")));
-            appointmentDetails.setDoctorsId((int) req.getSession().getAttribute("id"));
+            appointmentDetails.setDoctorsId(((User)req.getSession().getAttribute("user")).getId());
             appointmentDetails.setHospitalCardId(Integer.parseInt(req.getParameter("id")));
             dbManager.insertAppointmentDetails(appointmentDetails);
             req.setAttribute("message", "appoint added");

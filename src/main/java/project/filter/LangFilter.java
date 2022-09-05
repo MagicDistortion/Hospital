@@ -1,14 +1,12 @@
 package project.filter;
 
 import org.apache.log4j.Logger;
-import project.ConfigurationManager;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +20,7 @@ public class LangFilter implements Filter {
     final static Logger logger = Logger.getLogger(LangFilter.class);
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig){
         for (String lang : LANGS) {
             try (InputStream stream = LangFilter.class.getClassLoader()
                     .getResourceAsStream("lang." + lang + ".properties")) {
@@ -34,7 +32,7 @@ public class LangFilter implements Filter {
                     localizations.put(lang, phrases);
                 }
             } catch (IOException e) {
-                logger.error("failed to load localization "+lang,e);
+                logger.error("failed to load localization " + lang, e);
             }
         }
     }
@@ -42,13 +40,13 @@ public class LangFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServlet = (HttpServletRequest) servletRequest;
-        Object lang = httpServlet.getSession().getAttribute("lang");
+        String lang = httpServlet.getSession().getAttribute("lang").toString();
         if (lang == null || !localizations.containsKey(lang)) {
             httpServlet.getSession().setAttribute("lang", DEFAULT_LANGUAGE);
             lang = DEFAULT_LANGUAGE;
         }
         Map<String, String> phrases = localizations.get(lang);
-        servletRequest.setAttribute("phrases",phrases);
+        servletRequest.setAttribute("phrases", phrases);
 
         filterChain.doFilter(servletRequest, servletResponse);
 
