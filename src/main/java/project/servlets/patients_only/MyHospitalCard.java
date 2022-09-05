@@ -21,6 +21,7 @@ public class MyHospitalCard extends HttpServlet {
         int id = ((User) req.getSession().getAttribute("user")).getId();
         HospitalCard hospitalCard = dbManager.getHospitalCard(id);
         req.setAttribute("myhospitalcard", hospitalCard);
+        req.getSession().setAttribute("status_patient", hospitalCard.getStatus());
         if (hospitalCard.getCurrentDoctorName() == null && hospitalCard.getCurrentDoctorSurname() == null) {
             hospitalCard.setCurrentDoctorSurname(((Map<?, ?>) req.getAttribute("phrases")).get("langNotAssigned").toString());
             hospitalCard.setCurrentDoctorName(((Map<?, ?>) req.getAttribute("phrases")).get("langNotAssigned").toString());

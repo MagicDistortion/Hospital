@@ -19,7 +19,6 @@ public class NewbeeAgain extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String status =(String) req.getSession().getAttribute("status_patient");
         int id = ((User) req.getSession().getAttribute("user")).getId();
-
         if (status.equals("discharged")){
             dbManager.updateHospitalCardStatus("newbee", id);
             req.setAttribute("messtatus", ((Map<?, ?>)req.getAttribute("phrases")).get("langStatusUpdated"));
