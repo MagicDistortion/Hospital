@@ -2,31 +2,31 @@
       <%@ taglib prefix="tf" tagdir="/WEB-INF/tags"%>
       <%@ taglib uri="mytaglib" prefix="mt" %>
        <h2 align="center"  >
-              <a style="color:#0000ff" href="../index.jsp">${langMain}</a>
-              <a style="color:#ffff00" href="../about_us.jsp">${langAboutUs}</a>
-              <a style="color:#0000ff" href="../contacts.jsp">${langContacts}</a>
-              <a style="color:#ffff00" href="../doctors.jsp">${langDoctors}</a>
+              <a style="color:#0000ff" href="../index.jsp">${phrases['langMain']}</a>
+              <a style="color:#ffff00" href="../about_us.jsp">${phrases['langAboutUs']}</a>
+              <a style="color:#0000ff" href="../contacts.jsp">${phrases['langContacts']}</a>
+              <a style="color:#ffff00" href="../doctors.jsp">${phrases['langDoctors']}</a>
                     <br>
-            <a style="color:#0000ff" href="my_patients.jsp">${langMyPatients}</a>
-            <a style="color:#ffff00" href="hospital_cards.jsp">${langHospitalCards}</a>
-            <a style="color:#0000ff" href="add_appointment.jsp">${langAddAppointment}</a>
+            <a style="color:#0000ff" href="my_patients.jsp">${phrases['langMyPatients']}</a>
+            <a style="color:#ffff00" href="hospital_cards.jsp">${phrases['langHospitalCards']}</a>
+            <a style="color:#0000ff" href="add_appointment.jsp">${phrases['langAddAppointment']}</a>
        </h2>
                            <h5 align="right" style="color:#0000ff"><mt:myTag/></h5>
                             <c:if  test="${user.getRolesId()!=null}" >
-                             <h5 align="right" style="color:#ffff00"><tf:user message="${langHi}${user.getName()}"/></h5>
+                             <h5 align="right" style="color:#ffff00"><tf:user message="${phrases['langHi']}${user.getName()}"/></h5>
                            </c:if>
                       <form align="right" action="../lang" method="post">
                          <select name="lang">
-                         <option value="UA">${langUkrainian}</option>
-                         <option value="EN">${langEnglish}</option>
+                         <option value="UA">${phrases['langUkrainian']}</option>
+                         <option value="EN">${phrases['langEnglish']}</option>
                          </select>
-                         <input type="submit" value="${langSetLanguage}"/>
+                         <input type="submit" value="${phrases['langSetLanguage']}"/>
                       </form>
          <div align="right" >
              <form action="../edit_profile.jsp" method="post">
-                <input type="submit" value="${langEMP}"/>
+                <input type="submit" value="${phrases['langEMP']}"/>
              </form>
              <form action="../logout" method="get">
-                <input type="submit" value="${langLogOut}"/>
+                <input type="submit" value="${phrases['langLogOut']}"/>
              </form>
          </div>

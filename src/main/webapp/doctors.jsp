@@ -13,7 +13,7 @@
     <body>
     <%@ include file="header.jspf" %>
         <div align="center" >
-        <h2  style="color:#fff">${langDoctors}</h2>
+        <h2  style="color:#fff">${phrases['langDoctors']}</h2>
             <form action ="doctors_sortlist" method ="get">
              <input type="text" name="pagination" pattern="[1-9]\d*"
              <c:choose>
@@ -24,19 +24,19 @@
             </c:choose>
               placeholder="pagination" required />
                 <select name="sort">
-                   <option disabled>${langSorted} &nbsp</option>
-                   <option value="Surname">${langBySurname} &nbsp</option>
-                   <option value="category">${langByCategory} &nbsp</option>
-                   <option value="patients">${langByNOP} &nbsp</option>
-                <input type="submit" value="${langGetThem}"/><br>
+                   <option disabled>${phrases['langSorted']} &nbsp</option>
+                   <option value="Surname">${phrases['langBySurname']} &nbsp</option>
+                   <option value="category">${phrases['langByCategory']} &nbsp</option>
+                   <option value="patients">${phrases['langByNOP']} &nbsp</option>
+                <input type="submit" value="${phrases['langGetThem']}"/><br>
             </form>
         <h2 style="color:#B22222">
         <table class="table">
 
-            <th style="color:#0000ff"><h4/> ${langSurname} &nbsp</th>
-            <th style="color:#ffff00"><h4/> ${langName} &nbsp</th>
-            <th style="color:#0000ff"><h4 align="center"/>${langCategory} &nbsp</th>
-            <th style="color:#ffff00"><h4/>${langNOP} &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${phrases['langSurname']} &nbsp</th>
+            <th style="color:#ffff00"><h4/> ${phrases['langName']} &nbsp</th>
+            <th style="color:#0000ff"><h4 align="center"/>${phrases['langCategory']} &nbsp</th>
+            <th style="color:#ffff00"><h4/>${phrases['langNOP']} &nbsp</th>
                   <c:forEach items="${docList}" var="i">
                       <tr>
                          <td style="color:#fff"><h3/>${i.getSurname()} &nbsp</td>

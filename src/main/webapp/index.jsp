@@ -19,16 +19,16 @@
                    <div align="center" >
                         <table >
                             <tr>
-	                          <td style="color:#0000ff">${langLogin}:</td>
-	                          <td><input  name="login" class="form-control" placeholder="${langEnterLogin}"  required/></td>
+	                          <td style="color:#0000ff">${phrases['langLogin']}:</td>
+	                          <td><input  name="login" class="form-control" placeholder="${phrases['langEnterLogin']}"  required/></td>
                             </tr>
                             <tr>
-    	                      <td style="color:#ffff00" />${langPassword}:</td>
-	                          <td><input type="password" class="form-control" name="password" placeholder="${langEnterPassword}" required/></td>
+    	                      <td style="color:#ffff00" />${phrases['langPassword']}:</td>
+	                          <td><input type="password" class="form-control" name="password" placeholder="${phrases['langEnterPassword']}" required/></td>
 	                        </tr>
 
                         </table>
-    	                <input type="submit" class="btn btn-primary" value=${langGo} /><br>
+    	                <input type="submit" class="btn btn-primary" value=${phrases['langGo']} /><br>
                            <h2 style="color:#B22222">
                              <c:if  test="${not empty mes}" >${mes}</c:if>
                            </h2>

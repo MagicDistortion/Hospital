@@ -13,15 +13,15 @@
     <body>
     <%@ include file="../header_admins.jspf" %>
     <div align="center" >
-              <h2 style="color:#fff">${langGiveACategoryForDoctor}</h2>
+              <h2 style="color:#fff">${phrases['langGiveACategoryForDoctor']}</h2>
                         <form action ="../admins_only/doctors_list" method ="get">
-                            <input type="submit" value="${langGetADoctors}"/><br>
+                            <input type="submit" value="${phrases['langGetADoctors']}"/><br>
                         </form>
         <h2 style="color:#B22222">
           <table class="table">
-            <th style="color:#0000ff"><h4/> ${langSurname} &nbsp</th>
-            <th style="color:#ffff00"><h4/> ${langName} &nbsp</th>
-            <th style="color:#0000ff"><h4/> ${langPickACategory} &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${phrases['langSurname']} &nbsp</th>
+            <th style="color:#ffff00"><h4/> ${phrases['langName']} &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${phrases['langPickACategory']} &nbsp</th>
                   <c:forEach items="${docs}" var="i">
                       <tr>
                          <td style="color:#fff"><h4/>${i.getSurname()} &nbsp</td>
@@ -34,7 +34,7 @@
                                 <option value="${j.getId()}">${j.getName()}</option>
                              </c:forEach>
                              </select>
-                             <input type="submit" value="${langPick}"/>
+                             <input type="submit" value="${phrases['langPick']}"/>
                          </form>
                          </td>
                       </tr>

@@ -13,7 +13,7 @@
     <body>
     <%@ include file="../header_admins.jspf" %>
     <div align="center" >
-        <h2  style="color:#fff">${langGetAllPatients}</h2>
+        <h2  style="color:#fff">${phrases['langGetAllPatients']}</h2>
             <form action ="../admins_only/patients_sortlist" method ="get">
               <input type="text" name="pagination" pattern="[1-9]\d*"
               <c:choose>
@@ -24,17 +24,17 @@
              </c:choose>
                placeholder="pagination" required />
                 <select name="sort">
-                   <option disabled>${langSorted}</option>
-                   <option value="surname">${langBySurname}</option>
-                   <option value="date">${langByDateOfBirth}</option>
-                <input type="submit" value="${langGetThem}"/><br>
+                   <option disabled>${phrases['langSorted']}</option>
+                   <option value="surname">${phrases['langBySurname']}</option>
+                   <option value="date">${phrases['langByDateOfBirth']}</option>
+                <input type="submit" value="${phrases['langGetThem']}"/><br>
             </form>
         <h2 style="color:#B22222">
         <table class="table">
 
-            <th style="color:#0000ff"><h4/> ${langSurname} &nbsp</th>
-            <th style="color:#ffff00"><h4/> ${langName} &nbsp</th>
-            <th style="color:#0000ff"><h4/> ${langDateOfBirth} &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${phrases['langSurname']} &nbsp</th>
+            <th style="color:#ffff00"><h4/> ${phrases['langName']} &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${phrases['langDateOfBirth']} &nbsp</th>
                   <c:forEach items="${patientlist}" var="i">
                       <tr>
                          <td style="color:#fff"><h3/>${i.getSurname()} &nbsp</td>

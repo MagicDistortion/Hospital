@@ -12,8 +12,10 @@ import java.io.IOException;
 public class Language extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String replace = req.getHeader("referer").replace("http://localhost:8080/Hospital/", "");
+//        String replace = req.getHeader("referer").replace("http://localhost:8080/Hospital/", "");
         req.getSession().setAttribute("lang", req.getParameter("lang"));
-        resp.sendRedirect(replace);
+        resp.setHeader("Location",req.getHeader("referer"));
+        resp.setStatus(302);
+//        resp.sendRedirect(replace);
     }
 }

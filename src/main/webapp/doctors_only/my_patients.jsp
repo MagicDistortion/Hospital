@@ -13,7 +13,7 @@
     <body>
     <%@ include file="../header_doctors.jspf" %>
     <div align="center" >
-        <h2  style="color:#fff">${langGetMyPatients}</h2>
+        <h2  style="color:#fff">${phrases['langGetMyPatients']}</h2>
             <form action ="../doctors_only/my_patients" method ="get">
                          <input type="text" name="pagination" pattern="[1-9]\d*"
                          <c:choose>
@@ -24,18 +24,18 @@
                         </c:choose>
                           placeholder="pagination" required />
                 <select name="sort">
-                   <option disabled>${langSorted}</option>
-                   <option value="surname">${langBySurname}</option>
-                   <option value="date">${langByDateOfBirth}</option>
-                <input type="submit" value="${langGetThem}"/><br>
+                   <option disabled>${phrases['langSorted']}</option>
+                   <option value="surname">${phrases['langBySurname']}</option>
+                   <option value="date">${phrases['langByDateOfBirth']}</option>
+                <input type="submit" value="${phrases['langGetThem']}"/><br>
             </form>
         <h2 style="color:#B22222">
         <table class="table">
 
-            <th style="color:#0000ff"><h4/> ${langSurname} &nbsp</th>
-            <th style="color:#ffff00"><h4/> ${langName} &nbsp</th>
-            <th style="color:#0000ff"><h4 /> ${langDateOfBirth} &nbsp</th>
-            <th style="color:#ffff00"><h4 /> ${langGoTo} &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${phrases['langSurname']} &nbsp</th>
+            <th style="color:#ffff00"><h4/> ${phrases['langName']} &nbsp</th>
+            <th style="color:#0000ff"><h4 /> ${phrases['langDateOfBirth']} &nbsp</th>
+            <th style="color:#ffff00"><h4 /> ${phrases['langGoTo']} &nbsp</th>
                   <c:forEach items="${patientlist}" var="i">
                       <tr>
                          <td style="color:#fff"><h3/>${i.getSurname()} &nbsp</td>
@@ -44,7 +44,7 @@
                             <form action ="../doctors_only/edit_hospital_cards" method ="post">
                                <input type="hidden" name="id" value="${i.getId()}"/>
                                <input type="hidden" name="back" value="my_patients"/>
-                         <td> <input type="submit" value="${langGetDetail}"> </td>
+                         <td> <input type="submit" value="${phrases['langGetDetail']}"> </td>
                             </form>
 
                       </tr>

@@ -14,17 +14,17 @@
 
     <%@ include file="../header_patients.jspf" %>
     <div align="center" >
-        <h2  style="color:#fff">${langGetMyAppointments}</h2>
+        <h2  style="color:#fff">${phrases['langGetMyAppointments']}</h2>
             <form action ="../patients_only/my_appointments" method ="get">
-                <input type="submit" value="${langGetThem}"/><br>
+                <input type="submit" value="${phrases['langGetThem']}"/><br>
             </form>
  <table class="table">
 
-            <th style="color:#0000ff"><h4/> ${langAppointment} &nbsp</th>
-            <th style="color:#ffff00"><h4/> ${langAppointmentDetails} &nbsp</th>
-            <th style="color:#0000ff"><h4/> ${langCurrentDoctor} &nbsp</th>
-            <th style="color:#ffff00"><h4 />${langDesignatedNurse} &nbsp</th>
-            <th style="color:#0000ff"><h4 />${langDate} &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${phrases['langAppointment']} &nbsp</th>
+            <th style="color:#ffff00"><h4/> ${phrases['langAppointmentDetails']} &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${phrases['langCurrentDoctor']} &nbsp</th>
+            <th style="color:#ffff00"><h4 />${phrases['langDesignatedNurse']} &nbsp</th>
+            <th style="color:#0000ff"><h4 />${phrases['langDate']} &nbsp</th>
               <c:forEach items="${appointments}" var="i">
                 <tr>
                   <td><h3 style="color:#fff"/>${i.getAppointment()}&nbsp&nbsp</td>
@@ -38,9 +38,9 @@
              <h2 style="color:#B22222">
                   <c:if  test="${not empty mes}" >${mes}</c:if>
              </h2>
-             <h2  style="color:#fff">${langGetMyHospitalCard}</h2>
+             <h2  style="color:#fff">${phrases['langGetMyHospitalCard']}</h2>
             <form action ="../patients_only/my_hospitalcard" method ="get">
-                <input type="submit" value="${langGet}"/><br>
+                <input type="submit" value="${phrases['langGet']}"/><br>
             </form>
     </form>
     <c:if test="${not empty myhospitalcard}">
@@ -51,19 +51,19 @@
              <col>
             </colgroup>
                      <tr style="color:#0000ff">
-                        <td>${langDoctorSurname}: &nbsp</td>
+                        <td>${phrases['langDoctorSurname']}: &nbsp</td>
                         <td>${myhospitalcard.getCurrentDoctorSurname()}</td>
                      </tr>
                      <tr style="color:#ffff00">
-                        <td>${langDoctorName}: &nbsp</td>
+                        <td>${phrases['langDoctorName']}: &nbsp</td>
                         <td>${myhospitalcard.getCurrentDoctorName()}</td>
                      </tr>
                      <tr style="color:#0000ff">
-                        <td>${langCurrentDiagnosis}: &nbsp</td>
+                        <td>${phrases['langCurrentDiagnosis']}: &nbsp</td>
                         <td>${myhospitalcard.getDiagnosis()}</td>
                      </tr>
                      <tr style="color:#ffff00">
-                        <td>${langStatus}:</td>
+                        <td>${phrases['langStatus']}:</td>
                         <td>${myhospitalcard.getStatus()}</td>
                      </tr>
         </table>
@@ -71,7 +71,7 @@
     </c:if>
              <c:if test="${status_patient.equals('discharged')}">
                  <form action ="../patients_only/newbee_again" method ="post">
-                    <input type="submit" value="${langNeedHelpAgain}"/>
+                    <input type="submit" value="${phrases['langNeedHelpAgain']}"/>
                  </form>
              </c:if>
               <c:if test="{not empty messtatus}">${messtatus}

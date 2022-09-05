@@ -13,19 +13,19 @@
     <body>
     <%@ include file="../header_admins.jspf" %>
     <div align="center" >
-              <h2 style="color:#fff">${langAppointADoctorForPatient}</h2>
+              <h2 style="color:#fff">${phrases['langAppointADoctorForPatient']}</h2>
                         <form action ="../admins_only/patients_sortlist" method ="post">
                         <select name="sort">
-                             <option disabled>${langSorted}</option>
-                             <option value="surname">${langBySurname}</option>
-                             <option value="date">${langByDateOfBirth}</option>
-                            <input type="submit" value="${langGetPatientsWithOutADoctor}"/><br>
+                             <option disabled>${phrases['langSorted']}</option>
+                             <option value="surname">${phrases['langBySurname']}</option>
+                             <option value="date">${phrases['langByDateOfBirth']}</option>
+                            <input type="submit" value="${phrases['langGetPatientsWithOutADoctor']}"/><br>
                         </form>
 <h2 style="color:#B22222">
          <table class="table">
-            <th style="color:#0000ff"><h4/> ${langSurname}&nbsp</th>
-            <th style="color:#ffff00"><h4/> ${langName}&nbsp</th>
-            <th style="color:#0000ff"><h4/> ${langPickADoctor}&nbsp</th>
+            <th style="color:#0000ff"><h4/> ${phrases['langSurname']}&nbsp</th>
+            <th style="color:#ffff00"><h4/> ${phrases['langName']}&nbsp</th>
+            <th style="color:#0000ff"><h4/> ${phrases['langPickADoctor']}&nbsp</th>
                   <c:forEach items="${patients}" var="i">
                       <tr>
                          <td style="color:#fff"><h4/>${i.getSurname()} &nbsp</td>
@@ -34,12 +34,12 @@
                          <form action ="../admins_only/give_a_doctor" method ="post">
                              <input type="hidden" name="id" value="${i.getId()}"/>
                              <select name="doctor">
-                                     <option disabled>${langPickADoctor}&nbsp</option>
+                                     <option disabled>${phrases['langPickADoctor']}&nbsp</option>
                                  <c:forEach items="${doctors}" var="j">
                                      <option value="${j.getId()}">${j.getSurname()} ${j.getName()} ${j.getCategory()}</option>
                                  </c:forEach>
                              </select>
-                             <input type="submit" value="${langPick}"/>
+                             <input type="submit" value="${phrases['langPick']}"/>
                          </form>
                          </td>
                       </tr>

@@ -18,7 +18,7 @@
         <table>
             <tr>
                 <td><input name="name" placeholder="enter a name" required/></td>
-                  <td><input type="submit" value="${langAddAppointment}"/></td>
+                  <td><input type="submit" value="${phrases['langAddAppointment']}"/></td>
             </tr>
         </form>
         </table>

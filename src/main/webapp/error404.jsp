@@ -19,7 +19,7 @@
             <h2 align="center">Oops. Something went wrong. Go to Login> </h2>
         </c:if>
         <br><br><br><br><br><br><br><br><br><br><br><br>
-           <h1> <a style="color:#fff" href="/Hospital/index.jsp">${langGoToLogin}</a> </h1>
+           <h1> <a style="color:#fff" href="/Hospital/index.jsp">${phrases['langGoToLogin']}</a> </h1>
          </div>
     </body>
 </html>

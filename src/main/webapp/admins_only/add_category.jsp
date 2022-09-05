@@ -16,8 +16,8 @@
 
              <form action ="../admins_only/add_category" method ="post">
              <div align="center" >
-                    <input name="category" placeholder="${langAddCategory} " required/>
-                    <input type="submit" value="${langAddCategory}"/><br>
+                    <input name="category" placeholder="${phrases['langAddCategory']} " required/>
+                    <input type="submit" value="${phrases['langAddCategory']}"/><br>
                     <h2 style="color:#B22222">
                         <c:if  test="${not empty mes}" >${mes}</c:if>
                     </h2>

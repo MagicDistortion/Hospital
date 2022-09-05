@@ -1,12 +1,17 @@
 package project.controller;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.apache.log4j.Logger;
+import project.ConfigurationManager;
 import project.appointments.Appointment;
 import project.appointments.AppointmentDetails;
 import project.categories.Categories;
 import project.Constants;
 import project.hospitalcard.HospitalCard;
 import project.users.*;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -15,36 +20,44 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /* Клас для роботи з БД*/
 public class DBManager {
 
     final static Logger logger = Logger.getLogger(DBManager.class);
     static DBManager instance;
+    private DataSource dataSource;
 
     private DBManager() {
+        ConfigurationManager configInstance = ConfigurationManager.getInstance();
+        String dbUrl = configInstance.getConfigValue("db.url");
+        if (dbUrl == null) {
+            logger.error("cannot connection to db");
+            throw new RuntimeException("cannot connection to db");
+        }
+        boolean dbUsePool = Objects.equals(configInstance.getConfigValue("db.usepool"), "true");
+        if (dbUsePool) {
+            HikariConfig hikariConfig = new HikariConfig();
+            hikariConfig.setJdbcUrl(dbUrl);
+            hikariConfig.setMaximumPoolSize(100);
+            hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
+            this.dataSource = new HikariDataSource(hikariConfig);
+        } else {
+            MysqlDataSource mysqlDataSource = new MysqlDataSource();
+            mysqlDataSource.setURL(dbUrl);
+            this.dataSource = mysqlDataSource;
+        }
     }
+
     public static synchronized DBManager getInstance() {
         if (instance == null) instance = new DBManager();
         return instance;
     }
     /* метод отримання зв'язку з бд */
+
     public Connection getConnection() throws SQLException {
-        Context ctx;
-        Connection c = null;
-        DataSource ds;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            ctx = new InitialContext();
-            ds = (DataSource) ctx.lookup("java:comp/env/jdbc/myConnectionPool");
-            c = ds.getConnection();
-        } catch (NamingException ignored) {
-            c = DriverManager.getConnection(Constants.URL);
-            logger.info("using connection without pool");
-        } catch (SQLException | ClassNotFoundException e) {
-            logger.error(e);
-        }
-        return c;
+        return dataSource.getConnection();
     }
     /* метод отримання користувача з різалтсету */
     private static User getUser(ResultSet resultSet) throws SQLException {
@@ -58,6 +71,7 @@ public class DBManager {
         user.setRolesId(resultSet.getInt("id_roles"));
         return user;
     }
+
     /* метод додавання користувача  */
     public void insertUser(User user) {
         try (Connection connection = getConnection();
@@ -78,6 +92,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод додавання сіс адміна  */
     public void insertSysAdmin(User user) {
         try (Connection connection = getConnection();
@@ -92,6 +107,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод додавання лікаря */
     public void insertDoctor(User user) {
         try (Connection connection = getConnection();
@@ -106,6 +122,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод додавання медсестри  */
     public void insertNurse(User user) {
         try (Connection connection = getConnection();
@@ -120,6 +137,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод додавання пацієнта  */
     public void insertPatient(User user) {
         try (Connection connection = getConnection();
@@ -135,6 +153,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод додавання нової категорії  */
     public void insertCategory(Categories category) {
         try (Connection connection = getConnection();
@@ -162,6 +181,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод додавання нового призначення  */
     public void insertAppointment(Appointment appoinment) {
         try (Connection connection = getConnection();
@@ -177,6 +197,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод додавання додаткової інформації для поточного призначення  */
     public void insertAppointmentDetails(AppointmentDetails appointmentDetails) {
         try (Connection connection = getConnection();
@@ -197,6 +218,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод оновлення ролі користувача  */
     public void updateUserRole(int role, int id) {
         try (Connection connection = getConnection();
@@ -209,6 +231,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод оновлення категорії лікаря  */
     public void updateDoctorCategory(int categoryId, int id) {
         try (Connection connection = getConnection();
@@ -221,6 +244,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод оновлення діагнозу пацієнта у лікарняній картці  */
     public void updateDiagnos(String diagnos, int id) {
         try (Connection connection = getConnection();
@@ -233,6 +257,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод оновлення статусу призначення  */
     public void updateAppointmentStatus(String status, int id) {
         try (Connection connection = getConnection();
@@ -286,6 +311,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод оновлення Прізвища користувача  */
     public void updateUseSurname(String surname, int id) {
         try (Connection connection = getConnection();
@@ -298,6 +324,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод оновлення Імені користувача */
     public void updateUserName(String name, int id) {
         try (Connection connection = getConnection();
@@ -310,6 +337,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод оновлення Логіну користувача */
     public void updateUserLogin(String login, int id) {
         try (Connection connection = getConnection();
@@ -322,6 +350,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод оновлення Паролю користувача */
     public void updateUserPassword(String password, int id) {
         try (Connection connection = getConnection();
@@ -334,6 +363,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод оновлення Номера Телефона користувача */
     public void updateUserTel(String tel, int id) {
         try (Connection connection = getConnection();
@@ -346,6 +376,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод оновлення Дати народження користувача */
     public void updateUserDateOfBirth(LocalDate dateOfBtirth, int id) {
         try (Connection connection = getConnection();
@@ -358,6 +389,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод виписки пацієнта з лікарні */
     public void dischargePatient(int id) {
         try (Connection connection = getConnection();
@@ -369,6 +401,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
     /* метод отримання списку всіх користувачів */
     public List<User> findAllUsers() {
         List<User> userList = new ArrayList<>();
@@ -384,6 +417,7 @@ public class DBManager {
         }
         return userList;
     }
+
     /* метод отримання списку користувачів без ролі */
     public List<User> findUsersWitchOutRole() {
         List<User> userList = new ArrayList<>();

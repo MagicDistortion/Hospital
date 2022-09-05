@@ -3,67 +3,67 @@
 <%@ taglib uri="mytaglib" prefix="mt" %>
 
      <h2 align="center">
-              <a style="color:#0000ff" href="index.jsp">${langMain}</a>
-              <a style="color:#ffff00" href="about_us.jsp">${langAboutUs}</a>
-              <a style="color:#0000ff" href="contacts.jsp">${langContacts}</a>
-              <a style="color:#ffff00" href="doctors.jsp">${langDoctors}</a>
+              <a style="color:#0000ff" href="index.jsp">${phrases['langMain']}</a>
+              <a style="color:#ffff00" href="about_us.jsp">${phrases['langAboutUs']}</a>
+              <a style="color:#0000ff" href="contacts.jsp">${phrases['langContacts']}</a>
+              <a style="color:#ffff00" href="doctors.jsp">${phrases['langDoctors']}</a>
 
          <c:if  test="${user.getRolesId()==1}" >
                     <br>
-                <a style="color:#0000ff" href="admins_only/giving_a_role.jsp">${langGivingARole}</a>
-                <a style="color:#ffff00" href="admins_only/giving_a_category.jsp">${langGivingACategory}</a>
-                <a style="color:#0000ff" href="admins_only/patients.jsp">${langPatients}</a>
-                <a style="color:#ffff00" href="admins_only/appoint_a_doctor.jsp">${langAppointADoctor}</a>
-                <a style="color:#0000ff" href="admins_only/add_category.jsp">${langAddCategory}</a>
+                <a style="color:#0000ff" href="admins_only/giving_a_role.jsp">${phrases['langGivingARole']}</a>
+                <a style="color:#ffff00" href="admins_only/giving_a_category.jsp">${phrases['langGivingACategory']}</a>
+                <a style="color:#0000ff" href="admins_only/patients.jsp">${phrases['langPatients']}</a>
+                <a style="color:#ffff00" href="admins_only/appoint_a_doctor.jsp">${phrases['langAppointADoctor']}</a>
+                <a style="color:#0000ff" href="admins_only/add_category.jsp">${phrases['langAddCategory']}</a>
          </c:if>
 
          <c:if  test="${user.getRolesId()==2}" >
               <br>
-            <a style="color:#0000ff" href="doctors_only/my_patients.jsp">${langMyPatients}</a>
-            <a style="color:#ffff00" href="doctors_only/hospital_cards.jsp">${langHospitalCards}</a>
-            <a style="color:#0000ff" href="doctors_only/add_appointment.jsp">${langAddAppointment}</a>
+            <a style="color:#0000ff" href="doctors_only/my_patients.jsp">${phrases['langMyPatients']}</a>
+            <a style="color:#ffff00" href="doctors_only/hospital_cards.jsp">${phrases['langHospitalCards']}</a>
+            <a style="color:#0000ff" href="doctors_only/add_appointment.jsp">${phrases['langAddAppointment']}</a>
          </c:if>
 
          <c:if  test="${user.getRolesId()==3}" >
                     <br>
-            <a style="color:#0000ff" href="nurses_only/my_appointments.jsp">${langMyAppointments}</a>
+            <a style="color:#0000ff" href="nurses_only/my_appointments.jsp">${phrases['langMyAppointments']}</a>
          </c:if>
 
          <c:if  test="${user.getRolesId()==4}" >
                     <br>
-             <a style="color:#0000ff" href="patients_only/my_appointments.jsp">${langMyAppointments}</a>
+             <a style="color:#0000ff" href="patients_only/my_appointments.jsp">${phrases['langMyAppointments']}</a>
          </c:if>
 
      </h2>
                     <h5 align="right" style="color:#0000ff"><mt:myTag/></h5>
                      <c:if  test="${user.getRolesId()!=null}" >
-                      <h5 align="right" style="color:#ffff00"><tf:user message="${langHi}${user.getName()}"/></h5>
+                      <h5 align="right" style="color:#ffff00"><tf:user message="${phrases['langHi']}${user.getName()}"/></h5>
                     </c:if>
                       <form align="right" action="lang" method="post">
                          <select name="lang">
-                         <option value="UA">${langUkrainian}</option>
-                         <option value="EN">${langEnglish}</option>
+                         <option value="UA">${phrases['langUkrainian']}</option>
+                         <option value="EN">${phrases['langEnglish']}</option>
                          </select>
                          <input type="hidden" name="url" value=url />
-                         <input type="submit" value="${langSetLanguage}"/>
+                         <input type="submit" value="${phrases['langSetLanguage']}"/>
                       </form>
                     <c:choose>
                         <c:when test="${empty user}">
                             <div align="right" >
                                  <form action="register_form.jsp" method="post">
-                                      <input type="submit" value="${langRegister}"/>
+                                      <input type="submit" value="${phrases['langRegister']}"/>
                                  </form>
-                                 <input type="submit" value="${langLogIn}"
+                                 <input type="submit" value="${phrases['langLogIn']}"
                                   onclick="window.location='index.jsp';"/>
                             </div>
                         </c:when>
                         <c:otherwise>
                            <div align="right" >
                                    <form action="edit_profile.jsp" method="post">
-                                       <input type="submit" value="${langEMP}"/>
+                                       <input type="submit" value="${phrases['langEMP']}"/>
                                    </form>
                                    <form action="logout" method="get">
-                                       <input type="submit" value="${langLogOut}"/>
+                                       <input type="submit" value="${phrases['langLogOut']}"/>
                                    </form>
                            </div>
                         </c:otherwise>

@@ -13,15 +13,15 @@
     <body>
     <%@ include file="../header_admins.jspf" %>
     <div align="center" >
-        <h2 style="color:#fff">${langGivingARole}</h2>
+        <h2 style="color:#fff">${phrases['langGivingARole']}</h2>
             <form action ="../admins_only/users_list" method ="get">
-                <input type="submit" value="${langGetUsers}"/><br>
+                <input type="submit" value="${phrases['langGetUsers']}"/><br>
             </form>
         <h2 style="color:#B22222">
          <table class="table">
-            <th style="color:#0000ff"><h4/> ${langSurname} &nbsp</th>
-            <th style="color:#ffff00"><h4/> ${langName} &nbsp </th>
-            <th style="color:#0000ff"><h4/> ${langPickARole} &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${phrases['langSurname']} &nbsp</th>
+            <th style="color:#ffff00"><h4/> ${phrases['langName']} &nbsp </th>
+            <th style="color:#0000ff"><h4/> ${phrases['langPickARole']} &nbsp</th>
                   <c:forEach items="${userList}" var="i">
                       <tr>
                          <td style="color:#fff"><h4/>${i.getSurname()} &nbsp</td>
@@ -30,12 +30,12 @@
                          <form action ="../admins_only/give_a_role" method ="post">
                             <input type="hidden" name="id" value="${i.getId()}"/>
                              <select name="role">
-                                 <option value="1">${langSysAdmin}</option>
-                                 <option value="2">${langDoctor}</option>
-                                 <option value="3">${langNurse}</option>
-                                 <option value="4">${langPatient}</option>
+                                 <option value="1">${phrases['langSysAdmin']}</option>
+                                 <option value="2">${phrases['langDoctor']}</option>
+                                 <option value="3">${phrases['langNurse']}</option>
+                                 <option value="4">${phrases['langPatient']}</option>
                              </select>
-                             <input type="submit" value="${langPick}"/>
+                             <input type="submit" value="${phrases['langPick']}"/>
                          </form>
                          </td>
                       </tr>

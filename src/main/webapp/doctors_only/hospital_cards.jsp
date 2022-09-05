@@ -13,7 +13,7 @@
     <body>
     <%@ include file="../header_doctors.jspf" %>
     <div align="center" >
-        <h2  style="color:#fff">${langGetHospitalCards}</h2>
+        <h2  style="color:#fff">${phrases['langGetHospitalCards']}</h2>
             <form action ="../doctors_only/hospital_cards" method ="get">
                <input type="text" name="pagination" pattern="[1-9]\d*"
                  <c:choose>
@@ -23,13 +23,13 @@
                     </c:otherwise>
                  </c:choose>
                    placeholder="pagination" required />
-               <input type="submit" value="${langGetThem}"/><br>
+               <input type="submit" value="${phrases['langGetThem']}"/><br>
             </form>
         <h2 style="color:#B22222">
          <table class="table">
-            <th style="color:#0000ff"><h4/> ${langSurname} &nbsp</th>
-            <th style="color:#ffff00"><h4/> ${langName} &nbsp</th>
-            <th style="color:#0000ff"><h4/> ${langGoTo} &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${phrases['langSurname']} &nbsp</th>
+            <th style="color:#ffff00"><h4/> ${phrases['langName']} &nbsp</th>
+            <th style="color:#0000ff"><h4/> ${phrases['langGoTo']} &nbsp</th>
                   <c:forEach items="${cards}" var="i">
                       <tr>
                          <td style="color:#fff"><h3/>${i.getPatientsSurname()} &nbsp</td>
@@ -37,7 +37,7 @@
                             <form action ="../doctors_only/edit_hospital_cards" method ="post">
                                <input type="hidden" name="id" value="${i.getId()}"/>
                                <input type="hidden" name="back" value="hospital_cards"/>
-                         <td> <input type="submit" value="${langGetDetail}"> </td>
+                         <td> <input type="submit" value="${phrases['langGetDetail']}"> </td>
                             </form>
                       </tr>
                   </c:forEach>
