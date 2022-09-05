@@ -13,7 +13,7 @@ public class Constants {
     public static final String INSERT_APPOINMENT= "INSERT INTO appointment (name) VALUES (?)";
     public static final String INSERT_APPOINTMENT_DETAIL = "INSERT INTO appoinment_detail (text,nurse_id,appoinment_id,doctors_id,hospital_card_id,date) VALUES (?,?,?,?,?,?)";
     public static final String UPDATE_USER_ROLE = "UPDATE users SET `id_roles` = ? WHERE (`id_users` = ?)";
-    public static final String UPDATE_DOCTOR_CATEGORY = "UPDATE doctors SET `category_id` = ? ORDER by id WHERE (`id` = ?) ";
+    public static final String UPDATE_DOCTOR_CATEGORY = "UPDATE doctors SET `category_id` = ? WHERE (`id` = ?) ";
     public static final String UPDATE_DIAGNOS= "UPDATE hospital_card SET diagnosis = ? WHERE id_card =?";
     public static final String UPDATE_APPOINTMENT_STATUS= "UPDATE appoinment_detail SET status = ? WHERE id = ? ";
     public static final String UPDATE_HOSPITAL_CARD_STATUS= "UPDATE hospital_card SET status = ? WHERE id_card = ? ";

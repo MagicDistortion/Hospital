@@ -29,7 +29,7 @@ class NursesAppointmentsTest {
 
         when(request.getRequestDispatcher(path)).thenReturn(dispatcher);
         when(request.getSession()).thenReturn(session);
-        when(request.getSession().getAttribute("id")).thenReturn(29);
+        when(request.getSession().getAttribute("id")).thenReturn(31);
 
         servlet.doGet(request, response);
 

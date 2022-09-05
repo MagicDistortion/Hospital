@@ -18,15 +18,15 @@
                      <table>
                        <tr>
                          <td style="color:#0000ff"/>${langSurname}:</td>
-                         <td><input name="surname"  pattern="^[A-Za-zА-Яа-яІіЇїєЄ]{1,32}" value="${surname}"/></td>
+                         <td><input name="surname"  pattern="^[A-Za-zА-Яа-яІіЇїєЄ]{1,32}" value="${user.getSurname()}"/></td>
                        </tr>
                        <tr>
                          <td style="color:#0000ff"/>${langName}:</td>
-                         <td><input name="name"  pattern="^[A-Za-zА-Яа-яІіЇїєЄ]{1,32}" value="${name}"/></td>
+                         <td><input name="name"  pattern="^[A-Za-zА-Яа-яІіЇїєЄ]{1,32}" value="${user.getName()}"/></td>
                        </tr>
                        <tr>
                          <td style="color:#ffff00"/>${langLogin}:</td>
-	                     <td><input name="login" value="${login}" ></td>
+	                     <td><input name="login" value="${user.getLogin()}" ></td>
                        </tr>
                        <tr>
                          <td style="color:#0000ff"/>${langNewPassword}:</td>
@@ -38,19 +38,20 @@
                        </tr>
                        <tr>
                          <td style="color:#0000ff"/>${langTel}:</td>
-                         <td> <input  type="number" name="tel" value="${tel}" ></td>
+                         <td> <input  type="number" name="tel" value="${user.getTel()}" ></td>
                          <td style="color:#0000ff"/>Format: xxx xxx-xx-xx</td>
                        </tr>
                        <tr>
                          <td style="color:#ffff00"/>${langDateOfBirth}</td>
-                         <td><input type="date" name="date_of_birth" value="${date_of_birth}" /></td>
+                         <td><input type="date" name="date_of_birth" value="${user.getDateOfBirth()}" /></td>
                          <td style="color:#ffff00"/>Format: 1900 - ${langToday}</td>
                        </tr>
                       </table>
                     	<input type="submit" value="${langEditNow}"/><br>
                            <h2 style="color:#B22222">
-                             <c:if  test="${not empty mes}" >${mes}</c:if><br>
-                             <c:if  test="${not empty meserror}" >${meserror}</c:if><br>
+                               <c:forEach items="${errors}" var="i">
+                                  ${i}<br>
+                                  </c:forEach>
                                 <a style="color:#0000ff" href="index.jsp">${langBackToMain}</a>
                            </h2>
                     </div>

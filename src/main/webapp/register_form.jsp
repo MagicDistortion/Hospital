@@ -18,29 +18,29 @@ body {background:#000000 url(images/Serze2.jpg)}
     <table>
          <tr>
             <td style="color:#0000ff" />${langSurname}:</td>
-            <td><input name="surname" placeholder="${langEnterSurname}" pattern="^[A-Za-zА-Яа-яІіЇїєЄ]{1,32}" required/></td>
+            <td><input name="surname" placeholder="${langEnterSurname}" value="${user.getSurname()}" pattern="^[A-Za-zА-Яа-яІіЇїєЄ]{1,32}" required/></td>
         </tr>
         <tr>
             <td style="color:#0000ff" />${langName}:</td>
-            <td><input name="name" placeholder="${langEnterName}" pattern="^[A-Za-zА-Яа-яІіЇїєЄ]{1,32}" required/></td>
+            <td><input name="name" placeholder="${langEnterName}" value="${user.getName()}" pattern="^[A-Za-zА-Яа-яІіЇїєЄ]{1,32}" required/></td>
         </tr>
         <tr>
             <td style="color:#ffff00"/>${langLogin}:</td>
-	        <td><input name="login" placeholder="${langEnterLogin}" required/></td>
+	        <td><input name="login" placeholder="${langEnterLogin}" value="${user.getLogin()}" required/></td>
 
         </tr>
         <tr>
             <td style="color:#0000ff"/>${langPassword}:</td>
-            <td><input type="password" name="password" placeholder="${langEnterPassword}" required/></td>
+            <td><input type="password" name="password"  placeholder="${langEnterPassword}" required/></td>
         </tr>
 	    <tr>
 	        <td style="color:#ffff00"/>${langRePassword}:</td>
-	        <td><input type="password" name="repassword"  placeholder="${langRePassword}"required/></td>
+	        <td><input type="password" name="repassword" placeholder="${langRePassword}"required/></td>
 
         </tr>
         <tr>
             <td style="color:#0000ff"/>${langTel}:</td>
-            <td> <input  type="number" name="tel" placeholder="${langEnterTel}" required></td>
+            <td> <input  type="number" name="tel" value="${tel}" placeholder="${langEnterTel}" required></td>
             <td style="color:#0000ff"/>Format: xxx xxx-xx-xx</td>
 
         </tr>
@@ -54,7 +54,10 @@ body {background:#000000 url(images/Serze2.jpg)}
     	<input type="submit" value="${langRegister}"/><br>
 
     <h2 style="color:#B22222">
-        <c:if  test="${not empty mes}" >${mes}</c:if>
+     <c:forEach items="${errors}" var="i">
+     ${i}<br>
+     </c:forEach>
+     <a style="color:#0000ff" href="index.jsp">${langBackToMain}</a>
     </h2>
 
 </div>

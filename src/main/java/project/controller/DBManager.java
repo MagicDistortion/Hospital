@@ -29,20 +29,18 @@ public class DBManager {
         return instance;
     }
     /* метод отримання зв'язку з бд */
-    public Connection getConnection() {
+    public Connection getConnection() throws SQLException {
         Context ctx;
         Connection c = null;
         DataSource ds;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            c = DriverManager.getConnection(Constants.URL);
-
             ctx = new InitialContext();
             ds = (DataSource) ctx.lookup("java:comp/env/jdbc/myConnectionPool");
-            /* якщо є можливість зв'язатись з пулом томкату то конекшен переписується*/
             c = ds.getConnection();
-
         } catch (NamingException ignored) {
+            c = DriverManager.getConnection(Constants.URL);
+            logger.info("using connection without pool");
         } catch (SQLException | ClassNotFoundException e) {
             logger.error(e);
         }
