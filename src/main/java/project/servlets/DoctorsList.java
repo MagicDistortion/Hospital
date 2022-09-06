@@ -2,7 +2,6 @@ package project.servlets;
 
 import project.controller.DBManager;
 import project.users.Doctor;
-import project.users.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +29,7 @@ public class DoctorsList extends HttpServlet {
             case "patients":
                 sort = "ORDER BY number_of_patients DESC";
         }
-        List<Doctor> allDoctores = dbManager.findAllDoctores(sort);
+        List<Doctor> allDoctores = dbManager.findAllDoctors(sort);
         req.setAttribute("allDoctores", allDoctores);
 
         int pagination;
@@ -47,7 +46,7 @@ public class DoctorsList extends HttpServlet {
         int page = 1;
         if (req.getParameter("page") != null)
             page = Integer.parseInt(req.getParameter("page"));
-        List<Doctor> doctores = dbManager.findDoctoresWithLimit(sort, page, pagination);
+        List<Doctor> doctores = dbManager.findDoctorsWithLimit(sort, page, pagination);
         req.setAttribute("docList", doctores);
         req.getRequestDispatcher("doctors.jsp").forward(req, resp);
     }

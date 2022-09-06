@@ -22,7 +22,7 @@ public class DoctorsList extends HttpServlet {
         List<Categories> allCategories = dbManager.findAllCategories();
         req.setAttribute("categories", allCategories);
 
-        List<Doctor> allDoctores = dbManager.findAllDoctores("WHERE category_id = 1 ORDER BY users.name");
+        List<Doctor> allDoctores = dbManager.findAllDoctors("WHERE category_id = 1 ORDER BY users.name");
         req.setAttribute("docs", allDoctores);
 
         if (allDoctores.size() == 0) req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));

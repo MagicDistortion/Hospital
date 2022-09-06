@@ -20,7 +20,7 @@ public class UpdateDiagnosis extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         String diagnosis = req.getParameter("diagnosis");
         if (!diagnosis.isEmpty()) {
-            dbManager.updateDiagnos(diagnosis, id);
+            dbManager.updateDiagnosis(diagnosis, id);
             req.getSession().setAttribute("diagnosis",diagnosis);
         }
         resp.sendRedirect("edit_hospital_cards.jsp");

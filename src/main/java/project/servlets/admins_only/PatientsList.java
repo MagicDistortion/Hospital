@@ -63,7 +63,7 @@ public class PatientsList extends HttpServlet {
                 sort = "WHERE current_doctor_id is null AND `status`!='discharged' ORDER BY date_of_birth";
         }
         List<Patient> patients = dbManager.findAllPatients(sort);
-        List<Doctor> doctors = dbManager.findAllDoctores("Order by users.surname");
+        List<Doctor> doctors = dbManager.findAllDoctors("Order by users.surname");
         if (patients.size()==0)  req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));
         req.setAttribute("doctors", doctors);
         req.setAttribute("patients", patients);

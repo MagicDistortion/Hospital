@@ -11,6 +11,7 @@ import project.categories.Categories;
 import project.Constants;
 import project.hospitalcard.HospitalCard;
 import project.users.*;
+
 import javax.sql.DataSource;
 import java.sql.*;
 import java.time.LocalDate;
@@ -33,7 +34,7 @@ public class DBManager {
             logger.error("cannot connection to db");
             throw new RuntimeException("cannot connection to db");
         }
-        boolean dbUsePool = Objects.equals(configInstance.getConfigValue("db.usepool"), "true");
+        boolean dbUsePool = Objects.equals(configInstance.getConfigValue("db.usePool"), "true");
         if (dbUsePool) {
             HikariConfig hikariConfig = new HikariConfig();
             hikariConfig.setJdbcUrl(dbUrl);
@@ -111,9 +112,10 @@ public class DBManager {
             preparedStatement.setString(5, user.getTel());
             preparedStatement.setObject(6, user.getDateOfBirth());
             preparedStatement.executeUpdate();
-            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-            generatedKeys.next();
-            user.setId(generatedKeys.getInt(1));
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                generatedKeys.next();
+                user.setId(generatedKeys.getInt(1));
+            }
         } catch (SQLException e) {
             logger.error(e);
             throw new RuntimeException(e);
@@ -134,63 +136,57 @@ public class DBManager {
                 throw new RuntimeException(e);
             }
         });
-//        try (Connection connection = getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_SYS_ADMIN)) {
-//            if (user.getRolesId() == 0) {
-//                preparedStatement.setInt(1, user.getId());
-//                preparedStatement.executeUpdate();
-//                updateUserRole(1, user.getId());
-//            }
-//        } catch (SQLException e) {
-//            logger.error(e);
-//            throw new RuntimeException(e);
-//        }
     }
 
     /* метод додавання лікаря */
     public void insertDoctor(User user) {
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_DOCTORS)) {
-            if (user.getRolesId() == 0) {
-                preparedStatement.setInt(1, user.getId());
-                preparedStatement.executeUpdate();
-                updateUserRole(2, user.getId());
+        inTransaction(connection -> {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_DOCTORS)) {
+                if (user.getRolesId() == 0) {
+                    preparedStatement.setInt(1, user.getId());
+                    preparedStatement.executeUpdate();
+                    updateUserRole(connection, 2, user.getId());
+                }
+            } catch (SQLException e) {
+                logger.error(e);
+                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            logger.error(e);
-            throw new RuntimeException(e);
-        }
+        });
+
     }
 
     /* метод додавання медсестри  */
     public void insertNurse(User user) {
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_NURSE)) {
-            if (user.getRolesId() == 0) {
-                preparedStatement.setInt(1, user.getId());
-                preparedStatement.executeUpdate();
-                updateUserRole(3, user.getId());
+        inTransaction(connection -> {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_NURSE)) {
+                if (user.getRolesId() == 0) {
+                    preparedStatement.setInt(1, user.getId());
+                    preparedStatement.executeUpdate();
+                    updateUserRole(connection, 3, user.getId());
+                }
+            } catch (SQLException e) {
+                logger.error(e);
+                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            logger.error(e);
-            throw new RuntimeException(e);
-        }
+        });
     }
 
     /* метод додавання пацієнта  */
     public void insertPatient(User user) {
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_PATIENTS)) {
-            if (user.getRolesId() == 0) {
-                preparedStatement.setInt(1, user.getId());
-                preparedStatement.executeUpdate();
-                updateUserRole(4, user.getId());
-                insertHospitalCard(user.getId());
+        inTransaction(connection -> {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_PATIENTS)) {
+                if (user.getRolesId() == 0) {
+                    preparedStatement.setInt(1, user.getId());
+                    preparedStatement.executeUpdate();
+                    updateUserRole(connection, 4, user.getId());
+                    insertHospitalCard(user.getId());
+                }
+            } catch (SQLException e) {
+                logger.error(e);
+                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            logger.error(e);
-            throw new RuntimeException(e);
-        }
+        });
+
     }
 
     /* метод додавання нової категорії  */
@@ -200,9 +196,10 @@ public class DBManager {
                      = connection.prepareStatement(Constants.INSERT_CATEGORY, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, category.getName());
             preparedStatement.executeUpdate();
-            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-            generatedKeys.next();
-            category.setId(generatedKeys.getInt(1));
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                generatedKeys.next();
+                category.setId(generatedKeys.getInt(1));
+            }
         } catch (SQLException e) {
             logger.error(e);
             throw new RuntimeException(e);
@@ -222,15 +219,16 @@ public class DBManager {
     }
 
     /* метод додавання нового призначення  */
-    public void insertAppointment(Appointment appoinment) {
+    public void insertAppointment(Appointment appointment) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement
-                     = connection.prepareStatement(Constants.INSERT_APPOINMENT, PreparedStatement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, appoinment.getName());
+                     = connection.prepareStatement(Constants.INSERT_APPOINTMENT, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, appointment.getName());
             preparedStatement.executeUpdate();
-            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-            generatedKeys.next();
-            appoinment.setId(generatedKeys.getInt(1));
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                generatedKeys.next();
+                appointment.setId(generatedKeys.getInt(1));
+            }
         } catch (SQLException e) {
             logger.error(e);
             throw new RuntimeException(e);
@@ -249,9 +247,10 @@ public class DBManager {
             preparedStatement.setInt(5, appointmentDetails.getHospitalCardId());
             preparedStatement.setObject(6, appointmentDetails.getDate());
             preparedStatement.executeUpdate();
-            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-            generatedKeys.next();
-            appointmentDetails.setId(generatedKeys.getInt(1));
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                generatedKeys.next();
+                appointmentDetails.setId(generatedKeys.getInt(1));
+            }
         } catch (SQLException e) {
             logger.error(e);
             throw new RuntimeException(e);
@@ -259,21 +258,8 @@ public class DBManager {
     }
 
     /* метод оновлення ролі користувача  */
-    public void updateUserRole(int role, int id) {
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_ROLE)) {
-            preparedStatement.setInt(1, role);
-            preparedStatement.setInt(2, id);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            logger.error(e);
-            throw new RuntimeException(e);
-        }
-    }
-
     public void updateUserRole(Connection connection, int role, int id) {
-        try (
-                PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_ROLE)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_ROLE)) {
             preparedStatement.setInt(1, role);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
@@ -297,10 +283,10 @@ public class DBManager {
     }
 
     /* метод оновлення діагнозу пацієнта у лікарняній картці  */
-    public void updateDiagnos(String diagnos, int id) {
+    public void updateDiagnosis(String diagnosis, int id) {
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_DIAGNOS)) {
-            preparedStatement.setString(1, diagnos);
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_DIAGNOSIS)) {
+            preparedStatement.setString(1, diagnosis);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -429,10 +415,10 @@ public class DBManager {
     }
 
     /* метод оновлення Дати народження користувача */
-    public void updateUserDateOfBirth(LocalDate dateOfBtirth, int id) {
+    public void updateUserDateOfBirth(LocalDate dateOfBirth, int id) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_DATE_OF_BIRTH)) {
-            preparedStatement.setObject(1, dateOfBtirth);
+            preparedStatement.setObject(1, dateOfBirth);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -486,8 +472,8 @@ public class DBManager {
     }
     /* метод отримання списку всіх лікарів за сортуванням */
 
-    public List<Doctor> findAllDoctores(String sorted) {
-        List<Doctor> DoctoresList = new ArrayList<>();
+    public List<Doctor> findAllDoctors(String sorted) {
+        List<Doctor> DoctorsList = new ArrayList<>();
         try (Connection connection = getConnection();
              ResultSet resultSet = connection.prepareStatement(Constants.FROM_DOCTORS + sorted).executeQuery()) {
             while (resultSet.next()) {
@@ -495,20 +481,20 @@ public class DBManager {
                 doctor.setCategoryId(resultSet.getInt("category_id"));
                 doctor.setNumberOfPatients(resultSet.getInt("number_of_patients"));
                 doctor.setCategory(resultSet.getString("category.name"));
-                DoctoresList.add(doctor);
+                DoctorsList.add(doctor);
             }
         } catch (SQLException e) {
             logger.error(e);
             throw new RuntimeException(e);
         }
-        return DoctoresList;
+        return DoctorsList;
     }
     /* метод отримання списку лікарів за сортуванням та пагінацією */
 
-    public List<Doctor> findDoctoresWithLimit(String sorted, int start, int total) {
+    public List<Doctor> findDoctorsWithLimit(String sorted, int start, int total) {
         start = (start - 1) * total;
         String limit = " limit " + start + "," + total;
-        List<Doctor> DoctoresList = new ArrayList<>();
+        List<Doctor> DoctorsList = new ArrayList<>();
         try (Connection connection = getConnection();
              ResultSet resultSet = connection.prepareStatement(Constants.FROM_DOCTORS + sorted + limit).executeQuery()) {
             while (resultSet.next()) {
@@ -516,13 +502,13 @@ public class DBManager {
                 doctor.setCategoryId(resultSet.getInt("category_id"));
                 doctor.setNumberOfPatients(resultSet.getInt("number_of_patients"));
                 doctor.setCategory(resultSet.getString("category.name"));
-                DoctoresList.add(doctor);
+                DoctorsList.add(doctor);
             }
         } catch (SQLException e) {
             logger.error(e);
             throw new RuntimeException(e);
         }
-        return DoctoresList;
+        return DoctorsList;
     }
 
     /* метод отримання списку всіх мед сестр */
@@ -620,25 +606,26 @@ public class DBManager {
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.FROM_APPOINTMENT_DETAIL)) {
             preparedStatement.setInt(1, hospitalCardId);
             preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getResultSet();
-            while (resultSet.next()) {
-                LocalDate date = resultSet.getDate("date").toLocalDate();
-                if (date.equals(LocalDate.now()) || date.isAfter(LocalDate.now())) {
-                    Doctor doctor = findDoctorById(resultSet.getInt("doctors_id"));
+            try (ResultSet resultSet = preparedStatement.getResultSet()) {
+                while (resultSet.next()) {
+                    LocalDate date = resultSet.getDate("date").toLocalDate();
+                    if (date.equals(LocalDate.now()) || date.isAfter(LocalDate.now())) {
+                        Doctor doctor = findDoctorById(resultSet.getInt("doctors_id"));
+                        Nurse nurse = findNurseById(resultSet.getInt("nurse_id"));
 
-                    Nurse nurse = findNurseById(resultSet.getInt("nurse_id"));
-                    AppointmentDetails appointmentDetails = new AppointmentDetails(resultSet.getString("text"), date);
-                    appointmentDetails.setId(resultSet.getInt("id"));
-                    appointmentDetails.setNurseId(resultSet.getInt("nurse_id"));
-                    appointmentDetails.setAppointmentId(resultSet.getInt("appoinment_id"));
-                    appointmentDetails.setDoctorsId(resultSet.getInt("doctors_id"));
-                    appointmentDetails.setHospitalCardId(resultSet.getInt("hospital_card_id"));
-                    appointmentDetails.setAppointment(resultSet.getString("name"));
-                    appointmentDetails.setStatus(resultSet.getString("status"));
-
-                    appointmentDetails.setDoctorFullName(doctor.getSurname() + " " + doctor.getName());
-                    appointmentDetails.setNurseFullName(nurse.getSurname() + " " + nurse.getName());
-                    appointmentDetailsList.add(appointmentDetails);
+                        AppointmentDetails appointmentDetails
+                                = new AppointmentDetails(resultSet.getString("text"), date);
+                        appointmentDetails.setId(resultSet.getInt("id"));
+                        appointmentDetails.setNurseId(resultSet.getInt("nurse_id"));
+                        appointmentDetails.setAppointmentId(resultSet.getInt("appointment_id"));
+                        appointmentDetails.setDoctorsId(resultSet.getInt("doctors_id"));
+                        appointmentDetails.setHospitalCardId(resultSet.getInt("hospital_card_id"));
+                        appointmentDetails.setAppointment(resultSet.getString("name"));
+                        appointmentDetails.setStatus(resultSet.getString("status"));
+                        appointmentDetails.setDoctorFullName(doctor.getSurname() + " " + doctor.getName());
+                        appointmentDetails.setNurseFullName(nurse.getSurname() + " " + nurse.getName());
+                        appointmentDetailsList.add(appointmentDetails);
+                    }
                 }
             }
         } catch (SQLException e) {
@@ -655,28 +642,29 @@ public class DBManager {
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.FROM_APPOINTMENTS_FOR_NURSE)) {
             preparedStatement.setInt(1, nurseId);
             preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getResultSet();
-            while (resultSet.next()) {
-                String status = resultSet.getString("status");
-                LocalDate date = resultSet.getDate("date").toLocalDate();
-                if (!status.equals("done"))
-                    if (date.equals(LocalDate.now()) || date.isAfter(LocalDate.now())) {
-                        Doctor doctor = findDoctorById(resultSet.getInt("doctors_id"));
+            try (ResultSet resultSet = preparedStatement.getResultSet()) {
+                while (resultSet.next()) {
+                    String status = resultSet.getString("status");
+                    LocalDate date = resultSet.getDate("date").toLocalDate();
+                    if (!status.equals("done"))
+                        if (date.equals(LocalDate.now()) || date.isAfter(LocalDate.now())) {
+                            Doctor doctor = findDoctorById(resultSet.getInt("doctors_id"));
+                            Patient patient = findPatientById(resultSet.getInt("hospital_card_id"));
 
-                        Patient patient = findPatientById(resultSet.getInt("hospital_card_id"));
-                        AppointmentDetails appointmentDetails = new AppointmentDetails(resultSet.getString("text"), date);
-                        appointmentDetails.setId(resultSet.getInt("id"));
-                        appointmentDetails.setNurseId(resultSet.getInt("nurse_id"));
-                        appointmentDetails.setAppointmentId(resultSet.getInt("appoinment_id"));
-                        appointmentDetails.setDoctorsId(resultSet.getInt("doctors_id"));
-                        appointmentDetails.setHospitalCardId(resultSet.getInt("hospital_card_id"));
-                        appointmentDetails.setAppointment(resultSet.getString("name"));
-                        appointmentDetails.setStatus(status);
-
-                        appointmentDetails.setDoctorFullName(doctor.getSurname() + " " + doctor.getName());
-                        appointmentDetails.setPatientFullName(patient.getSurname() + " " + patient.getName());
-                        appointmentDetailsList.add(appointmentDetails);
-                    }
+                            AppointmentDetails appointmentDetails
+                                    = new AppointmentDetails(resultSet.getString("text"), date);
+                            appointmentDetails.setId(resultSet.getInt("id"));
+                            appointmentDetails.setNurseId(resultSet.getInt("nurse_id"));
+                            appointmentDetails.setAppointmentId(resultSet.getInt("appointment_id"));
+                            appointmentDetails.setDoctorsId(resultSet.getInt("doctors_id"));
+                            appointmentDetails.setHospitalCardId(resultSet.getInt("hospital_card_id"));
+                            appointmentDetails.setAppointment(resultSet.getString("name"));
+                            appointmentDetails.setStatus(status);
+                            appointmentDetails.setDoctorFullName(doctor.getSurname() + " " + doctor.getName());
+                            appointmentDetails.setPatientFullName(patient.getSurname() + " " + patient.getName());
+                            appointmentDetailsList.add(appointmentDetails);
+                        }
+                }
             }
         } catch (SQLException e) {
             logger.error(e);
@@ -693,10 +681,11 @@ public class DBManager {
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.FIND_CATEGORY)) {
             preparedStatement.setString(1, name);
             preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getResultSet();
-            while (resultSet.next()) {
-                category = new Categories(resultSet.getString("name"));
-                category.setId(resultSet.getInt("id"));
+            try (ResultSet resultSet = preparedStatement.getResultSet()) {
+                while (resultSet.next()) {
+                    category = new Categories(resultSet.getString("name"));
+                    category.setId(resultSet.getInt("id"));
+                }
             }
         } catch (SQLException e) {
             logger.error(e);
@@ -712,9 +701,10 @@ public class DBManager {
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.FIND_BY_LOGIN)) {
             preparedStatement.setString(1, login);
             preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getResultSet();
-            if (resultSet.next()) {
-                user = getUser(resultSet);
+            try (ResultSet resultSet = preparedStatement.getResultSet()) {
+                if (resultSet.next()) {
+                    user = getUser(resultSet);
+                }
             }
         } catch (SQLException e) {
             logger.error(e);
@@ -730,10 +720,11 @@ public class DBManager {
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.FIND_APPOINTMENT)) {
             preparedStatement.setString(1, name);
             preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getResultSet();
-            if (resultSet.next()) {
-                appointment = new Appointment(resultSet.getString("name"));
-                appointment.setId(resultSet.getInt("id"));
+            try (ResultSet resultSet = preparedStatement.getResultSet()) {
+                if (resultSet.next()) {
+                    appointment = new Appointment(resultSet.getString("name"));
+                    appointment.setId(resultSet.getInt("id"));
+                }
             }
         } catch (SQLException e) {
             logger.error(e);
@@ -749,9 +740,10 @@ public class DBManager {
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.FIND_BY_ID)) {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getResultSet();
-            if (resultSet.next()) {
-                user = getUser(resultSet);
+            try (ResultSet resultSet = preparedStatement.getResultSet()) {
+                if (resultSet.next()) {
+                    user = getUser(resultSet);
+                }
             }
         } catch (SQLException e) {
             logger.error(e);
@@ -767,12 +759,13 @@ public class DBManager {
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.FIND_DOCTOR_BY_ID)) {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getResultSet();
-            if (resultSet.next()) {
-                doctor = new Doctor(getUser(resultSet));
-                doctor.setCategoryId(resultSet.getInt("category_id"));
-                doctor.setNumberOfPatients(resultSet.getInt("number_of_patients"));
-                doctor.setCategory(resultSet.getString("category.name"));
+            try (ResultSet resultSet = preparedStatement.getResultSet()) {
+                if (resultSet.next()) {
+                    doctor = new Doctor(getUser(resultSet));
+                    doctor.setCategoryId(resultSet.getInt("category_id"));
+                    doctor.setNumberOfPatients(resultSet.getInt("number_of_patients"));
+                    doctor.setCategory(resultSet.getString("category.name"));
+                }
             }
         } catch (SQLException e) {
             logger.error(e);
@@ -788,9 +781,10 @@ public class DBManager {
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.FIND_PATIENT_BY_ID)) {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getResultSet();
-            if (resultSet.next()) {
-                patient = new Patient(getUser(resultSet));
+            try (ResultSet resultSet = preparedStatement.getResultSet()) {
+                if (resultSet.next()) {
+                    patient = new Patient(getUser(resultSet));
+                }
             }
         } catch (SQLException e) {
             logger.error(e);
@@ -806,9 +800,10 @@ public class DBManager {
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.FIND_NURSE_BY_ID)) {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getResultSet();
-            if (resultSet.next()) {
-                nurse = new Nurse(getUser(resultSet));
+            try (ResultSet resultSet = preparedStatement.getResultSet()) {
+                if (resultSet.next()) {
+                    nurse = new Nurse(getUser(resultSet));
+                }
             }
         } catch (SQLException e) {
             logger.error(e);
@@ -824,21 +819,21 @@ public class DBManager {
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.GET_A_HOSPITAL_CARD)) {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getResultSet();
-            if (resultSet.next()) {
-                Doctor doctor = findDoctorById(resultSet.getInt("current_doctor_id"));
+            try (ResultSet resultSet = preparedStatement.getResultSet()) {
+                if (resultSet.next()) {
+                    Doctor doctor = findDoctorById(resultSet.getInt("current_doctor_id"));
 
-                hospitalCard = new HospitalCard(resultSet.getInt("id_card"));
-                hospitalCard.setDiagnosis(resultSet.getString("diagnosis"));
-                hospitalCard.setDoctorsId(resultSet.getInt("current_doctor_id"));
-                hospitalCard.setCreateTime(resultSet.getDate("create_time").toLocalDate());
-                hospitalCard.setPatientsName(resultSet.getString("name"));
-                hospitalCard.setPatientsSurname(resultSet.getString("surname"));
-                hospitalCard.setStatus(resultSet.getString("status"));
-
-                if (doctor != null) {
-                    hospitalCard.setCurrentDoctorName(doctor.getName());
-                    hospitalCard.setCurrentDoctorSurname(doctor.getSurname());
+                    hospitalCard = new HospitalCard(resultSet.getInt("id_card"));
+                    hospitalCard.setDiagnosis(resultSet.getString("diagnosis"));
+                    hospitalCard.setDoctorsId(resultSet.getInt("current_doctor_id"));
+                    hospitalCard.setCreateTime(resultSet.getDate("create_time").toLocalDate());
+                    hospitalCard.setPatientsName(resultSet.getString("name"));
+                    hospitalCard.setPatientsSurname(resultSet.getString("surname"));
+                    hospitalCard.setStatus(resultSet.getString("status"));
+                    if (doctor != null) {
+                        hospitalCard.setCurrentDoctorName(doctor.getName());
+                        hospitalCard.setCurrentDoctorSurname(doctor.getSurname());
+                    }
                 }
             }
         } catch (SQLException e) {
@@ -864,13 +859,11 @@ public class DBManager {
                 hospitalCard.setPatientsName(resultSet.getString("name"));
                 hospitalCard.setPatientsSurname(resultSet.getString("surname"));
                 hospitalCard.setStatus(resultSet.getString("status"));
-
                 if (doctor != null) {
                     hospitalCard.setCurrentDoctorName(doctor.getName());
                     hospitalCard.setCurrentDoctorSurname(doctor.getSurname());
                 }
                 hospitalCardList.add(hospitalCard);
-
             }
         } catch (SQLException e) {
             logger.error(e);
@@ -896,13 +889,11 @@ public class DBManager {
                 hospitalCard.setPatientsSurname(resultSet.getString("surname"));
                 hospitalCard.setPatientsName(resultSet.getString("name"));
                 hospitalCard.setStatus(resultSet.getString("status"));
-
                 if (doctor != null) {
                     hospitalCard.setCurrentDoctorName(doctor.getName());
                     hospitalCard.setCurrentDoctorSurname(doctor.getSurname());
                 }
                 hospitalCardList.add(hospitalCard);
-
             }
         } catch (SQLException e) {
             logger.error(e);
