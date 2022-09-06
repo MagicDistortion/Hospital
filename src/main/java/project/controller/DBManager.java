@@ -34,17 +34,22 @@ public class DBManager {
             logger.error("cannot connection to db");
             throw new RuntimeException("cannot connection to db");
         }
-        boolean dbUsePool = Objects.equals(configInstance.getConfigValue("db.usePool"), "true");
-        if (dbUsePool) {
-            HikariConfig hikariConfig = new HikariConfig();
-            hikariConfig.setJdbcUrl(dbUrl);
-            hikariConfig.setMaximumPoolSize(100);
-            hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-            this.dataSource = new HikariDataSource(hikariConfig);
-        } else {
-            MysqlDataSource mysqlDataSource = new MysqlDataSource();
-            mysqlDataSource.setURL(dbUrl);
-            this.dataSource = mysqlDataSource;
+        try {
+            boolean dbUsePool = Objects.equals(configInstance.getConfigValue("db.usePool"), "true");
+            if (dbUsePool) {
+                HikariConfig hikariConfig = new HikariConfig();
+                hikariConfig.setJdbcUrl(dbUrl);
+                hikariConfig.setMaximumPoolSize(100);
+                hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
+                this.dataSource = new HikariDataSource(hikariConfig);
+            } else {
+                MysqlDataSource mysqlDataSource = new MysqlDataSource();
+                mysqlDataSource.setURL(dbUrl);
+                this.dataSource = mysqlDataSource;
+            }
+        } catch (Exception e) {
+            logger.error("cannot connection to db", e);
+            throw new RuntimeException("cannot connection to db",e);
         }
     }
 
