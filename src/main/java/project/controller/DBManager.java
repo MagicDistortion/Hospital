@@ -179,7 +179,7 @@ public class DBManager {
                     preparedStatement.setInt(1, user.getId());
                     preparedStatement.executeUpdate();
                     updateUserRole(connection, 4, user.getId());
-                    insertHospitalCard(user.getId());
+                    insertHospitalCard(connection, user.getId());
                 }
             } catch (SQLException e) {
                 logger.error(e);
@@ -207,9 +207,8 @@ public class DBManager {
     }
 
     /* метод створення лікарняної карти для пацієнта  */
-    public void insertHospitalCard(int patientId) {
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_HOSPITAL_CARD)) {
+    public void insertHospitalCard(Connection connection, int patientId) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(Constants.INSERT_HOSPITAL_CARD)) {
             preparedStatement.setInt(1, patientId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

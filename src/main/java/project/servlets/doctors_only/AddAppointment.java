@@ -13,7 +13,7 @@ import java.util.Map;
 
 
 @WebServlet("/doctors_only/add_appointment")
-public class AddAppoinment extends HttpServlet {
+public class AddAppointment extends HttpServlet {
     DBManager dbManager = DBManager.getInstance();
 
     @Override

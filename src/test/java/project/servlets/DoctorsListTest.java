@@ -1,6 +1,7 @@
 package project.servlets;
 
 import org.junit.jupiter.api.Test;
+import project.servlets.DoctorsList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

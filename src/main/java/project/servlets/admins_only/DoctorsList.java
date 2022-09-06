@@ -22,10 +22,10 @@ public class DoctorsList extends HttpServlet {
         List<Categories> allCategories = dbManager.findAllCategories();
         req.setAttribute("categories", allCategories);
 
-        List<Doctor> allDoctores = dbManager.findAllDoctors("WHERE category_id = 1 ORDER BY users.name");
-        req.setAttribute("docs", allDoctores);
+        List<Doctor> allDoctors = dbManager.findAllDoctors("WHERE category_id = 1 ORDER BY users.name");
+        req.setAttribute("docs", allDoctors);
 
-        if (allDoctores.size() == 0) req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));
+        if (allDoctors.size() == 0) req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));
         req.getRequestDispatcher("/admins_only/giving_a_category.jsp").forward(req, resp);
     }
 }

@@ -2,6 +2,7 @@ package project.servlets.admins_only;
 
 import org.junit.jupiter.api.Test;
 import project.servlets.DoctorsList;
+import project.servlets.admins_only.PatientsList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

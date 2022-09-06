@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 
 @WebServlet("/doctors_only/insert_appoint")
@@ -20,7 +19,7 @@ public class InsertAppoint extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LocalDate date = LocalDate.parse(req.getParameter("date"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate date = LocalDate.parse(req.getParameter("date"));
         if (date.isAfter(LocalDate.now()) || date.equals(LocalDate.now())) {
             AppointmentDetails appointmentDetails = new AppointmentDetails(req.getParameter("text"), date);
             appointmentDetails.setAppointmentId(Integer.parseInt(req.getParameter("appoint")));

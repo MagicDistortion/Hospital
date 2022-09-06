@@ -1,6 +1,8 @@
 package project.servlets;
 
 import org.junit.jupiter.api.Test;
+import project.servlets.Language;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +15,7 @@ class LanguageTest {
 
     @Test
     void doPost() throws ServletException, IOException {
-        final Language  servlet = new Language();
+        final Language servlet = new Language();
         final HttpSession session = mock(HttpSession.class);
 
         final HttpServletRequest request = mock(HttpServletRequest.class);

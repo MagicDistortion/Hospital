@@ -21,7 +21,6 @@ public class AppointmentDetails {
         this.date = date;
         this.text = text;
     }
-
     public int getId() {
         return id;
     }

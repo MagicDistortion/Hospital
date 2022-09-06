@@ -1,7 +1,7 @@
 package project.servlets.doctors_only;
 
 import org.junit.jupiter.api.Test;
-import project.servlets.admins_only.UsersList;
+import project.servlets.doctors_only.GetAppointmentDetails;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,16 +11,15 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
-class GetAppoinmentDetailsTest {
+class GetAppointmentDetailsTest {
     private final static String path = "/doctors_only/edit_hospital_cards.jsp";
 
     @Test
     void doGet() throws ServletException, IOException {
-        final GetAppoinmentDetails servlet = new GetAppoinmentDetails();
+        final GetAppointmentDetails servlet = new GetAppointmentDetails();
 
         final HttpSession session = mock(HttpSession.class);
         final HttpServletRequest request = mock(HttpServletRequest.class);

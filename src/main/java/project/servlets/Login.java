@@ -29,7 +29,6 @@ public class Login extends HttpServlet {
             resp.sendRedirect("index.jsp");
         }
         if (user == null) {
-
             req.setAttribute("mes", " Login -> " + login +" "+ phrases.get("langNotFound"));
             req.getRequestDispatcher("index.jsp").forward(req, resp);
         }

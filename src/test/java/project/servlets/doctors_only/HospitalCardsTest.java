@@ -1,16 +1,13 @@
 package project.servlets.doctors_only;
 
 import org.junit.jupiter.api.Test;
+import project.servlets.doctors_only.HospitalCards;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 

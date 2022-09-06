@@ -29,8 +29,8 @@ public class DoctorsList extends HttpServlet {
             case "patients":
                 sort = "ORDER BY number_of_patients DESC";
         }
-        List<Doctor> allDoctores = dbManager.findAllDoctors(sort);
-        req.setAttribute("allDoctores", allDoctores);
+        List<Doctor> allDoctors = dbManager.findAllDoctors(sort);
+        req.setAttribute("allDoctors", allDoctors);
 
         int pagination;
         if ( req.getParameter("pagination")==null|| Integer.parseInt(req.getParameter("pagination")) <= 0) {
@@ -39,15 +39,15 @@ public class DoctorsList extends HttpServlet {
             pagination = Integer.parseInt(req.getParameter("pagination"));
         req.setAttribute("pagination", pagination);
 
-        int pages = allDoctores.size() / pagination;
-        if (allDoctores.size() % pagination != 0) pages += 1;
+        int pages = allDoctors.size() / pagination;
+        if (allDoctors.size() % pagination != 0) pages += 1;
         req.setAttribute("pages", pages);
 
         int page = 1;
         if (req.getParameter("page") != null)
             page = Integer.parseInt(req.getParameter("page"));
-        List<Doctor> doctores = dbManager.findDoctorsWithLimit(sort, page, pagination);
-        req.setAttribute("docList", doctores);
+        List<Doctor> doctors = dbManager.findDoctorsWithLimit(sort, page, pagination);
+        req.setAttribute("docList", doctors);
         req.getRequestDispatcher("doctors.jsp").forward(req, resp);
     }
 }

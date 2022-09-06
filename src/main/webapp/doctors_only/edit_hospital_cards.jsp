@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="mytaglib" prefix="mt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,7 +61,7 @@ body {background:#000000 url(../images/Serze2.jpg)}
                    </c:forEach>
                 </select>
 
-                <input type="date" name="date" value="${today}" required/>
+                <input type="date" name="date" value=<mt:myTag/> required/>
     	        <input type="submit" value="${phrases['langInsertNewAppointment']}"/><br>
               </form>
              <h2 style="color:#B22222">
@@ -73,7 +74,7 @@ body {background:#000000 url(../images/Serze2.jpg)}
 
                 <br><br>
                      <tr style="color:#0000ff">
-                         <td>${phrases['langPatientSurname']}:</td>
+                         <td>${phrases['langPatientSurname']}:&nbsp</td>
                          <td>${patient_surname}</td>
                      </tr>
                      <tr style="color:#ffff00">

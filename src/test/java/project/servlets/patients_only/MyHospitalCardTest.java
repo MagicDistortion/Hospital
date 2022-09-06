@@ -1,6 +1,8 @@
 package project.servlets.patients_only;
 
 import org.junit.jupiter.api.Test;
+import project.servlets.patients_only.MyHospitalCard;
+import project.users.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -20,6 +25,9 @@ class MyHospitalCardTest {
     @Test
     void doGet() throws ServletException, IOException {
         final MyHospitalCard servlet = new MyHospitalCard();
+        Map<?,?> map =new HashMap<>();
+        User user = new User("test","test","test","9595","6688882211", LocalDate.now());
+        user.setId(87);
 
         final HttpSession session =mock(HttpSession.class);
         final HttpServletRequest request = mock(HttpServletRequest.class);
@@ -28,8 +36,8 @@ class MyHospitalCardTest {
 
         when(request.getRequestDispatcher(path)).thenReturn(dispatcher);
         when(request.getSession()).thenReturn(session);
-        when(request.getSession().getAttribute("id")).thenReturn(87);
-
+        when(session.getAttribute("user")).thenReturn(user);
+        when(request.getAttribute("phrases")).thenReturn(map);
         servlet.doGet(request, response);
 
         verify(response, never()).sendRedirect(path);

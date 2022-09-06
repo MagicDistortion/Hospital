@@ -46,7 +46,7 @@
                       </tr>
                   </c:forEach>
         </table>
-                   <c:forEach items="${allDoctores}" var="i" varStatus="j">
+                   <c:forEach items="${allDoctors}" var="i" varStatus="j">
                    <c:if test="${j.count<=pages}">
                         <a href="doctors_sortlist?pagination=${pagination}&sort=${sort}&page=${j.count}">${j.count}</a>
                    </c:if>

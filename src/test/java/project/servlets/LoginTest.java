@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.mockito.Mockito.*;
 
@@ -35,6 +37,7 @@ class LoginTest {
     @Test
     void doPostWrongLogin() throws ServletException, IOException {
         final Login servlet = new Login();
+        Map<?,?> map =new HashMap<>();
 
         final HttpSession session = mock((HttpSession.class));
         final HttpServletRequest request = mock(HttpServletRequest.class);
@@ -45,11 +48,12 @@ class LoginTest {
         when(request.getRequestDispatcher(path)).thenReturn(dispatcher);
         when(request.getParameter("login")).thenReturn("orox");
         when(request.getParameter("password")).thenReturn("9582");
+        when(request.getAttribute("phrases")).thenReturn(map);
 
         servlet.doPost(request, response);
 
         verify(response, never()).sendRedirect(path);
-        verify(request, times(1)).getSession();
+        verify(request, never()).getSession();
         verify(dispatcher,times(1)).forward(request, response);
     }
 }

@@ -18,7 +18,7 @@ public class MyPatients extends HttpServlet {
     DBManager dbManager = DBManager.getInstance();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = ((User)req.getSession().getAttribute("user")).getId();
         String sort = req.getParameter("sort");
         req.setAttribute("sort", sort);

@@ -1,6 +1,7 @@
 package project.servlets;
 
 import org.junit.jupiter.api.Test;
+import project.servlets.Logout;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ class LogoutTest {
 
     @Test
     void doGet() throws ServletException, IOException {
-        final Logout  servlet = new Logout();
+        final Logout servlet = new Logout();
         HttpSession session = mock(HttpSession.class);
 
         final HttpServletRequest request = mock(HttpServletRequest.class);
