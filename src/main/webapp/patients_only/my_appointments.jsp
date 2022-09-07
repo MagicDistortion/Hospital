@@ -8,15 +8,16 @@
         	 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
      </head>
           <style>
-               body {background:#000000 url(../images/Serze2.jpg)}
+              body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
           </style>
         <body>
 
     <%@ include file="../header_patients.jspf" %>
+    <br>
     <div align="center" >
         <h2  style="color:#fff">${phrases['langGetMyAppointments']}</h2>
             <form action ="../patients_only/my_appointments" method ="get">
-                <input type="submit" value="${phrases['langGetThem']}"/><br>
+                <input type="submit" class="btn btn-dark" value="${phrases['langGetThem']}"/><br>
             </form>
  <table class="table">
 
@@ -40,7 +41,7 @@
              </h2>
              <h2  style="color:#fff">${phrases['langGetMyHospitalCard']}</h2>
             <form action ="../patients_only/my_hospitalcard" method ="get">
-                <input type="submit" value="${phrases['langGet']}"/><br>
+                <input type="submit" class="btn btn-dark" value="${phrases['langGet']}"/><br>
             </form>
     </form>
     <c:if test="${not empty myhospitalcard}">
@@ -71,7 +72,7 @@
     </c:if>
              <c:if test="${status_patient.equals('discharged')}">
                  <form action ="../patients_only/newbee_again" method ="post">
-                    <input type="submit" value="${phrases['langNeedHelpAgain']}"/>
+                    <input type="submit" class="btn btn-dark" value="${phrases['langNeedHelpAgain']}"/>
                  </form>
              </c:if>
               <c:if test="{not empty messtatus}">${messtatus}

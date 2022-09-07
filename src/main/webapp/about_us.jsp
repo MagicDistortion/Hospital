@@ -8,11 +8,11 @@
              <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
      </head>
           <style>
-               body {background:#000000 url(images/Serze2.jpg)}
+               body {background:#000000 url(images/Serze2.jpg) no-repeat;}
           </style>
     <body>
-
     <%@ include file="header.jspf" %>
+    <br><br><br>
         <div style="color:#fff"/>
         <c:if test="${lang=='UA'}">
             <h2 align="center">О Нас</h2>

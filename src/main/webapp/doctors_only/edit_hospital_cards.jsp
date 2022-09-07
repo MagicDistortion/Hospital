@@ -6,38 +6,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 
 <body>
 
 <style>
-body {background:#000000 url(../images/Serze2.jpg)}
+body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
 </style>
-<br><br><br><br><br><br>
+<br><br><br>
   <table class="table">
     <tr>
         <td>
            <h2  style="color:#0000ff">${phrases['langGetAppointmentsOfPatient']}</h2>
             <form action ="../doctors_only/get_appointments" method ="get">
                 <input type="hidden" name="id" value="${id_card}"/>
-                <input type="submit" value="${phrases['langGetThem']}"/>
+                <input type="submit" class="btn btn-primary" value="${phrases['langGetThem']}"/>
             </form>
              <table border=1 class="table">
 
-               <th style="color:#0000ff"><h3/> ${phrases['langAppointment']} &nbsp</th>
-               <th style="color:#ffff00"><h3/> ${phrases['langAppointmentDetails']}</th>
-               <th style="color:#0000ff"><h3/> ${phrases['langCurrentDoctor']}</th>
-               <th style="color:#ffff00"><h3/> ${phrases['langDesignatedNurse']}</th>
-               <th style="color:#0000ff"><h3/> ${phrases['langDate']} &nbsp&nbsp&nbsp</th>
-               <th style="color:#ffff00"><h3/> ${phrases['langStatus']} &nbsp</th>
+               <th style="color:#0000ff"><h5/> ${phrases['langAppointment']} &nbsp</th>
+               <th style="color:#ffff00"><h5/> ${phrases['langAppointmentDetails']}</th>
+               <th style="color:#0000ff"><h5/> ${phrases['langCurrentDoctor']}</th>
+               <th style="color:#ffff00"><h5/> ${phrases['langDesignatedNurse']}</th>
+               <th style="color:#0000ff"><h5/> ${phrases['langDate']} &nbsp&nbsp&nbsp</th>
+               <th style="color:#ffff00"><h5/> ${phrases['langStatus']} &nbsp</th>
            <c:forEach items="${appointments}" var="i">
                   <tr>
-                    <td><h3 style="color:#fff"/>${i.getAppointment()}&nbsp</td>
-                    <td><h3 style="color:#fff"/>${i.getText()}&nbsp</td>
-                    <td><h3 style="color:#fff"/>${i.getDoctorFullName()}&nbsp</td>
-                    <td><h3 style="color:#fff"/>${i.getNurseFullName()} &nbsp</td>
-                    <td><h3 style="color:#fff"/>${i.getDate()} &nbsp</td>
-                    <td><h3 style="color:#fff"/>${i.getStatus()} &nbsp</td>
+                    <td><h5 style="color:#fff"/>${i.getAppointment()}&nbsp</td>
+                    <td><h5 style="color:#fff"/>${i.getText()}&nbsp</td>
+                    <td><h5 style="color:#fff"/>${i.getDoctorFullName()}&nbsp</td>
+                    <td><h5 style="color:#fff"/>${i.getNurseFullName()} &nbsp</td>
+                    <td><h5 style="color:#fff"/>${i.getDate()} &nbsp</td>
+                    <td><h5 style="color:#fff"/>${i.getStatus()} &nbsp</td>
                   </tr>
            </c:forEach>
            </table>
@@ -47,29 +48,29 @@ body {background:#000000 url(../images/Serze2.jpg)}
              <h2  style="color:#ffff00">${phrases['langAddAppointment']}</h2>
               <form action ="../doctors_only/insert_appoint" method ="post">
                   <input type="hidden" name="id" value="${id_card}"/>
-                <select name="appoint" required>
+                <select class="btn btn-primary dropdown-toggle" name="appoint" required>
                     <option disabled>${phrases['langPickAPoint']}</option>
                    <c:forEach items="${appoints}" var="j">
                     <option value="${j.getId()}">${j.getName()}</option>
                    </c:forEach>
                 </select>
-                  <input name="text" placeholder="${phrases['langDetails']}" required/>
-                <select name="nurse" >
+                  <input class="btn btn-warning" name="text" placeholder="${phrases['langDetails']}" required/>
+                <select class="btn btn-primary dropdown-toggle" name="nurse" >
                     <option disabled>${phrases['langPickANurse']}</option>
                    <c:forEach items="${nurses}" var="i">
                     <option value="${i.getId()}">${i.getSurname()} ${i.getName()}</option>
                    </c:forEach>
                 </select>
 
-                <input type="date" name="date" value=<mt:myTag/> required/>
-    	        <input type="submit" value="${phrases['langInsertNewAppointment']}"/><br>
+                <input class="btn btn-warning dropdown-toggle" type="date" name="date" value=<mt:myTag/> required/>
+    	        <input type="submit" class="btn btn-primary" value="${phrases['langInsertNewAppointment']}"/><br>
               </form>
              <h2 style="color:#B22222">
                  <c:if  test="${not empty message}" >${message}</c:if>
              </h2>
         </td>
         <td>
-            <h2>
+            <h5>
                   <table class="table">
 
                 <br><br>
@@ -104,28 +105,28 @@ body {background:#000000 url(../images/Serze2.jpg)}
                      <tr>
                          <td><form action ="../doctors_only/update_diagnosis" method ="post">
                            <input type="hidden" name="id" value="${id_card}"/>
-    	                   <input type="submit" value="${phrases['langChangeDiagnosis']}"/><br>
-    	                   <input name="diagnosis" placeholder="${phrases['langEnterNewDiagnosis']}"/><br>
+    	                   <input type="submit" class="btn btn-primary" value="${phrases['langChangeDiagnosis']}"/><br>
+    	                   <input name="diagnosis"  class="form-control" placeholder="${phrases['langEnterNewDiagnosis']}"/><br>
                          </form></td>
                          <td><form action ="../doctors_only/update_status" method ="post">
-                             <select name="status">
+                             <select  class="form-control" name="status">
                              <option disabled>${phrases['langSetStatus']}</option>
                              <option value="is being treated">is being treated</option>
                              <option value="cured">cured</option>
                              <option value="discharged">discharged</option>
-                             <input type="submit" value="${phrases['langSetStatus']}"/>
+                             <input type="submit" class="btn btn-warning" value="${phrases['langSetStatus']}"/>
                              </select></form></td>
                      </tr>
             </table>
              <h2 style="color:#B22222">
                  <c:if  test="${not empty messtatus}" >${messtatus}</c:if>
              </h2>
-            </h2>
+            </h5>
         </td>
     </tr>
 </table>
 <div align="center">
-<input type="submit" value="${phrases['langGoBack']}"  onclick="window.location='${back}.jsp';"/>
+<input type="submit" class="btn btn-dark" value="${phrases['langGoBack']}"  onclick="window.location='${back}.jsp';"/>
 </div>
 
 </body>

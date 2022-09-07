@@ -4,6 +4,7 @@
 <html>
     <head>
      <title>Error 500</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     </head>
     <body>
         <style>
@@ -19,7 +20,7 @@
             <h2 align="center">Oops. Something went wrong. Go to Login. And try again Later> </h2>
         </c:if>
         <br><br><br><br><br><br><br><br><br><br><br><br>
-           <h1> <a style="color:#fff" href="/Hospital/index.jsp">${phrases['langGoToLogin']}</a> </h1>
+           <h1> <a class="btn btn-light" href="/Hospital/index.jsp">${phrases['langGoToLogin']}</a> </h1>
          </div>
     </body>
 </html>

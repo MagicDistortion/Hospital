@@ -11,7 +11,7 @@
 <body>
 <br><br><br><br><br><br>
 <style>
-body {background:#000000 url(images/Serze2.jpg)}
+ body {background:#000000 url(images/Serze2.jpg) no-repeat;}
 </style>
 
 <form  action ="register" method ="post" >

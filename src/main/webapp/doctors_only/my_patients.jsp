@@ -8,14 +8,15 @@
         		   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
      </head>
                 <style>
-                    body {background:#000000 url(../images/Serze2.jpg)}
+                    body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
                 </style>
     <body>
     <%@ include file="../header_doctors.jspf" %>
+    <br>
     <div align="center" >
         <h2  style="color:#fff">${phrases['langGetMyPatients']}</h2>
             <form action ="../doctors_only/my_patients" method ="get">
-                         <input type="text" name="pagination" pattern="[1-9]\d*"
+                         <input class="btn btn-dark" type="text" name="pagination" pattern="[1-9]\d*"
                          <c:choose>
                             <c:when test="${not empty pagination}">value="${pagination}"
                             </c:when>
@@ -23,11 +24,11 @@
                             </c:otherwise>
                         </c:choose>
                           placeholder="pagination" required />
-                <select name="sort">
+                <select  class="btn btn-dark dropdown-toggle" name="sort">
                    <option disabled>${phrases['langSorted']}</option>
                    <option value="surname">${phrases['langBySurname']}</option>
                    <option value="date">${phrases['langByDateOfBirth']}</option>
-                <input type="submit" value="${phrases['langGetThem']}"/><br>
+                <input type="submit" class="btn btn-dark" value="${phrases['langGetThem']}"/><br>
             </form>
         <h2 style="color:#B22222">
         <table class="table">
@@ -44,7 +45,7 @@
                             <form action ="../doctors_only/edit_hospital_cards" method ="post">
                                <input type="hidden" name="id" value="${i.getId()}"/>
                                <input type="hidden" name="back" value="my_patients"/>
-                         <td> <input type="submit" value="${phrases['langGetDetail']}"> </td>
+                         <td> <input type="submit" class="btn btn-dark" value="${phrases['langGetDetail']}"> </td>
                             </form>
 
                       </tr>

@@ -8,15 +8,16 @@
         	 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
      </head>
           <style>
-               body {background:#000000 url(../images/Serze2.jpg)}
+               body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
           </style>
         <body>
 
     <%@ include file="../header_nurses.jspf" %>
+    <br><br>
     <div align="center" >
         <h2  style="color:#fff">${phrases['langGetMyAppointments']}</h2>
             <form action ="../nurses_only/nurses_appointments" method ="get">
-                <input type="submit" value="${phrases['langGetThem']}"/><br>
+                <input type="submit" class="btn btn-dark" value="${phrases['langGetThem']}"/><br>
             </form>
         <h4 style="color:#B22222">
 
@@ -38,12 +39,12 @@
                   <td><h4 style="color:#fff"/>${i.getStatus()} &nbsp</td>
                 <form action ="../nurses_only/update_status" method ="post">
                   <input type="hidden" name="id" value="${i.getId()}"/>
-                  <td><select name="status">
+                  <td><select class="btn btn-primary dropdown-toggle" name="status">
                          <option disabled>${phrases['langSetStatus']}</option>
                          <option value="waiting">waiting</option>
                          <option value="in process">In process</option>
                          <option value="done">Done</option> </select><br>
-                       <input type="submit" value="${phrases['langSetStatus']}"/>
+                       <input type="submit" class="btn btn-warning" value="${phrases['langSetStatus']}"/>
                   </td>
                 </form>
                 </tr>

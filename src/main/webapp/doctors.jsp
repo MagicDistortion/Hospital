@@ -8,14 +8,14 @@
              <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
      </head>
           <style>
-               body {background:#000000 url(images/Serze2.jpg)}
+               body {background:#000000 url(images/Serze2.jpg) no-repeat;}
           </style>
     <body>
     <%@ include file="header.jspf" %>
         <div align="center" >
         <h2  style="color:#fff">${phrases['langDoctors']}</h2>
             <form action ="doctors_sortlist" method ="get">
-             <input type="text" name="pagination" pattern="[1-9]\d*"
+             <input class="btn btn-dark" type="text" name="pagination" pattern="[1-9]\d*"
              <c:choose>
                 <c:when test="${not empty pagination}">value="${pagination}"
                 </c:when>
@@ -23,12 +23,12 @@
                 </c:otherwise>
             </c:choose>
               placeholder="pagination" required />
-                <select name="sort">
+                <select type="button" class="btn btn-dark dropdown-toggle" name="sort">
                    <option disabled>${phrases['langSorted']} &nbsp</option>
                    <option value="Surname">${phrases['langBySurname']} &nbsp</option>
                    <option value="category">${phrases['langByCategory']} &nbsp</option>
                    <option value="patients">${phrases['langByNOP']} &nbsp</option>
-                <input type="submit" value="${phrases['langGetThem']}"/><br>
+                <input type="submit" class="btn btn-dark" value="${phrases['langGetThem']}"/><br>
             </form>
         <h2 style="color:#B22222">
         <table class="table">

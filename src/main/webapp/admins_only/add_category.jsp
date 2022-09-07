@@ -8,16 +8,16 @@
         		   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
      </head>
                 <style>
-                    body {background:#000000 url(../images/Serze2.jpg)}
+                    body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
                 </style>
     <body>
     <%@ include file="../header_admins.jspf" %>
-<br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
 
              <form action ="../admins_only/add_category" method ="post">
              <div align="center" >
-                    <input name="category" placeholder="${phrases['langAddCategory']} " required/>
-                    <input type="submit" value="${phrases['langAddCategory']}"/><br>
+                    <input name="category" class="btn btn-warning" placeholder="${phrases['langAddCategory']} " required/>
+                    <input type="submit" class="btn btn-warning"  value="${phrases['langAddCategory']}"/><br>
                     <h2 style="color:#B22222">
                         <c:if  test="${not empty mes}" >${mes}</c:if>
                     </h2>
