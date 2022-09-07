@@ -16,6 +16,7 @@ public class DBManager {
     private static DBManager instance;
     private final DataSource dataSource;
 
+    /* приватний конструктор DBManager , налаштовує конекшен до БД череш ConfigurationManager */
     private DBManager() {
         ConfigurationManager configInstance = ConfigurationManager.getInstance();
         String dbUrl = configInstance.getConfigValue("db.url");
@@ -41,17 +42,16 @@ public class DBManager {
             throw new RuntimeException("cannot connection to db", e);
         }
     }
-
+    /* метод отримання синглтону DBManager */
     public static synchronized DBManager getInstance() {
         if (instance == null) instance = new DBManager();
         return instance;
     }
     /* метод отримання зв'язку з бд */
-
     public Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
-
+    /*Обгортання методу у транзакцію */
     public void inTransaction(Consumer<Connection> action) {
         Connection connection = null;
         try {
