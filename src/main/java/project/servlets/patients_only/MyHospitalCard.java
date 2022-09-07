@@ -1,8 +1,8 @@
 package project.servlets.patients_only;
 
 import project.dao.HospitalCardDAO;
-import project.hospitalcard.HospitalCard;
-import project.users.User;
+import project.models.hospitalcard.HospitalCard;
+import project.models.users.User;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +14,6 @@ import java.util.Map;
 @WebServlet("/patients_only/my_hospitalcard")
 public class MyHospitalCard extends HttpServlet {
     private final HospitalCardDAO hospitalCardDAO= new HospitalCardDAO();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = ((User) req.getSession().getAttribute("user")).getId();

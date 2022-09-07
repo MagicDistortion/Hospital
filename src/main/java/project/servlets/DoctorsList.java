@@ -1,9 +1,7 @@
 package project.servlets;
 
-import project.dao.DBManager;
 import project.dao.DoctorsDAO;
-import project.users.Doctor;
-
+import project.models.users.Doctor;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +12,6 @@ import java.util.List;
  /* єтот сервлет возвращает список врачей */
 @WebServlet("/doctors_sortlist")
 public class DoctorsList extends HttpServlet {
-    DBManager dbManager = DBManager.getInstance();
      private final DoctorsDAO doctorsDAO = new DoctorsDAO();
      @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

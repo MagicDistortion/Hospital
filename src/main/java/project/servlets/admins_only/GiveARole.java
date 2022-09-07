@@ -1,14 +1,13 @@
 package project.servlets.admins_only;
 
 import project.dao.*;
-import project.users.User;
+import project.models.users.User;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
 
 @WebServlet("/admins_only/give_a_role")
 public class GiveARole extends HttpServlet {

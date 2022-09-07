@@ -1,8 +1,8 @@
 package project.servlets.patients_only;
 
-import project.appointments.AppointmentDetails;
+import project.models.appointments.AppointmentDetails;
 import project.dao.AppointmentDetailsDAO;
-import project.users.User;
+import project.models.users.User;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

@@ -1,8 +1,7 @@
 package project.servlets;
 
-
 import project.dao.UsersDAO;
-import project.users.User;
+import project.models.users.User;
 import project.validator.ValidatorEditForm;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-
 
 @WebServlet("/edit_profile")
 public class EditProfile extends HttpServlet {

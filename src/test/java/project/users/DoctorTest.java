@@ -2,7 +2,9 @@ package project.users;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import project.categories.Categories;
+import project.models.categories.Categories;
+import project.models.users.Doctor;
+import project.models.users.User;
 
 import java.time.LocalDate;
 

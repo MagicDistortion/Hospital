@@ -2,10 +2,10 @@ package project.dao;
 
 import org.apache.log4j.Logger;
 import project.Constants;
-import project.appointments.AppointmentDetails;
-import project.users.Doctor;
-import project.users.Nurse;
-import project.users.Patient;
+import project.models.appointments.AppointmentDetails;
+import project.models.users.Doctor;
+import project.models.users.Nurse;
+import project.models.users.Patient;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

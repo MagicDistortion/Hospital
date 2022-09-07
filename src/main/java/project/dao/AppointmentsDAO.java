@@ -2,7 +2,7 @@ package project.dao;
 
 import org.apache.log4j.Logger;
 import project.Constants;
-import project.appointments.Appointment;
+import project.models.appointments.Appointment;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

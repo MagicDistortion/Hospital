@@ -1,6 +1,6 @@
 package project.servlets.admins_only;
 
-import project.categories.Categories;
+import project.models.categories.Categories;
 import project.dao.CategoriesDAO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +12,6 @@ import java.io.IOException;
 @WebServlet("/admins_only/add_category")
 public class AddCategory extends HttpServlet {
     private final CategoriesDAO categoriesDAO = new CategoriesDAO();
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String category = req.getParameter("category");

@@ -2,8 +2,8 @@ package project.dao;
 
 import org.apache.log4j.Logger;
 import project.Constants;
-import project.users.Nurse;
-import project.users.User;
+import project.models.users.Nurse;
+import project.models.users.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

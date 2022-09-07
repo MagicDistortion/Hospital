@@ -1,4 +1,4 @@
-package project.categories;
+package project.models.categories;
 /* Клас категорій лікарів */
 
 public class Categories {

@@ -2,7 +2,7 @@ package project.servlets.admins_only;
 
 import project.dao.DBManager;
 import project.dao.UsersDAO;
-import project.users.User;
+import project.models.users.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

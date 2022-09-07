@@ -3,8 +3,8 @@ package project.servlets.doctors_only;
 import project.dao.AppointmentDetailsDAO;
 import project.dao.DoctorsDAO;
 import project.dao.HospitalCardDAO;
-import project.users.Doctor;
-import project.users.User;
+import project.models.users.Doctor;
+import project.models.users.User;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +18,6 @@ public class UpdatePatientStatus extends HttpServlet {
     private final DoctorsDAO doctorsDAO = new DoctorsDAO();
     private final HospitalCardDAO hospitalCardDAO = new HospitalCardDAO();
     private final AppointmentDetailsDAO appointmentDetailsDAO =new AppointmentDetailsDAO();
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = (int) req.getSession().getAttribute("id_card");

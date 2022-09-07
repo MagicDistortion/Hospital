@@ -1,7 +1,7 @@
 package project.servlets;
 
 import project.dao.UsersDAO;
-import project.users.User;
+import project.models.users.User;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,13 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-
 @WebServlet("/login")
 public class Login extends HttpServlet {
     private final UsersDAO usersDAO=new UsersDAO();
     String login;
     String password;
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         login = req.getParameter("login");

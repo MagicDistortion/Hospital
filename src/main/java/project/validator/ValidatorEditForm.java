@@ -5,7 +5,7 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 import project.dao.DBManager;
 import project.dao.UsersDAO;
-import project.users.User;
+import project.models.users.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.DateTimeException;

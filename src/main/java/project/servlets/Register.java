@@ -1,7 +1,7 @@
 package project.servlets;
 
 import project.dao.UsersDAO;
-import project.users.User;
+import project.models.users.User;
 import project.validator.Validator;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,11 +12,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-
 @WebServlet("/register")
 public class Register extends HttpServlet {
     UsersDAO usersDAO = new UsersDAO();
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<String> errors = Validator.registerValidate(req);

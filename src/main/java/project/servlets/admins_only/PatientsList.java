@@ -3,9 +3,8 @@ package project.servlets.admins_only;
 import project.dao.DBManager;
 import project.dao.DoctorsDAO;
 import project.dao.PatientsDAO;
-import project.users.Doctor;
-import project.users.Patient;
-
+import project.models.users.Doctor;
+import project.models.users.Patient;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +19,6 @@ public class PatientsList extends HttpServlet {
     DBManager dbManager = DBManager.getInstance();
     private final DoctorsDAO doctorsDAO = new DoctorsDAO();
     private final PatientsDAO patientsDAO= new PatientsDAO();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sort = req.getParameter("sort");
@@ -55,7 +53,6 @@ public class PatientsList extends HttpServlet {
         if (patientList.size()==0)  req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));
         req.getRequestDispatcher("/admins_only/patients.jsp").forward(req, resp);
     }
-
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sort = req.getParameter("sort");
         if (sort == null) sort = "surname";

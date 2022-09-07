@@ -2,10 +2,10 @@ package project.users;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import project.models.users.Nurse;
+import project.models.users.User;
 
 import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class NurseTest {
     User user = new User("Baranets", "Artem", "admin"

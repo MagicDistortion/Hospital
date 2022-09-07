@@ -1,8 +1,7 @@
 package project.servlets.doctors_only;
 
 import org.junit.jupiter.api.Test;
-import project.servlets.doctors_only.MyPatients;
-import project.users.User;
+import project.models.users.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

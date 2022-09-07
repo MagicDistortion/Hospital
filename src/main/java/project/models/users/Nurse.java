@@ -1,13 +1,13 @@
-package project.users;
+package project.models.users;
 
-/* Клас сістемних адміністраторів */
+/* Клас медсестр */
 
-public class SysAdmin {
+public class Nurse {
     private int id;
     private String surname;
     private String name;
 
-    public SysAdmin(User user) {
+    public Nurse(User user) {
         this.id = user.getId();
         this.surname = user.getSurname();
         this.name = user.getName();
@@ -39,7 +39,6 @@ public class SysAdmin {
 
     @Override
     public String toString() {
-        return "SysAdmin "+ surname+" "+ name;
+        return "Nurse " + surname + " " + name;
     }
-
 }

@@ -1,4 +1,4 @@
-package project.appointments;
+package project.models.appointments;
 
 import java.time.LocalDate;
 /* Клас додаткової інформації до призначень */

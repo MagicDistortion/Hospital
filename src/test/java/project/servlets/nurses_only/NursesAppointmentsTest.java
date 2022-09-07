@@ -1,9 +1,7 @@
 package project.servlets.nurses_only;
 
 import org.junit.jupiter.api.Test;
-import project.servlets.doctors_only.MyPatients;
-import project.servlets.nurses_only.NursesAppointments;
-import project.users.User;
+import project.models.users.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +14,6 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 

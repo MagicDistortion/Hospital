@@ -1,9 +1,8 @@
 package project.servlets.doctors_only;
 
-
 import project.dao.PatientsDAO;
-import project.users.Patient;
-import project.users.User;
+import project.models.users.Patient;
+import project.models.users.User;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +15,6 @@ import java.util.Map;
 @WebServlet("/doctors_only/my_patients")
 public class MyPatients extends HttpServlet {
     private final PatientsDAO patientsDAO= new PatientsDAO();
-
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = ((User)req.getSession().getAttribute("user")).getId();

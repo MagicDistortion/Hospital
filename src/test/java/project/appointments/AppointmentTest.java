@@ -2,8 +2,7 @@ package project.appointments;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import project.models.appointments.Appointment;
 
 class AppointmentTest {
     Appointment appointment =new Appointment("Лазерна коррекція");

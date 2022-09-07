@@ -1,6 +1,6 @@
 package project.servlets.doctors_only;
 
-import project.appointments.AppointmentDetails;
+import project.models.appointments.AppointmentDetails;
 import project.dao.AppointmentDetailsDAO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +14,6 @@ import java.util.Map;
 @WebServlet("/doctors_only/get_appointments")
 public class GetAppointmentDetails extends HttpServlet {
     private final AppointmentDetailsDAO appointmentDetailsDAO =new AppointmentDetailsDAO();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = (int) req.getSession().getAttribute("id_card");

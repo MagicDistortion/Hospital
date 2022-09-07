@@ -2,10 +2,10 @@ package project.users;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import project.models.users.SysAdmin;
+import project.models.users.User;
 
 import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SysAdminTest {
     User user = new User("Baranets", "Artem", "admin"

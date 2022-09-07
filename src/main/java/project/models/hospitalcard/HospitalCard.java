@@ -1,4 +1,4 @@
-package project.hospitalcard;
+package project.models.hospitalcard;
 
 import java.time.LocalDate;
 /* Клас лікарняних карт */

@@ -2,10 +2,10 @@ package project.appointments;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import project.models.appointments.Appointment;
+import project.models.appointments.AppointmentDetails;
 
 import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class AppointmentDetailsTest {
     AppointmentDetails appointmentDetails = new AppointmentDetails("бути обережними", LocalDate.of(2022, 9, 11));

@@ -1,9 +1,9 @@
 package project.servlets.admins_only;
 
-import project.categories.Categories;
+import project.models.categories.Categories;
 import project.dao.CategoriesDAO;
 import project.dao.DoctorsDAO;
-import project.users.Doctor;
+import project.models.users.Doctor;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +17,6 @@ import java.util.Map;
 public class DoctorsList extends HttpServlet {
     private final DoctorsDAO doctorsDAO = new DoctorsDAO();
     private final CategoriesDAO categoriesDAO = new CategoriesDAO();
-
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Categories> allCategories = categoriesDAO.findAllCategories();
         req.setAttribute("categories", allCategories);

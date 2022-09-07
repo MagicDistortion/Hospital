@@ -2,8 +2,7 @@ package project.roles;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import project.models.roles.Role;
 
 class RoleTest {
     Role role=new Role("guest");

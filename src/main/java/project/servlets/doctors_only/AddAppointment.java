@@ -1,6 +1,6 @@
 package project.servlets.doctors_only;
 
-import project.appointments.Appointment;
+import project.models.appointments.Appointment;
 import project.dao.AppointmentsDAO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,11 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-
 @WebServlet("/doctors_only/add_appointment")
 public class AddAppointment extends HttpServlet {
     private final AppointmentsDAO appointmentsDAO = new AppointmentsDAO();
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");

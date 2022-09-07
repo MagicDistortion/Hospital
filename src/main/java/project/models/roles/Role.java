@@ -1,4 +1,4 @@
-package project.roles;
+package project.models.roles;
 /* Клас ролей користувачів */
 public class Role {
     private int id;

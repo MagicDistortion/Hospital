@@ -1,6 +1,6 @@
 package project.filter;
 
-import project.users.User;
+import project.models.users.User;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

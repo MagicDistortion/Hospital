@@ -2,6 +2,8 @@ package project.users;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import project.models.users.Patient;
+import project.models.users.User;
 
 import java.time.LocalDate;
 

@@ -2,7 +2,7 @@ package project.servlets.admins_only;
 
 import project.dao.DoctorsDAO;
 import project.dao.HospitalCardDAO;
-import project.users.Doctor;
+import project.models.users.Doctor;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +14,6 @@ import java.io.IOException;
 public class GiveADoctor extends HttpServlet {
     private final DoctorsDAO doctorsDAO = new DoctorsDAO();
     private final HospitalCardDAO hospitalCardDAO = new HospitalCardDAO();
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int doctorId = Integer.parseInt(req.getParameter("doctor"));
