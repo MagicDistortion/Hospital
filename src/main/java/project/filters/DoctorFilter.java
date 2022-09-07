@@ -1,4 +1,4 @@
-package project.filter;
+package project.filters;
 
 import project.models.users.User;
 
@@ -6,11 +6,11 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+/* фільтр до сторінок для лікарів*/
 
-/* фільтр до сторінок для сіс адмінів*/
-public class AdminFilter implements Filter {
+public class DoctorFilter implements Filter {
     @Override
-    public void init(FilterConfig filterConfig){
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override
@@ -20,7 +20,7 @@ public class AdminFilter implements Filter {
         int role = 0;
         if (httpServlet.getSession().getAttribute("user") != null)
             role = ((User) httpServlet.getSession().getAttribute("user")).getRolesId();
-        if (role != 1) httpServletResponse.sendRedirect("../index.jsp");
+        if (role != 2) httpServletResponse.sendRedirect("../index.jsp");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

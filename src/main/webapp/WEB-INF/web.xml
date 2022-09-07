@@ -18,7 +18,7 @@
 
     <filter>
         <filter-name>encoding=filter</filter-name>
-        <filter-class>project.filter.EncodingFilter</filter-class>
+        <filter-class>project.filters.EncodingFilter</filter-class>
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
@@ -32,7 +32,7 @@
 
     <filter>
         <filter-name>Language=filter</filter-name>
-        <filter-class>project.filter.LangFilter</filter-class>
+        <filter-class>project.filters.LangFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -42,7 +42,7 @@
 
     <filter>
         <filter-name>doctor=filter</filter-name>
-        <filter-class>project.filter.DoctorFilter</filter-class>
+        <filter-class>project.filters.DoctorFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -51,7 +51,7 @@
     </filter-mapping>
     <filter>
         <filter-name>admin=filter</filter-name>
-        <filter-class>project.filter.AdminFilter</filter-class>
+        <filter-class>project.filters.AdminFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -65,7 +65,7 @@
 
     <filter>
         <filter-name>patient=filter</filter-name>
-        <filter-class>project.filter.PatientFilter</filter-class>
+        <filter-class>project.filters.PatientFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -75,7 +75,7 @@
 
     <filter>
         <filter-name>nurse=filter</filter-name>
-        <filter-class>project.filter.NurseFilter</filter-class>
+        <filter-class>project.filters.NurseFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -83,7 +83,7 @@
         <url-pattern>/nurses_only/*</url-pattern>
     </filter-mapping>
     <listener>
-        <listener-class>project.filter.Listener</listener-class>
+        <listener-class>project.filters.Listener</listener-class>
     </listener>
 
     <jsp-config>

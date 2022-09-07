@@ -30,7 +30,6 @@ public class GiveARole extends HttpServlet {
                break;
            case 4 : patientsDAO.insertPatient(user);
                break;
-           default: return;
        }
        resp.sendRedirect("users_list");
     }

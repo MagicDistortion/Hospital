@@ -1,4 +1,4 @@
-package project.filter;
+package project.filters;
 
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;

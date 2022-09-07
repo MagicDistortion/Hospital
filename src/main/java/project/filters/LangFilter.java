@@ -1,4 +1,4 @@
-package project.filter;
+package project.filters;
 
 import org.apache.log4j.Logger;
 

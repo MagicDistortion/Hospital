@@ -14,7 +14,6 @@ import java.util.List;
 public class UsersDAO {
     private final static Logger logger = Logger.getLogger(UsersDAO.class);
     private final DBManager dbManager = DBManager.getInstance();
-
     /* метод отримання користувача з різалтсету */
     public User getUser(ResultSet resultSet) throws SQLException {
         User user = new User(resultSet.getString("surname")
