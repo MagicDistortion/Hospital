@@ -2,6 +2,7 @@ package project.servlets.doctors_only;
 
 import project.dao.HospitalCardDAO;
 import project.models.hospitalcard.HospitalCard;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,14 +13,15 @@ import java.util.List;
 
 @WebServlet("/doctors_only/hospital_cards")
 public class HospitalCards extends HttpServlet {
-    private final HospitalCardDAO hospitalCardDAO= new HospitalCardDAO();
+    private final HospitalCardDAO hospitalCardDAO = new HospitalCardDAO();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<HospitalCard> hospitalCardList = hospitalCardDAO.getAllHospitalCards();
         req.setAttribute("hospital_cards", hospitalCardList);
 
         int pagination;
-        if (req.getParameter("pagination")==null|| Integer.parseInt(req.getParameter("pagination")) <= 0) {
+        if (req.getParameter("pagination") == null || Integer.parseInt(req.getParameter("pagination")) <= 0) {
             pagination = 5;
         } else
             pagination = Integer.parseInt(req.getParameter("pagination"));
@@ -32,6 +34,7 @@ public class HospitalCards extends HttpServlet {
         int page = 1;
         if (req.getParameter("page") != null)
             page = Integer.parseInt(req.getParameter("page"));
+        req.setAttribute("page", page);
 
         List<HospitalCard> cards = hospitalCardDAO.getHospitalCardsWithLimit(page, pagination);
         req.setAttribute("cards", cards);

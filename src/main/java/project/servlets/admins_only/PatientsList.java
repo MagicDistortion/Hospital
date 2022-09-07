@@ -1,6 +1,5 @@
 package project.servlets.admins_only;
 
-import project.dao.DBManager;
 import project.dao.DoctorsDAO;
 import project.dao.PatientsDAO;
 import project.models.users.Doctor;
@@ -16,7 +15,6 @@ import java.util.Map;
 
 @WebServlet("/admins_only/patients_sortlist")
 public class PatientsList extends HttpServlet {
-    DBManager dbManager = DBManager.getInstance();
     private final DoctorsDAO doctorsDAO = new DoctorsDAO();
     private final PatientsDAO patientsDAO= new PatientsDAO();
     @Override
@@ -47,6 +45,7 @@ public class PatientsList extends HttpServlet {
         int page = 1;
         if (req.getParameter("page") != null)
             page = Integer.parseInt(req.getParameter("page"));
+        req.setAttribute("page", page);
 
         List<Patient> patientList = patientsDAO.findPatientsWithLimit(sort, page, pagination);
         req.setAttribute("patientlist", patientList);

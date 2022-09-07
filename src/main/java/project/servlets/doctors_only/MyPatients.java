@@ -44,6 +44,7 @@ public class MyPatients extends HttpServlet {
         int page = 1;
         if (req.getParameter("page") != null)
             page = Integer.parseInt(req.getParameter("page"));
+        req.setAttribute("page", page);
 
         List<Patient> patientList = patientsDAO.findPatientsWithLimit(sort, page, pagination);
         req.setAttribute("patientlist", patientList);

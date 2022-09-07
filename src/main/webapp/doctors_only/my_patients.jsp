@@ -51,11 +51,17 @@
                       </tr>
                   </c:forEach>
         </table>
+                   <c:if test="${page>1}">
+                   <a class="btn btn-outline-primary"  href="../doctors_only/my_patients?pagination=${pagination}&sort=${sort}&page=${page-1}"><<</a>
+                   </c:if>
                            <c:forEach items="${patients}" var="i" varStatus="j">
                            <c:if test="${j.count<=pages}">
                                 <a class="btn btn-outline-primary"  href="../doctors_only/my_patients?pagination=${pagination}&sort=${sort}&page=${j.count}">${j.count}</a>
                            </c:if>
                            </c:forEach>
+                   <c:if test="${page<pages}">
+                   <a class="btn btn-outline-primary"  href="../doctors_only/my_patients?pagination=${pagination}&sort=${sort}&page=${page+1}">>></a>
+                   </c:if>
              <h2 style="color:#B22222">
                   <c:if  test="${not empty mes}" >${mes}</c:if>
              </h2>
