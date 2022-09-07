@@ -12,11 +12,11 @@
                 </style>
     <body>
     <%@ include file="../header_admins.jspf" %>
-<br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
 
              <form action ="../admins_only/add_category" method ="post">
              <div align="center" >
-                    <input name="category" class="btn btn-warning" placeholder="${phrases['langAddCategory']} " required/>
+                    <input name="category" class="btn btn-light" placeholder="${phrases['langAddCategory']} " required/>
                     <input type="submit" class="btn btn-warning"  value="${phrases['langAddCategory']}"/><br>
                     <h2 style="color:#B22222">
                         <c:if  test="${not empty mes}" >${mes}</c:if>

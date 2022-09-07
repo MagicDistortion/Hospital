@@ -14,16 +14,16 @@
     <%@ include file="header.jspf" %>
      <c:choose>
         <c:when test="${empty user}">
-           <br><br><br><br><br>
+           <br><br><br><br><br><br><br>
                <form action ="login" method ="post">
                    <div align="center" >
                         <table >
                             <tr>
-	                          <td style="color:#0000ff">${phrases['langLogin']}:</td>
+	                          <td style="color:#0000ff"><h3/>${phrases['langLogin']}:</td>
 	                          <td><input  name="login" class="form-control" placeholder="${phrases['langEnterLogin']}"  required/></td>
                             </tr>
                             <tr>
-    	                      <td style="color:#ffff00" />${phrases['langPassword']}:</td>
+    	                      <td style="color:#ffff00" /><h3/>${phrases['langPassword']}:</td>
 	                          <td><input type="password" class="form-control" name="password" placeholder="${phrases['langEnterPassword']}" required/></td>
 	                        </tr>
 

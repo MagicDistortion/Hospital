@@ -12,6 +12,7 @@
           </style>
     <body>
     <%@ include file="header.jspf" %>
+    <br><br>
         <div align="center" >
         <h2  style="color:#fff">${phrases['langDoctors']}</h2>
             <form action ="doctors_sortlist" method ="get">
@@ -31,8 +32,7 @@
                 <input type="submit" class="btn btn-dark" value="${phrases['langGetThem']}"/><br>
             </form>
         <h2 style="color:#B22222">
-        <table class="table">
-
+        <table class="table table-dark table-striped">
             <th style="color:#0000ff"><h4/> ${phrases['langSurname']} &nbsp</th>
             <th style="color:#ffff00"><h4/> ${phrases['langName']} &nbsp</th>
             <th style="color:#0000ff"><h4 align="center"/>${phrases['langCategory']} &nbsp</th>
@@ -48,7 +48,7 @@
         </table>
                    <c:forEach items="${allDoctors}" var="i" varStatus="j">
                    <c:if test="${j.count<=pages}">
-                        <a href="doctors_sortlist?pagination=${pagination}&sort=${sort}&page=${j.count}">${j.count}</a>
+                        <a class="btn btn-outline-primary" href="doctors_sortlist?pagination=${pagination}&sort=${sort}&page=${j.count}">${j.count}</a>
                    </c:if>
                    </c:forEach>
         </div>

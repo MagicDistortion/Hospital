@@ -5,20 +5,28 @@
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <a style="color:#0000ff" class="nav-link" href="../index.jsp"><h5>${phrases['langMain']}</h5></a>
-              <a style="color:#ffff00" class="nav-link" href="../about_us.jsp"><h5>${phrases['langAboutUs']}</h5></a>
-              <a style="color:#0000ff" class="nav-link" href="../contacts.jsp"><h5>${phrases['langContacts']}</h5></a>
-              <a style="color:#ffff00" class="nav-link" href="../doctors.jsp"><h5>${phrases['langDoctors']}</h5></a>
+       <table>
+           <tr>
+              <td><a style="color:#0000ff" class="nav-link" href="../index.jsp"><h5>${phrases['langMain']}</h5></a></td>
+              <td><a style="color:#ffff00" class="nav-link" href="../about_us.jsp"><h5>${phrases['langAboutUs']}</h5></a></td>
+              <td><a style="color:#0000ff" class="nav-link" href="../contacts.jsp"><h5>${phrases['langContacts']}</h5></a></td>
+              <td><a style="color:#ffff00" class="nav-link" href="../doctors.jsp"><h5>${phrases['langDoctors']}</h5></a></td>
 
-              <a style="color:#0000ff" class="nav-link" href="my_appointments.jsp"><h5>${phrases['langMyAppointments']}</h5></a>
+              <td><a style="color:#0000ff" class="nav-link" href="my_appointments.jsp"><h5>${phrases['langMyAppointments']}</h5></a></td>
+           </tr>
           </ul>
     </div>
+    </table>
   </div>
+        <table align="right">
+              <tr>
+                 <td><h5 align="right" style="color:#0000ff"><tf:user message="${phrases['langHi']}${user.getName()}"/></h5></td>
+              </tr>
+              <tr>
+                 <td><h5 align="right" style="color:#ffff00"><mt:myTag/></h5></td>
+              </tr>
+        </table>
 </nav>
-                           <h5 align="right" style="color:#0000ff"><mt:myTag/></h5>
-                            <c:if  test="${user.getRolesId()!=null}" >
-                             <h5 align="right" style="color:#ffff00"><tf:user message="${phrases['langHi']}${user.getName()}"/></h5>
-                           </c:if>
                       <form align="right" action="../lang" method="post">
                          <select type="button" class="btn btn-primary dropdown-toggle" name="lang">
                          <option value="UA">${phrases['langUkrainian']}</option>

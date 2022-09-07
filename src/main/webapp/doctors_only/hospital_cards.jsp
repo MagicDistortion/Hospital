@@ -12,6 +12,7 @@
                 </style>
     <body>
     <%@ include file="../header_doctors.jspf" %>
+    <br>
     <div align="center" >
         <h2  style="color:#fff">${phrases['langGetHospitalCards']}</h2>
             <form action ="../doctors_only/hospital_cards" method ="get">
@@ -26,7 +27,7 @@
                <input type="submit" class="btn btn-dark" value="${phrases['langGetThem']}"/><br>
             </form>
         <h2 style="color:#B22222">
-         <table class="table">
+         <table class="table table-dark table-striped table-bordered">
             <th style="color:#0000ff"><h4/> ${phrases['langSurname']} &nbsp</th>
             <th style="color:#ffff00"><h4/> ${phrases['langName']} &nbsp</th>
             <th style="color:#0000ff"><h4/> ${phrases['langGoTo']} &nbsp</th>
@@ -37,14 +38,14 @@
                             <form action ="../doctors_only/edit_hospital_cards" method ="post">
                                <input type="hidden" name="id" value="${i.getId()}"/>
                                <input type="hidden" name="back" value="hospital_cards"/>
-                         <td> <input type="submit" class="btn btn-dark" value="${phrases['langGetDetail']}"> </td>
+                         <td> <input type="submit" class="btn btn-light" value="${phrases['langGetDetail']}"> </td>
                             </form>
                       </tr>
                   </c:forEach>
         </table>
                       <c:forEach items="${hospital_cards}" var="i" varStatus="j">
                        <c:if test="${j.count<=pages}">
-                          <a href="../doctors_only/hospital_cards?pagination=${pagination}&page=${j.count}">${j.count}</a>
+                          <a class="btn btn-outline-primary"  href="../doctors_only/hospital_cards?pagination=${pagination}&page=${j.count}">${j.count}</a>
                       </c:if>
                       </c:forEach>
         </h2>

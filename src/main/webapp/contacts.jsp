@@ -12,7 +12,7 @@
           </style>
     <body>
 	 <%@ include file="header.jspf" %>
-	 <br><br>
+	 <br><br><br><br>
         <div style="color:#fff"/>
         <c:if test="${lang=='UA'}">
             <h2 align="center">Наші контакти</h2>

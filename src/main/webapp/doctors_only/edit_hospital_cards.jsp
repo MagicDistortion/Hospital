@@ -15,7 +15,7 @@
 body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
 </style>
 <br><br><br>
-  <table class="table">
+  <table class="table table-borderless">
     <tr>
         <td>
            <h2  style="color:#0000ff">${phrases['langGetAppointmentsOfPatient']}</h2>
@@ -23,7 +23,7 @@ body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
                 <input type="hidden" name="id" value="${id_card}"/>
                 <input type="submit" class="btn btn-primary" value="${phrases['langGetThem']}"/>
             </form>
-             <table border=1 class="table">
+             <table class="table table-dark table-striped table-bordered">
 
                <th style="color:#0000ff"><h5/> ${phrases['langAppointment']} &nbsp</th>
                <th style="color:#ffff00"><h5/> ${phrases['langAppointmentDetails']}</th>
@@ -71,7 +71,7 @@ body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
         </td>
         <td>
             <h5>
-                  <table class="table">
+                  <table class="table table-borderless">
 
                 <br><br>
                      <tr style="color:#0000ff">

@@ -12,7 +12,7 @@
                 </style>
     <body>
     <%@ include file="../header_admins.jspf" %>
-    <br>
+<br><br>
     <div align="center" >
               <h2 style="color:#fff">${phrases['langAppointADoctorForPatient']}</h2>
                         <form action ="../admins_only/patients_sortlist" method ="post">
@@ -23,7 +23,7 @@
                             <input type="submit" class="btn btn-dark" value="${phrases['langGetPatientsWithOutADoctor']}"/><br>
                         </form>
 <h2 style="color:#B22222">
-         <table class="table">
+         <table class="table table-dark table-striped table-bordered">
             <th style="color:#0000ff"><h4/> ${phrases['langSurname']}&nbsp</th>
             <th style="color:#ffff00"><h4/> ${phrases['langName']}&nbsp</th>
             <th style="color:#0000ff"><h4/> ${phrases['langPickADoctor']}&nbsp</th>
@@ -34,13 +34,13 @@
                          <td style="color:#fff"><h4/>
                          <form action ="../admins_only/give_a_doctor" method ="post">
                              <input type="hidden" name="id" value="${i.getId()}"/>
-                             <select class="btn btn-dark dropdown-toggle"  name="doctor">
+                             <select class="btn btn-info dropdown-toggle"  name="doctor">
                                      <option disabled>${phrases['langPickADoctor']}&nbsp</option>
                                  <c:forEach items="${doctors}" var="j">
                                      <option value="${j.getId()}">${j.getSurname()} ${j.getName()} ${j.getCategory()}</option>
                                  </c:forEach>
                              </select>
-                             <input type="submit" class="btn btn-dark" value="${phrases['langPick']}"/>
+                             <input type="submit" class="btn btn-warning" value="${phrases['langPick']}"/>
                          </form>
                          </td>
                       </tr>

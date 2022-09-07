@@ -11,15 +11,14 @@
               body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
           </style>
         <body>
-
     <%@ include file="../header_patients.jspf" %>
-    <br>
+    <br><br>
     <div align="center" >
         <h2  style="color:#fff">${phrases['langGetMyAppointments']}</h2>
             <form action ="../patients_only/my_appointments" method ="get">
                 <input type="submit" class="btn btn-dark" value="${phrases['langGetThem']}"/><br>
             </form>
- <table class="table">
+ <table class="table table-dark table-striped table-bordered">
 
             <th style="color:#0000ff"><h4/> ${phrases['langAppointment']} &nbsp</th>
             <th style="color:#ffff00"><h4/> ${phrases['langAppointmentDetails']} &nbsp</th>
@@ -46,11 +45,8 @@
     </form>
     <c:if test="${not empty myhospitalcard}">
     <h3>
-        <table border="1" >
-            <colgroup style="background-color:#87CEFA;">
-             <col>
-             <col>
-            </colgroup>
+        <table class="table table-dark table-bordered" >
+
                      <tr style="color:#0000ff">
                         <td>${phrases['langDoctorSurname']}: &nbsp</td>
                         <td>${myhospitalcard.getCurrentDoctorSurname()}</td>

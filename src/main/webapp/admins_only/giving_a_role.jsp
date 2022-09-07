@@ -12,14 +12,14 @@
                 </style>
     <body>
     <%@ include file="../header_admins.jspf" %>
-    <br>
+<br><br>
     <div align="center" >
         <h2 style="color:#fff">${phrases['langGivingARole']}</h2>
             <form action ="../admins_only/users_list" method ="get">
                 <input type="submit" class="btn btn-dark" value="${phrases['langGetUsers']}"/><br>
             </form>
         <h2 style="color:#B22222">
-         <table class="table">
+         <table class="table table-dark table-striped table-bordered">
             <th style="color:#0000ff"><h4/> ${phrases['langSurname']} &nbsp</th>
             <th style="color:#ffff00"><h4/> ${phrases['langName']} &nbsp </th>
             <th style="color:#0000ff"><h4/> ${phrases['langPickARole']} &nbsp</th>
@@ -30,13 +30,13 @@
                          <td ><h4/>
                          <form action ="../admins_only/give_a_role" method ="post">
                             <input type="hidden" name="id" value="${i.getId()}"/>
-                             <select class="btn btn-dark dropdown-toggle" name="role">
+                             <select class="btn btn-info dropdown-toggle" name="role">
                                  <option value="1">${phrases['langSysAdmin']}</option>
                                  <option value="2">${phrases['langDoctor']}</option>
                                  <option value="3">${phrases['langNurse']}</option>
                                  <option value="4">${phrases['langPatient']}</option>
                              </select>
-                             <input type="submit" class="btn btn-dark" value="${phrases['langPick']}"/>
+                             <input type="submit" class="btn btn-warning" value="${phrases['langPick']}"/>
                          </form>
                          </td>
                       </tr>

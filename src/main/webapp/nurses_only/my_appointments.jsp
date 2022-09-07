@@ -21,7 +21,7 @@
             </form>
         <h4 style="color:#B22222">
 
-         <table class="table">
+         <table class="table table-dark table-striped table-bordered">
             <th style="color:#0000ff"><h4/> ${phrases['langAppointment']} &nbsp</th>
             <th style="color:#ffff00"><h4/> ${phrases['langAppointmentDetails']} &nbsp</th>
             <th style="color:#0000ff"><h4/> ${phrases['langCurrentDoctor']} &nbsp</th>
