@@ -1,32 +1,39 @@
       <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
       <%@ taglib prefix="tf" tagdir="/WEB-INF/tags"%>
       <%@ taglib uri="mytaglib" prefix="mt" %>
-       <h2 align="center"  >
-              <a style="color:#0000ff" href="../index.jsp">${phrases['langMain']}</a>
-              <a style="color:#ffff00" href="../about_us.jsp">${phrases['langAboutUs']}</a>
-              <a style="color:#0000ff" href="../contacts.jsp">${phrases['langContacts']}</a>
-              <a style="color:#ffff00" href="../doctors.jsp">${phrases['langDoctors']}</a>
-                    <br>
-            <a style="color:#0000ff" href="my_patients.jsp">${phrases['langMyPatients']}</a>
-            <a style="color:#ffff00" href="hospital_cards.jsp">${phrases['langHospitalCards']}</a>
-            <a style="color:#0000ff" href="add_appointment.jsp">${phrases['langAddAppointment']}</a>
-       </h2>
+<nav class="navbar navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <a style="color:#0000ff" class="nav-link" href="../index.jsp"><h5>${phrases['langMain']}</h5></a>
+              <a style="color:#ffff00" class="nav-link" href="../about_us.jsp"><h5>${phrases['langAboutUs']}</h5></a>
+              <a style="color:#0000ff" class="nav-link" href="../contacts.jsp"><h5>${phrases['langContacts']}</h5></a>
+              <a style="color:#ffff00" class="nav-link" href="../doctors.jsp"><h5>${phrases['langDoctors']}</h5></a>
+
+              <a style="color:#0000ff" class="nav-link" href="my_patients.jsp"><h5>${phrases['langMyPatients']}</h5></a>
+              <a style="color:#ffff00" class="nav-link" href="hospital_cards.jsp"><h5>${phrases['langHospitalCards']}</h5></a>
+              <a style="color:#0000ff" class="nav-link" href="add_appointment.jsp"><h5>${phrases['langAddAppointment']}</h5></a>
+          </ul>
+    </div>
+  </div>
+</nav>
+
                            <h5 align="right" style="color:#0000ff"><mt:myTag/></h5>
                             <c:if  test="${user.getRolesId()!=null}" >
                              <h5 align="right" style="color:#ffff00"><tf:user message="${phrases['langHi']}${user.getName()}"/></h5>
                            </c:if>
                       <form align="right" action="../lang" method="post">
-                         <select name="lang">
+                         <select type="button" class="btn btn-primary dropdown-toggle" name="lang">
                          <option value="UA">${phrases['langUkrainian']}</option>
                          <option value="EN">${phrases['langEnglish']}</option>
                          </select>
-                         <input type="submit" value="${phrases['langSetLanguage']}"/>
+                         <input type="submit" class="btn btn-primary" value="${phrases['langSetLanguage']}"/>
                       </form>
          <div align="right" >
              <form action="../edit_profile.jsp" method="post">
-                <input type="submit" value="${phrases['langEMP']}"/>
+                <input type="submit" class="btn btn-warning" value="${phrases['langEMP']}"/>
              </form>
              <form action="../logout" method="get">
-                <input type="submit" value="${phrases['langLogOut']}"/>
+                <input type="submit" class="btn btn-dark" value="${phrases['langLogOut']}"/>
              </form>
          </div>

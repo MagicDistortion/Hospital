@@ -2,68 +2,68 @@
 <%@ taglib prefix="tf" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="mytaglib" prefix="mt" %>
 
-     <h2 align="center">
-              <a style="color:#0000ff" href="index.jsp">${phrases['langMain']}</a>
-              <a style="color:#ffff00" href="about_us.jsp">${phrases['langAboutUs']}</a>
-              <a style="color:#0000ff" href="contacts.jsp">${phrases['langContacts']}</a>
-              <a style="color:#ffff00" href="doctors.jsp">${phrases['langDoctors']}</a>
+<nav class="navbar navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <a style="color:#0000ff" class="nav-link" href="index.jsp"><h5> ${phrases['langMain']}</h5></a>
+          <a style="color:#ffff00" class="nav-link" href="about_us.jsp"><h5>${phrases['langAboutUs']}</h5></a>
+          <a style="color:#0000ff" class="nav-link" href="contacts.jsp"><h5>${phrases['langContacts']}</h5></a>
+          <a style="color:#ffff00" class="nav-link" href="doctors.jsp"><h5>${phrases['langDoctors']}</h5></a>
 
          <c:if  test="${user.getRolesId()==1}" >
-                    <br>
-                <a style="color:#0000ff" href="admins_only/giving_a_role.jsp">${phrases['langGivingARole']}</a>
-                <a style="color:#ffff00" href="admins_only/giving_a_category.jsp">${phrases['langGivingACategory']}</a>
-                <a style="color:#0000ff" href="admins_only/patients.jsp">${phrases['langPatients']}</a>
-                <a style="color:#ffff00" href="admins_only/appoint_a_doctor.jsp">${phrases['langAppointADoctor']}</a>
-                <a style="color:#0000ff" href="admins_only/add_category.jsp">${phrases['langAddCategory']}</a>
+           <a style="color:#0000ff" class="nav-link" href="admins_only/giving_a_role.jsp"><h5>${phrases['langGivingARole']}</h5></a>
+           <a style="color:#ffff00" class="nav-link" href="admins_only/giving_a_category.jsp"><h5>${phrases['langGivingACategory']}</h5></a>
+           <a style="color:#0000ff" class="nav-link" href="admins_only/patients.jsp"><h5>${phrases['langPatients']}</h5></a>
+           <a style="color:#ffff00" class="nav-link" href="admins_only/appoint_a_doctor.jsp"><h5>${phrases['langAppointADoctor']}</h5></a>
+           <a style="color:#0000ff" class="nav-link" href="admins_only/add_category.jsp"><h5>${phrases['langAddCategory']}</h5></a>
          </c:if>
 
          <c:if  test="${user.getRolesId()==2}" >
-              <br>
-            <a style="color:#0000ff" href="doctors_only/my_patients.jsp">${phrases['langMyPatients']}</a>
-            <a style="color:#ffff00" href="doctors_only/hospital_cards.jsp">${phrases['langHospitalCards']}</a>
-            <a style="color:#0000ff" href="doctors_only/add_appointment.jsp">${phrases['langAddAppointment']}</a>
+           <a style="color:#0000ff" class="nav-link" href="doctors_only/my_patients.jsp"><h5>${phrases['langMyPatients']}</h5></a>
+           <a style="color:#ffff00" class="nav-link" href="doctors_only/hospital_cards.jsp"><h5>${phrases['langHospitalCards']}</h5></a>
+           <a style="color:#0000ff" class="nav-link" href="doctors_only/add_appointment.jsp"><h5>${phrases['langAddAppointment']}</h5></a>
          </c:if>
 
          <c:if  test="${user.getRolesId()==3}" >
-                    <br>
-            <a style="color:#0000ff" href="nurses_only/my_appointments.jsp">${phrases['langMyAppointments']}</a>
+           <a style="color:#0000ff" class="nav-link" href="nurses_only/my_appointments.jsp"><h5>${phrases['langMyAppointments']}</h5></a>
          </c:if>
 
          <c:if  test="${user.getRolesId()==4}" >
-                    <br>
-             <a style="color:#0000ff" href="patients_only/my_appointments.jsp">${phrases['langMyAppointments']}</a>
+           <a style="color:#0000ff" class="nav-link" href="patients_only/my_appointments.jsp"><h5>${phrases['langMyAppointments']}</h5></a>
          </c:if>
-
-     </h2>
+          </ul>
+    </div>
+  </div>
+</nav>
                     <h5 align="right" style="color:#0000ff"><mt:myTag/></h5>
                      <c:if  test="${user.getRolesId()!=null}" >
                       <h5 align="right" style="color:#ffff00"><tf:user message="${phrases['langHi']}${user.getName()}"/></h5>
                     </c:if>
                       <form align="right" action="lang" method="post">
-                         <select name="lang">
+                         <select type="button" class="btn btn-primary dropdown-toggle"  name="lang">
                          <option value="UA">${phrases['langUkrainian']}</option>
                          <option value="EN">${phrases['langEnglish']}</option>
                          </select>
-                         <input type="hidden" name="url" value=url />
-                         <input type="submit" value="${phrases['langSetLanguage']}"/>
+                         <input type="submit" class="btn btn-primary" value="${phrases['langSetLanguage']}"/>
                       </form>
                     <c:choose>
                         <c:when test="${empty user}">
                             <div align="right" >
                                  <form action="register_form.jsp" method="post">
-                                      <input type="submit" value="${phrases['langRegister']}"/>
+                                      <input type="submit" class="btn btn-warning" value="${phrases['langRegister']}"/>
                                  </form>
-                                 <input type="submit" value="${phrases['langLogIn']}"
+                                 <input type="submit" class="btn btn-dark" value="${phrases['langLogIn']}"
                                   onclick="window.location='index.jsp';"/>
                             </div>
                         </c:when>
                         <c:otherwise>
                            <div align="right" >
                                    <form action="edit_profile.jsp" method="post">
-                                       <input type="submit" value="${phrases['langEMP']}"/>
+                                       <input type="submit" class="btn btn-warning" value="${phrases['langEMP']}"/>
                                    </form>
                                    <form action="logout" method="get">
-                                       <input type="submit" value="${phrases['langLogOut']}"/>
+                                       <input type="submit" class="btn btn-dark" value="${phrases['langLogOut']}"/>
                                    </form>
                            </div>
                         </c:otherwise>
