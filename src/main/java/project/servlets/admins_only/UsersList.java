@@ -1,6 +1,7 @@
 package project.servlets.admins_only;
 
-import project.controller.DBManager;
+import project.dao.DBManager;
+import project.dao.UsersDAO;
 import project.users.User;
 
 import javax.servlet.ServletException;
@@ -15,10 +16,12 @@ import java.util.Map;
 @WebServlet("/admins_only/users_list")
 public class UsersList extends HttpServlet {
     DBManager dbManager = DBManager.getInstance();
+    private static final UsersDAO usersDAO = new UsersDAO();
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> allUsers = dbManager.findUsersWitchOutRole();
+        List<User> allUsers = usersDAO.findUsersWitchOutRole();
         req.setAttribute("userList", allUsers);
         if (allUsers.size()==0)  req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));
         req.getRequestDispatcher("/admins_only/giving_a_role.jsp").forward(req, resp);

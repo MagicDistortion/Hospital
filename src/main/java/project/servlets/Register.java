@@ -1,9 +1,8 @@
 package project.servlets;
 
-import project.controller.DBManager;
+import project.dao.UsersDAO;
 import project.users.User;
 import project.validator.Validator;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +15,7 @@ import java.util.List;
 
 @WebServlet("/register")
 public class Register extends HttpServlet {
-    DBManager dbManager = DBManager.getInstance();
+    UsersDAO usersDAO = new UsersDAO();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,7 +27,7 @@ public class Register extends HttpServlet {
                 , Validator.finalTel(req.getParameter("tel"))
                 , LocalDate.parse(req.getParameter("date_of_birth")));
         if (errors.isEmpty()) {
-            dbManager.insertUser(user);
+            usersDAO.insertUser(user);
             req.getSession().setAttribute("user", user);
             resp.sendRedirect("index.jsp");
         }else  {

@@ -1,9 +1,9 @@
 package project.servlets.doctors_only;
 
-import project.controller.DBManager;
+
+import project.dao.PatientsDAO;
 import project.users.Patient;
 import project.users.User;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +15,7 @@ import java.util.Map;
 
 @WebServlet("/doctors_only/my_patients")
 public class MyPatients extends HttpServlet {
-    DBManager dbManager = DBManager.getInstance();
+    private final PatientsDAO patientsDAO= new PatientsDAO();
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,7 +29,7 @@ public class MyPatients extends HttpServlet {
             case "date":
                 sort = "WHERE current_doctor_id ="+id+" ORDER BY date_of_birth";
         }
-        List<Patient> patients = dbManager.findAllPatients(sort);
+        List<Patient> patients = patientsDAO.findAllPatients(sort);
         req.setAttribute("patients", patients);
 
         int pagination;
@@ -47,7 +47,7 @@ public class MyPatients extends HttpServlet {
         if (req.getParameter("page") != null)
             page = Integer.parseInt(req.getParameter("page"));
 
-        List<Patient> patientList = dbManager.findPatientsWithLimit(sort, page, pagination);
+        List<Patient> patientList = patientsDAO.findPatientsWithLimit(sort, page, pagination);
         req.setAttribute("patientlist", patientList);
         if (patientList.size()==0)  req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));
 

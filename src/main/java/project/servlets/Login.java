@@ -1,8 +1,7 @@
 package project.servlets;
 
-import project.controller.DBManager;
+import project.dao.UsersDAO;
 import project.users.User;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +13,7 @@ import java.util.Map;
 
 @WebServlet("/login")
 public class Login extends HttpServlet {
-    DBManager dbManager = DBManager.getInstance();
+    private final UsersDAO usersDAO=new UsersDAO();
     String login;
     String password;
 
@@ -22,7 +21,7 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         login = req.getParameter("login");
         password = req.getParameter("password");
-        User user = dbManager.findUserByLogin(login);
+        User user = usersDAO.findUserByLogin(login);
         Map<?, ?> phrases = (Map<?, ?>) req.getAttribute("phrases");
         if (user != null && user.getPassword().equals(String.valueOf(password.hashCode()))) {
             req.getSession().setAttribute("user", user);

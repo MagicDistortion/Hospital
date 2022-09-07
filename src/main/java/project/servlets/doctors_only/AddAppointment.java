@@ -1,8 +1,7 @@
 package project.servlets.doctors_only;
 
 import project.appointments.Appointment;
-import project.controller.DBManager;
-
+import project.dao.AppointmentsDAO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,15 +13,15 @@ import java.util.Map;
 
 @WebServlet("/doctors_only/add_appointment")
 public class AddAppointment extends HttpServlet {
-    DBManager dbManager = DBManager.getInstance();
+    private final AppointmentsDAO appointmentsDAO = new AppointmentsDAO();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
-        if (dbManager.findAppointmentByName(name) == null) {
-            dbManager.insertAppointment(new Appointment(name));
-            req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langSuccessfulAdd"));
-        } else req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langAllReadyExist"));
+        if (appointmentsDAO.findAppointmentByName(name) == null) {
+            appointmentsDAO.insertAppointment(new Appointment(name));
+            req.setAttribute("mes", ((Map<?, ?>) req.getAttribute("phrases")).get("langSuccessfulAdd"));
+        } else req.setAttribute("mes", ((Map<?, ?>) req.getAttribute("phrases")).get("langAllReadyExist"));
         req.getRequestDispatcher("/doctors_only/add_appointment.jsp").forward(req, resp);
     }
 }

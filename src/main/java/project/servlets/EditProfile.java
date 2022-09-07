@@ -1,9 +1,9 @@
 package project.servlets;
 
-import project.controller.DBManager;
+
+import project.dao.UsersDAO;
 import project.users.User;
 import project.validator.ValidatorEditForm;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,11 +15,11 @@ import java.util.List;
 
 @WebServlet("/edit_profile")
 public class EditProfile extends HttpServlet {
-    DBManager dbManager =DBManager.getInstance();
+    private final UsersDAO usersDAO=new UsersDAO();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<String> errors = ValidatorEditForm.editValidate(req);
-        User user = dbManager.findUserByID(((User)req.getSession().getAttribute("user")).getId());
+        User user = usersDAO.findUserByID(((User)req.getSession().getAttribute("user")).getId());
         req.getSession().setAttribute("user", user);
         req.setAttribute("errors", errors);
         req.getRequestDispatcher("edit_profile.jsp").forward(req, resp);

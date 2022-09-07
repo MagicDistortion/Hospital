@@ -1,9 +1,8 @@
 package project.servlets.doctors_only;
 
 import project.appointments.AppointmentDetails;
-import project.controller.DBManager;
+import project.dao.AppointmentDetailsDAO;
 import project.users.User;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +14,7 @@ import java.time.LocalDate;
 
 @WebServlet("/doctors_only/insert_appoint")
 public class InsertAppoint extends HttpServlet {
-    DBManager dbManager = DBManager.getInstance();
+    private final AppointmentDetailsDAO appointmentDetailsDAO = new AppointmentDetailsDAO();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,7 +25,7 @@ public class InsertAppoint extends HttpServlet {
             appointmentDetails.setNurseId(Integer.parseInt(req.getParameter("nurse")));
             appointmentDetails.setDoctorsId(((User)req.getSession().getAttribute("user")).getId());
             appointmentDetails.setHospitalCardId(Integer.parseInt(req.getParameter("id")));
-            dbManager.insertAppointmentDetails(appointmentDetails);
+            appointmentDetailsDAO.insertAppointmentDetails(appointmentDetails);
             req.setAttribute("message", "appoint added");
         } else req.setAttribute("message", "wrong date");
 

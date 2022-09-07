@@ -1,7 +1,6 @@
 package project.servlets.admins_only;
 
-import project.controller.DBManager;
-
+import project.dao.DoctorsDAO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,12 +10,13 @@ import java.io.IOException;
 
 @WebServlet("/admins_only/give_a_category")
 public class GiveACategory extends HttpServlet {
-    DBManager dbManager = DBManager.getInstance();
+    private final DoctorsDAO doctorsDAO = new DoctorsDAO();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int category = Integer.parseInt(req.getParameter("category"));
         int id = Integer.parseInt(req.getParameter("id"));
-        dbManager.updateDoctorCategory(category, id);
+        doctorsDAO.updateDoctorCategory(category, id);
         resp.sendRedirect("doctors_list");
     }
 }

@@ -2,10 +2,11 @@ package project.servlets.doctors_only;
 
 
 import project.appointments.Appointment;
+import project.dao.AppointmentsDAO;
+import project.dao.HospitalCardDAO;
+import project.dao.NursesDAO;
 import project.hospitalcard.HospitalCard;
-import project.controller.DBManager;
 import project.users.Nurse;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,18 +19,21 @@ import java.util.Map;
 
 @WebServlet("/doctors_only/edit_hospital_cards")
 public class EditHospitalCard extends HttpServlet {
-    DBManager dbManager = DBManager.getInstance();
+    private final NursesDAO nursesDAO=new NursesDAO();
+    private final HospitalCardDAO hospitalCardDAO= new HospitalCardDAO();
+    private final AppointmentsDAO appointmentsDAO = new AppointmentsDAO();
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Appointment> allAppointments = dbManager.findAllAppointments();
+        List<Appointment> allAppointments = appointmentsDAO.findAllAppointments();
         req.getSession().setAttribute("appoints", allAppointments);
 
-        List<Nurse> allNurse = dbManager.findAllNurse();
+        List<Nurse> allNurse = nursesDAO.findAllNurse();
         req.getSession().setAttribute("nurses", allNurse);
 
         int patientId = Integer.parseInt(req.getParameter("id"));
-        HospitalCard hospitalCard = dbManager.getHospitalCard(patientId);
+        HospitalCard hospitalCard = hospitalCardDAO.getHospitalCard(patientId);
 
         req.getSession().setAttribute("back", req.getParameter("back"));
         req.getSession().setAttribute("patient_surname", hospitalCard.getPatientsSurname());

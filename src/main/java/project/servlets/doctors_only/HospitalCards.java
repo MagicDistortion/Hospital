@@ -1,8 +1,7 @@
 package project.servlets.doctors_only;
 
+import project.dao.HospitalCardDAO;
 import project.hospitalcard.HospitalCard;
-import project.controller.DBManager;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,11 +12,11 @@ import java.util.List;
 
 @WebServlet("/doctors_only/hospital_cards")
 public class HospitalCards extends HttpServlet {
-    DBManager dbManager = DBManager.getInstance();
+    private final HospitalCardDAO hospitalCardDAO= new HospitalCardDAO();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<HospitalCard> hospitalCardList = dbManager.getAllHospitalCards();
+        List<HospitalCard> hospitalCardList = hospitalCardDAO.getAllHospitalCards();
         req.setAttribute("hospital_cards", hospitalCardList);
 
         int pagination;
@@ -35,7 +34,7 @@ public class HospitalCards extends HttpServlet {
         if (req.getParameter("page") != null)
             page = Integer.parseInt(req.getParameter("page"));
 
-        List<HospitalCard> cards = dbManager.getHospitalCardsWithLimit(page, pagination);
+        List<HospitalCard> cards = hospitalCardDAO.getHospitalCardsWithLimit(page, pagination);
         req.setAttribute("cards", cards);
 
         req.getRequestDispatcher("/doctors_only/hospital_cards.jsp").forward(req, resp);

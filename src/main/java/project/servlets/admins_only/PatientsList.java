@@ -1,6 +1,8 @@
 package project.servlets.admins_only;
 
-import project.controller.DBManager;
+import project.dao.DBManager;
+import project.dao.DoctorsDAO;
+import project.dao.PatientsDAO;
 import project.users.Doctor;
 import project.users.Patient;
 
@@ -16,6 +18,8 @@ import java.util.Map;
 @WebServlet("/admins_only/patients_sortlist")
 public class PatientsList extends HttpServlet {
     DBManager dbManager = DBManager.getInstance();
+    private final DoctorsDAO doctorsDAO = new DoctorsDAO();
+    private final PatientsDAO patientsDAO= new PatientsDAO();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,7 +32,7 @@ public class PatientsList extends HttpServlet {
             case "date":
                 sort = "WHERE `status`!='discharged' ORDER BY date_of_birth";
         }
-        List<Patient> patients = dbManager.findAllPatients(sort);
+        List<Patient> patients = patientsDAO.findAllPatients(sort);
         req.setAttribute("patients", patients);
 
         int pagination;
@@ -46,7 +50,7 @@ public class PatientsList extends HttpServlet {
         if (req.getParameter("page") != null)
             page = Integer.parseInt(req.getParameter("page"));
 
-        List<Patient> patientList = dbManager.findPatientsWithLimit(sort, page, pagination);
+        List<Patient> patientList = patientsDAO.findPatientsWithLimit(sort, page, pagination);
         req.setAttribute("patientlist", patientList);
         if (patientList.size()==0)  req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));
         req.getRequestDispatcher("/admins_only/patients.jsp").forward(req, resp);
@@ -62,8 +66,8 @@ public class PatientsList extends HttpServlet {
             case "date":
                 sort = "WHERE current_doctor_id is null AND `status`!='discharged' ORDER BY date_of_birth";
         }
-        List<Patient> patients = dbManager.findAllPatients(sort);
-        List<Doctor> doctors = dbManager.findAllDoctors("Order by users.surname");
+        List<Patient> patients = patientsDAO.findAllPatients(sort);
+        List<Doctor> doctors = doctorsDAO.findAllDoctors("Order by users.surname");
         if (patients.size()==0)  req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));
         req.setAttribute("doctors", doctors);
         req.setAttribute("patients", patients);

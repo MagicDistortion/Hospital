@@ -1,9 +1,9 @@
 package project.servlets.admins_only;
 
 import project.categories.Categories;
-import project.controller.DBManager;
+import project.dao.CategoriesDAO;
+import project.dao.DoctorsDAO;
 import project.users.Doctor;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,14 +15,14 @@ import java.util.Map;
 
 @WebServlet("/admins_only/doctors_list")
 public class DoctorsList extends HttpServlet {
-    DBManager dbManager = DBManager.getInstance();
-
+    private final DoctorsDAO doctorsDAO = new DoctorsDAO();
+    private final CategoriesDAO categoriesDAO = new CategoriesDAO();
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Categories> allCategories = dbManager.findAllCategories();
+        List<Categories> allCategories = categoriesDAO.findAllCategories();
         req.setAttribute("categories", allCategories);
 
-        List<Doctor> allDoctors = dbManager.findAllDoctors("WHERE category_id = 1 ORDER BY users.name");
+        List<Doctor> allDoctors = doctorsDAO.findAllDoctors("WHERE category_id = 1 ORDER BY users.name");
         req.setAttribute("docs", allDoctors);
 
         if (allDoctors.size() == 0) req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));

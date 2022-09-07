@@ -1,6 +1,7 @@
 package project.servlets;
 
-import project.controller.DBManager;
+import project.dao.DBManager;
+import project.dao.DoctorsDAO;
 import project.users.Doctor;
 
 import javax.servlet.ServletException;
@@ -14,8 +15,8 @@ import java.util.List;
 @WebServlet("/doctors_sortlist")
 public class DoctorsList extends HttpServlet {
     DBManager dbManager = DBManager.getInstance();
-
-    @Override
+     private final DoctorsDAO doctorsDAO = new DoctorsDAO();
+     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sort = req.getParameter("sort");
         req.setAttribute("sort", sort);
@@ -29,7 +30,7 @@ public class DoctorsList extends HttpServlet {
             case "patients":
                 sort = "ORDER BY number_of_patients DESC";
         }
-        List<Doctor> allDoctors = dbManager.findAllDoctors(sort);
+        List<Doctor> allDoctors = doctorsDAO.findAllDoctors(sort);
         req.setAttribute("allDoctors", allDoctors);
 
         int pagination;
@@ -46,7 +47,7 @@ public class DoctorsList extends HttpServlet {
         int page = 1;
         if (req.getParameter("page") != null)
             page = Integer.parseInt(req.getParameter("page"));
-        List<Doctor> doctors = dbManager.findDoctorsWithLimit(sort, page, pagination);
+        List<Doctor> doctors = doctorsDAO.findDoctorsWithLimit(sort, page, pagination);
         req.setAttribute("docList", doctors);
         req.getRequestDispatcher("doctors.jsp").forward(req, resp);
     }

@@ -1,8 +1,7 @@
 package project.servlets.doctors_only;
 
 import project.appointments.AppointmentDetails;
-import project.controller.DBManager;
-
+import project.dao.AppointmentDetailsDAO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,12 +13,12 @@ import java.util.Map;
 
 @WebServlet("/doctors_only/get_appointments")
 public class GetAppointmentDetails extends HttpServlet {
-    DBManager dbManager = DBManager.getInstance();
+    private final AppointmentDetailsDAO appointmentDetailsDAO =new AppointmentDetailsDAO();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = (int) req.getSession().getAttribute("id_card");
-        List<AppointmentDetails> appointmentsDetails = dbManager.findAllAppointmentDetailsByID(id);
+        List<AppointmentDetails> appointmentsDetails = appointmentDetailsDAO.findAllAppointmentDetailsByID(id);
         if (appointmentsDetails.size() == 0)  req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));
         req.setAttribute("appointments", appointmentsDetails);
         req.getRequestDispatcher("/doctors_only/edit_hospital_cards.jsp").forward(req, resp);

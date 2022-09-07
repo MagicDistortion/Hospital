@@ -23,7 +23,6 @@ class AddCategoryTest {
 
         when(request.getRequestDispatcher(path)).thenReturn(dispatcher);
         when(request.getParameter("category")).thenReturn("Хірург");
-
         servlet.doPost(request, response);
 
         verify(response,never()).sendRedirect(path);

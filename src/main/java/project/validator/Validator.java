@@ -3,7 +3,8 @@ package project.validator;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
-import project.controller.DBManager;
+import project.dao.DBManager;
+import project.dao.UsersDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.DateTimeException;
@@ -15,6 +16,8 @@ import java.util.Objects;
 public class Validator {
     private static final List<String> errors = new ArrayList<>();
     private static final DBManager dbManager = DBManager.getInstance();
+    private static final UsersDAO usersDAO = new UsersDAO();
+
 
     public synchronized static List<String> registerValidate(HttpServletRequest req) {
         errors.clear();
@@ -39,7 +42,7 @@ public class Validator {
     }
 
     private static String validateLogin(String login) {
-        if (dbManager.findUserByLogin(login) != null) return "The login is already in use";
+        if (usersDAO.findUserByLogin(login) != null) return "The login is already in use";
         if (login != null && login.length() >= 2 && login.length() < 32) return null;
         return "login is wrong";
     }
@@ -54,7 +57,7 @@ public class Validator {
         if (number == null) return "phone number is wrong";
         String finalTel = finalTel(number);
         if (finalTel.length() < 12) return "phone number is wrong";
-        if (dbManager.findAllUsers().stream().anyMatch(x -> x.getTel().equals(finalTel)))
+        if (usersDAO.findAllUsers().stream().anyMatch(x -> x.getTel().equals(finalTel)))
             return "phone number is already in use";
         return null;
     }
