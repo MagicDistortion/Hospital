@@ -20,8 +20,9 @@ public class DoctorFilter implements Filter {
         int role = 0;
         if (httpServlet.getSession().getAttribute("user") != null)
             role = ((User) httpServlet.getSession().getAttribute("user")).getRolesId();
-        if (role != 2) httpServletResponse.sendRedirect("../index.jsp");
-        filterChain.doFilter(servletRequest, servletResponse);
+        if (role != 2) {
+            httpServletResponse.sendRedirect("../index.jsp");
+        }else filterChain.doFilter(servletRequest, servletResponse);
     }
 
 }

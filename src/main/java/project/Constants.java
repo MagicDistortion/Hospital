@@ -57,4 +57,9 @@ public class Constants {
     public static final String UPDATE_USER_TEL = "UPDATE users SET `tel` = ? WHERE (`id_users` = ?)";
     public static final String UPDATE_USER_DATE_OF_BIRTH = "UPDATE users SET `date_of_birth`= ?  WHERE `id_users` = ?";
     public static final String DISCHARGE_PATIENT = "UPDATE hospital_card SET `current_doctor_id` = null  WHERE id_card = ?";
+    public static final String FROM_PATIENTS_COUNT = "SELECT count(*) FROM patients ";
+    public static final String FROM_PATIENTS_COUNT_FOR_DOCTOR ="SELECT count(*) FROM patients left join hospital_card on id = id_card where current_doctor_id =?";
+    public static final String FROM_DOCTORS_COUNT = "SELECT count(*) FROM doctors ";
+    public static final String FROM_HOSPITALCARD_COUNT = "SELECT count(*) FROM hospital_card ";
+
 }

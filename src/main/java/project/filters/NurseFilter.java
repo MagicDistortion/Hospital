@@ -20,8 +20,9 @@ public class NurseFilter implements Filter {
         int role = 0;
         if (httpServlet.getSession().getAttribute("user") != null)
             role = ((User) httpServlet.getSession().getAttribute("user")).getRolesId();
-        if (role != 3) httpServletResponse.sendRedirect("../index.jsp");
-        filterChain.doFilter(servletRequest, servletResponse);
+        if (role != 3) {
+            httpServletResponse.sendRedirect("../index.jsp");
+        }else filterChain.doFilter(servletRequest, servletResponse);
     }
 
 }

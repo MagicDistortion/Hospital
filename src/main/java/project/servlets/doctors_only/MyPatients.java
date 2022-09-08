@@ -1,8 +1,7 @@
 package project.servlets.doctors_only;
 
-import project.dao.PatientsDAO;
+import project.Paginator;
 import project.models.users.Patient;
-import project.models.users.User;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,42 +13,11 @@ import java.util.Map;
 
 @WebServlet("/doctors_only/my_patients")
 public class MyPatients extends HttpServlet {
-    private final PatientsDAO patientsDAO= new PatientsDAO();
+private final Paginator paginator=new Paginator();
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = ((User)req.getSession().getAttribute("user")).getId();
-        String sort = req.getParameter("sort");
-        req.setAttribute("sort", sort);
-        switch (sort) {
-            case "surname":
-                sort = "WHERE current_doctor_id ="+id+" ORDER BY surname";
-                break;
-            case "date":
-                sort = "WHERE current_doctor_id ="+id+" ORDER BY date_of_birth";
-        }
-        List<Patient> patients = patientsDAO.findAllPatients(sort);
-        req.setAttribute("patients", patients);
-
-        int pagination;
-        if (req.getParameter("pagination")==null || Integer.parseInt(req.getParameter("pagination")) <= 0) {
-            pagination = 5;
-        } else
-            pagination = Integer.parseInt(req.getParameter("pagination"));
-        req.setAttribute("pagination", pagination);
-
-        int pages = patients.size() / pagination;
-        if (patients.size() % pagination != 0) pages += 1;
-        req.setAttribute("pages", pages);
-
-        int page = 1;
-        if (req.getParameter("page") != null)
-            page = Integer.parseInt(req.getParameter("page"));
-        req.setAttribute("page", page);
-
-        List<Patient> patientList = patientsDAO.findPatientsWithLimit(sort, page, pagination);
-        req.setAttribute("patientlist", patientList);
+        List<Patient>patientList = paginator.paginationMyPatients(req);
         if (patientList.size()==0)  req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));
-
         req.getRequestDispatcher("/doctors_only/my_patients.jsp").forward(req, resp);
     }
 }

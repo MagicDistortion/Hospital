@@ -166,4 +166,18 @@ public class HospitalCardDAO {
         }
         return hospitalCardList;
     }
+    /* метод отримання кількості лікарняних карт в базі*/
+    public int hospitalCardsCount() {
+        int count = 0;
+        try (Connection connection = dbManager.getConnection();
+             ResultSet resultSet = connection.prepareStatement(Constants.FROM_HOSPITALCARD_COUNT).executeQuery()) {
+            while (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+            throw new RuntimeException(e);
+        }
+        return count;
+    }
 }

@@ -49,9 +49,9 @@
                    <c:if test="${page>1}">
                    <a class="btn btn-outline-primary"  href="doctors_sortlist?pagination=${pagination}&sort=${sort}&page=${page-1}"><<</a>
                    </c:if>
-                   <c:forEach items="${allDoctors}" var="i" varStatus="j">
-                   <c:if test="${j.count<=pages}">
-                        <a class="btn btn-outline-primary" href="doctors_sortlist?pagination=${pagination}&sort=${sort}&page=${j.count}">${j.count}</a>
+                  <c:forEach begin="1" end="${doctorsCount}" var="i" step="1">
+                   <c:if test="${i<=pages}">
+                        <a class="btn btn-outline-primary" href="doctors_sortlist?pagination=${pagination}&sort=${sort}&page=${i}">${i}</a>
                    </c:if>
                    </c:forEach>
                    <c:if test="${page<pages}">

@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import project.Constants;
 import project.models.users.Patient;
 import project.models.users.User;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,6 +34,7 @@ public class PatientsDAO {
             }
         });
     }
+
     /* метод пошуку пацієнта по id */
     public Patient findPatientById(int id) {
         Patient patient = null;
@@ -51,6 +53,38 @@ public class PatientsDAO {
         }
         return patient;
     }
+/* метод отримання кількості пацієнтів в базі*/
+    public int patientsCount() {
+        int count = 0;
+        try (Connection connection = dbManager.getConnection();
+             ResultSet resultSet = connection.prepareStatement(Constants.FROM_PATIENTS_COUNT).executeQuery()) {
+            while (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+            throw new RuntimeException(e);
+        }
+        return count;
+    }
+
+    /* метод отримання кількості пацієнтів в базі*/
+    public int patientsCountForDoctor(int id) {
+        int count = 0;
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(Constants.FROM_PATIENTS_COUNT_FOR_DOCTOR)) {
+            preparedStatement.setInt(1,id);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    count = resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+            throw new RuntimeException(e);
+        }
+        return count;
+    }
     /* метод отримання списку всіх пацієнтів за сортуванням */
     public List<Patient> findAllPatients(String sorted) {
         List<Patient> patientList = new ArrayList<>();
@@ -67,6 +101,7 @@ public class PatientsDAO {
         }
         return patientList;
     }
+
     /* метод отримання списку пацієнтів за сортуванням та пагінацією */
     public List<Patient> findPatientsWithLimit(String sorted, int start, int total) {
         start = (start - 1) * total;

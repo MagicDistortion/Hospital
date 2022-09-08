@@ -11,10 +11,10 @@
         <location>/error404.jsp</location>
     </error-page>
 
-    <error-page>
-        <error-code>500</error-code>
-        <location>/error500.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <error-code>500</error-code>-->
+<!--        <location>/error500.jsp</location>-->
+<!--    </error-page>-->
 
     <filter>
         <filter-name>encoding=filter</filter-name>
@@ -58,10 +58,6 @@
         <filter-name>admin=filter</filter-name>
         <url-pattern>/admins_only/*</url-pattern>
     </filter-mapping>
-    <filter-mapping>
-        <filter-name>doctor=filter</filter-name>
-        <url-pattern>/doctors_only/*</url-pattern>
-    </filter-mapping>
 
     <filter>
         <filter-name>patient=filter</filter-name>
@@ -82,6 +78,7 @@
         <filter-name>nurse=filter</filter-name>
         <url-pattern>/nurses_only/*</url-pattern>
     </filter-mapping>
+
     <listener>
         <listener-class>project.filters.Listener</listener-class>
     </listener>
