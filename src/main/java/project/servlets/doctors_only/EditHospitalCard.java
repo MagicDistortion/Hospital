@@ -37,6 +37,7 @@ public class EditHospitalCard extends HttpServlet {
         req.getSession().setAttribute("create_time", hospitalCard.getCreateTime());
         req.getSession().setAttribute("id_card", hospitalCard.getId());
         req.getSession().setAttribute("status_patient", hospitalCard.getStatus());
+        req.getSession().setAttribute("doctors_id",hospitalCard.getDoctorsId());
 
         if (hospitalCard.getDiagnosis() != null) {
             req.getSession().setAttribute("diagnosis", hospitalCard.getDiagnosis());

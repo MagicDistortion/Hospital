@@ -1,7 +1,7 @@
 package project.servlets.doctors_only;
 
-import project.models.appointments.AppointmentDetails;
 import project.dao.AppointmentDetailsDAO;
+import project.models.appointments.AppointmentDetails;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/doctors_only/get_appointments")
-public class GetAppointmentDetails extends HttpServlet {
+@WebServlet("/doctors_only/get_overdue_appointments")
+public class GetOverdueAppointmentDetails extends HttpServlet {
     private final AppointmentDetailsDAO appointmentDetailsDAO = new AppointmentDetailsDAO();
     int id;
 
@@ -21,10 +21,10 @@ public class GetAppointmentDetails extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("id_card") != null) id = (int) req.getSession().getAttribute("id_card");
 
-        List<AppointmentDetails> appointmentsDetails = appointmentDetailsDAO.findAllAppointmentDetailsByID(id);
+        List<AppointmentDetails> appointmentsDetails = appointmentDetailsDAO.findOverdueAppointmentsByID(id);
         if (appointmentsDetails.size() == 0)
-            req.setAttribute("mes", ((Map<?, ?>) req.getAttribute("phrases")).get("langEmpty"));
-        req.setAttribute("appointments", appointmentsDetails);
+            req.setAttribute("ermes", ((Map<?, ?>) req.getAttribute("phrases")).get("langEmpty"));
+        req.setAttribute("overdue_appointments", appointmentsDetails);
         req.getRequestDispatcher("/doctors_only/edit_hospital_cards.jsp").forward(req, resp);
     }
 }

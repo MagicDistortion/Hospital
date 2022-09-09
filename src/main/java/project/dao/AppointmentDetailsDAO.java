@@ -6,6 +6,7 @@ import project.models.appointments.AppointmentDetails;
 import project.models.users.Doctor;
 import project.models.users.Nurse;
 import project.models.users.Patient;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,7 +56,33 @@ public class AppointmentDetailsDAO {
             throw new RuntimeException(e);
         }
     }
-    /* метод отримання списку невиконаних та не просрочених за датою призначень у лікарняній картці по id картки  */
+
+    /* метод оновлення дати призначення  */
+    public void updateDateAppointment(LocalDate date, int id) {
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_DATE_APPOINTMENT)) {
+            preparedStatement.setObject(1, date);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            logger.error(e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    /* метод видалення призначення  */
+    public void deleteAppointment(int id) {
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.DELETE_APPOINTMENT)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            logger.error(e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    /* метод отримання списку невиконаних та не прострочених за датою призначень у лікарняній картці по id картки  */
     public List<AppointmentDetails> findAllAppointmentDetailsByID(int hospitalCardId) {
         List<AppointmentDetails> appointmentDetailsList = new ArrayList<>();
         try (Connection connection = dbManager.getConnection();
@@ -90,6 +117,77 @@ public class AppointmentDetailsDAO {
         }
         return appointmentDetailsList;
     }
+
+    /* метод отримання списку невиконаних та прострочених за датою призначень у лікарняній картці по id картки  */
+    public List<AppointmentDetails> findOverdueAppointmentsByID(int hospitalCardId) {
+        List<AppointmentDetails> appointmentDetailsList = new ArrayList<>();
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.FROM_APPOINTMENT_DETAIL)) {
+            preparedStatement.setInt(1, hospitalCardId);
+            preparedStatement.execute();
+            try (ResultSet resultSet = preparedStatement.getResultSet()) {
+                while (resultSet.next()) {
+                    LocalDate date = resultSet.getDate("date").toLocalDate();
+                    if (!date.equals(LocalDate.now()) && date.isBefore(LocalDate.now())) {
+                        Doctor doctor = doctorsDAO.findDoctorById(resultSet.getInt("doctors_id"));
+                        Nurse nurse = nursesDAO.findNurseById(resultSet.getInt("nurse_id"));
+
+                        AppointmentDetails appointmentDetails
+                                = new AppointmentDetails(resultSet.getString("text"), date);
+                        appointmentDetails.setId(resultSet.getInt("id"));
+                        appointmentDetails.setNurseId(resultSet.getInt("nurse_id"));
+                        appointmentDetails.setAppointmentId(resultSet.getInt("appointment_id"));
+                        appointmentDetails.setDoctorsId(resultSet.getInt("doctors_id"));
+                        appointmentDetails.setHospitalCardId(resultSet.getInt("hospital_card_id"));
+                        appointmentDetails.setAppointment(resultSet.getString("name"));
+                        appointmentDetails.setStatus(resultSet.getString("status"));
+                        appointmentDetails.setDoctorFullName(doctor.getSurname() + " " + doctor.getName());
+                        appointmentDetails.setNurseFullName(nurse.getSurname() + " " + nurse.getName());
+                        appointmentDetailsList.add(appointmentDetails);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+            throw new RuntimeException(e);
+        }
+        return appointmentDetailsList;
+    }
+
+    /* метод отримання списку виконаних призначень у лікарняній картці по id картки  */
+    public List<AppointmentDetails> findDoneAppointmentDetailsByID(int hospitalCardId) {
+        List<AppointmentDetails> appointmentDetailsList = new ArrayList<>();
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.DONE_APPOINTMENT_DETAILS)) {
+            preparedStatement.setInt(1, hospitalCardId);
+            preparedStatement.execute();
+            try (ResultSet resultSet = preparedStatement.getResultSet()) {
+                while (resultSet.next()) {
+                    LocalDate date = resultSet.getDate("date").toLocalDate();
+                    Doctor doctor = doctorsDAO.findDoctorById(resultSet.getInt("doctors_id"));
+                    Nurse nurse = nursesDAO.findNurseById(resultSet.getInt("nurse_id"));
+
+                    AppointmentDetails appointmentDetails
+                            = new AppointmentDetails(resultSet.getString("text"), date);
+                    appointmentDetails.setId(resultSet.getInt("id"));
+                    appointmentDetails.setNurseId(resultSet.getInt("nurse_id"));
+                    appointmentDetails.setAppointmentId(resultSet.getInt("appointment_id"));
+                    appointmentDetails.setDoctorsId(resultSet.getInt("doctors_id"));
+                    appointmentDetails.setHospitalCardId(resultSet.getInt("hospital_card_id"));
+                    appointmentDetails.setAppointment(resultSet.getString("name"));
+                    appointmentDetails.setStatus(resultSet.getString("status"));
+                    appointmentDetails.setDoctorFullName(doctor.getSurname() + " " + doctor.getName());
+                    appointmentDetails.setNurseFullName(nurse.getSurname() + " " + nurse.getName());
+                    appointmentDetailsList.add(appointmentDetails);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+            throw new RuntimeException(e);
+        }
+        return appointmentDetailsList;
+    }
+
     /* метод отримання списку невиконаних та не просрочених за датою призначень назначених для поточної медсестри  */
     public List<AppointmentDetails> findAllAppointmentsForNurse(int nurseId) {
         List<AppointmentDetails> appointmentDetailsList = new ArrayList<>();

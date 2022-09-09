@@ -26,9 +26,9 @@
               placeholder="pagination" required />
                 <select type="button" class="btn btn-dark dropdown-toggle" name="sort">
                    <option disabled>${phrases['langSorted']} &nbsp</option>
-                   <option value="Surname">${phrases['langBySurname']} &nbsp</option>
-                   <option value="category">${phrases['langByCategory']} &nbsp</option>
-                   <option value="patients">${phrases['langByNOP']} &nbsp</option>
+                   <option value="Surname" <c:if test="${sort.equals('Surname')}"> selected </c:if> >${phrases['langBySurname']}</option>
+                   <option value="category" <c:if test="${sort.equals('category')}"> selected </c:if>>${phrases['langByCategory']}</option>
+                   <option value="patients" <c:if test="${sort.equals('patients')}"> selected </c:if>>${phrases['langByNOP']}</option>
                 <input type="submit" class="btn btn-dark" value="${phrases['langGetThem']}"/><br>
             </form>
         <h2 style="color:#B22222">

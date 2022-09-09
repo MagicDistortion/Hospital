@@ -1,4 +1,4 @@
-package project.servlets.nurses_only;
+package project.servlets.doctors_only;
 
 import project.dao.AppointmentDetailsDAO;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/nurses_only/update_status")
-public class UpdateStatus extends HttpServlet {
+@WebServlet("/doctors_only/update_status_appointment")
+public class UpdateStatusAppointment extends HttpServlet {
     private final AppointmentDetailsDAO appointmentDetailsDAO = new AppointmentDetailsDAO();
     int id;
     String status;
@@ -24,6 +24,7 @@ public class UpdateStatus extends HttpServlet {
                 appointmentDetailsDAO.deleteAppointment(id);
             } else appointmentDetailsDAO.updateAppointmentStatus(status, id);
         }
-        resp.sendRedirect("nurses_appointments");
+        resp.sendRedirect("get_appointments");
     }
 }
+

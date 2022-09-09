@@ -52,7 +52,7 @@
         </table>
 </nav>
                       <form align="right" action="lang" method="post">
-                         <select type="button" class="btn btn-primary dropdown-toggle"  name="lang">
+                         <select type="button" class="btn btn-primary dropdown-toggle" name="lang">
                          <option value="UA">${phrases['langUkrainian']}</option>
                          <option value="EN">${phrases['langEnglish']}</option>
                          </select>

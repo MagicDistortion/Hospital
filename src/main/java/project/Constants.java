@@ -17,6 +17,8 @@ public class Constants {
     public static final String UPDATE_DOCTOR_CATEGORY = "UPDATE doctors SET `category_id` = ? WHERE (`id` = ?) ";
     public static final String UPDATE_DIAGNOSIS = "UPDATE hospital_card SET diagnosis = ? WHERE id_card =?";
     public static final String UPDATE_APPOINTMENT_STATUS = "UPDATE appointment_detail SET status = ? WHERE id = ? ";
+    public static final String UPDATE_DATE_APPOINTMENT = "UPDATE appointment_detail SET date = ? WHERE id = ? ";
+    public static final String DELETE_APPOINTMENT = "DELETE FROM appointment_detail WHERE id = ? ";
     public static final String UPDATE_HOSPITAL_CARD_STATUS = "UPDATE hospital_card SET status = ? WHERE id_card = ? ";
     public static final String UPDATE_NUMBER_OF_PATIENTS = "UPDATE doctors SET number_of_patients = ? WHERE id = ? ";
     public static final String APPOINT_A_DOCTOR
@@ -34,6 +36,9 @@ public class Constants {
     public static final String FROM_APPOINTMENT_DETAIL
             = "SELECT * FROM appointment_detail left join appointment on appointment_id = appointment.id" +
             " where hospital_card_id = ? and `status`!='done'";
+    public static final String DONE_APPOINTMENT_DETAILS
+            = "SELECT * FROM appointment_detail left join appointment on appointment_id = appointment.id" +
+            " where hospital_card_id = ? and `status`='done'";
     public static final String FROM_APPOINTMENTS_FOR_NURSE
             = "SELECT * FROM appointment_detail left join appointment on appointment_id = appointment.id where nurse_id = ?";
     public static final String FIND_CATEGORY = "SELECT * FROM category WHERE name = ?";

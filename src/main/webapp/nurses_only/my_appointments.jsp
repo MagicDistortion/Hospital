@@ -37,16 +37,24 @@
                   <td><h4 style="color:#fff"/>${i.getPatientFullName()}&nbsp</td>
                   <td><h4 style="color:#fff"/>${i.getDate()} &nbsp</td>
                   <td><h4 style="color:#fff"/>${i.getStatus()} &nbsp</td>
+            <c:choose>
+              <c:when test="${!i.getAppointment().equals('Операція')}">
                 <form action ="../nurses_only/update_status" method ="post">
                   <input type="hidden" name="id" value="${i.getId()}"/>
                   <td><select class="btn btn-primary dropdown-toggle" name="status">
                          <option disabled>${phrases['langSetStatus']}</option>
+                         <option value="delete">delete</option>
                          <option value="waiting">waiting</option>
-                         <option value="in process">In process</option>
+                         <option value="in process" selected>In process</option>
                          <option value="done">Done</option> </select><br>
                        <input type="submit" class="btn btn-warning" value="${phrases['langSetStatus']}"/>
                   </td>
                 </form>
+              </c:when>
+              <c:otherwise>
+                 <td><h4 style="color:#fff"/>${phrases['langOnlyForDoctor']}</td>
+              </c:otherwise>
+            </c:choose>
                 </tr>
               </c:forEach>
         </table>
