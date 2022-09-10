@@ -29,6 +29,7 @@
                    <option value="Surname" <c:if test="${sort.equals('Surname')}"> selected </c:if> >${phrases['langBySurname']}</option>
                    <option value="category" <c:if test="${sort.equals('category')}"> selected </c:if>>${phrases['langByCategory']}</option>
                    <option value="patients" <c:if test="${sort.equals('patients')}"> selected </c:if>>${phrases['langByNOP']}</option>
+                </select>
                 <input type="submit" class="btn btn-dark" value="${phrases['langGetThem']}"/><br>
             </form>
         <h2 style="color:#B22222">

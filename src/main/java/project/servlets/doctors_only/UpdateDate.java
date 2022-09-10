@@ -24,7 +24,7 @@ public class UpdateDate extends HttpServlet {
                 appointmentDetailsDAO.updateDateAppointment(date, id);
                 resp.sendRedirect("get_overdue_appointments");
             }else {
-                req.setAttribute("err_message", "wrong date");
+                req.setAttribute("mes", "wrong date");
                 req.getRequestDispatcher("/doctors_only/edit_hospital_cards.jsp").forward(req, resp);
             }
         }

@@ -33,7 +33,7 @@ class GetAppointmentDetailsTest {
         servlet.doGet(request, response);
 
         verify(response, never()).sendRedirect(path);
-        verify(request,times(2)).getSession();
+        verify(request,times(3)).getSession();
         verify(dispatcher,times(1)).forward(request, response);
     }
 }
