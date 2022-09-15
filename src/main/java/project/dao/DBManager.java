@@ -5,6 +5,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.log4j.Logger;
 import project.ConfigurationManager;
+
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.Objects;
@@ -20,37 +21,35 @@ public class DBManager {
     private DBManager() {
         ConfigurationManager configInstance = ConfigurationManager.getInstance();
         String dbUrl = configInstance.getConfigValue("db.url");
-        if (dbUrl == null) {
+        String dbDriver = configInstance.getConfigValue("db.driver.class.name");
+        if (dbUrl == null || dbDriver == null) {
             logger.error("cannot connection to db");
             throw new RuntimeException("cannot connection to db");
         }
         try {
-            boolean dbUsePool = Objects.equals(configInstance.getConfigValue("db.usePool"), "true");
-            if (dbUsePool) {
-                HikariConfig hikariConfig = new HikariConfig();
-                hikariConfig.setJdbcUrl(dbUrl);
-                hikariConfig.setMaximumPoolSize(100);
-                hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-                this.dataSource = new HikariDataSource(hikariConfig);
-            } else {
-                MysqlDataSource mysqlDataSource = new MysqlDataSource();
-                mysqlDataSource.setURL(dbUrl);
-                this.dataSource = mysqlDataSource;
-            }
+            HikariConfig hikariConfig = new HikariConfig();
+            hikariConfig.setJdbcUrl(dbUrl);
+            hikariConfig.setMaximumPoolSize(100);
+            hikariConfig.setDriverClassName(dbDriver);
+            this.dataSource = new HikariDataSource(hikariConfig);
+
         } catch (Exception e) {
             logger.error("cannot connection to db", e);
             throw new RuntimeException("cannot connection to db", e);
         }
     }
+
     /* метод отримання синглтону DBManager */
     public static synchronized DBManager getInstance() {
         if (instance == null) instance = new DBManager();
         return instance;
     }
+
     /* метод отримання зв'язку з бд */
     public Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
+
     /*Обгортання методу у транзакцію */
     public void inTransaction(Consumer<Connection> action) {
         Connection connection = null;

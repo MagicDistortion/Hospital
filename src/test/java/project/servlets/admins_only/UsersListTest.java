@@ -1,6 +1,7 @@
 package project.servlets.admins_only;
 
 import org.junit.jupiter.api.Test;
+import project.BaseTest;
 import project.servlets.DoctorsList;
 import project.servlets.admins_only.UsersList;
 
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
-class UsersListTest {
+class UsersListTest extends BaseTest {
     private final static String path = "/admins_only/giving_a_role.jsp";
 
     @Test

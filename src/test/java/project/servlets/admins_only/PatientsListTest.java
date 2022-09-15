@@ -1,6 +1,7 @@
 package project.servlets.admins_only;
 
 import org.junit.jupiter.api.Test;
+import project.BaseTest;
 import project.servlets.DoctorsList;
 import project.servlets.admins_only.PatientsList;
 
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
-class PatientsListTest {
+class PatientsListTest extends BaseTest {
     private final static String pathGet = "/admins_only/patients.jsp";
     private final static String pathPost = "/admins_only/appoint_a_doctor.jsp";
     @Test

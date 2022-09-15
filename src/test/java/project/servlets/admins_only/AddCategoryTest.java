@@ -1,6 +1,7 @@
 package project.servlets.admins_only;
 
 import org.junit.jupiter.api.Test;
+import project.BaseTest;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
-class AddCategoryTest {
+class AddCategoryTest extends BaseTest {
     private final static String path = "/admins_only/add_category.jsp";
     @Test
     void doPost() throws ServletException, IOException {

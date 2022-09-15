@@ -1,6 +1,7 @@
 package project.servlets;
 
 import org.junit.jupiter.api.Test;
+import project.BaseTest;
 import project.servlets.DoctorsList;
 
 import javax.servlet.RequestDispatcher;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.never;
 
-class DoctorsListTest {
+class DoctorsListTest extends BaseTest {
     private final static String path = "doctors.jsp";
 
     @Test

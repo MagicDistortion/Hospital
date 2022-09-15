@@ -1,6 +1,7 @@
 package project.servlets;
 
 import org.junit.jupiter.api.Test;
+import project.BaseTest;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +14,7 @@ import java.util.Map;
 
 import static org.mockito.Mockito.*;
 
-class LoginTest {
+class LoginTest extends BaseTest {
     private final static String path = "index.jsp";
 
     @Test

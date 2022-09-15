@@ -1,6 +1,7 @@
 package project.servlets.doctors_only;
 
 import org.junit.jupiter.api.Test;
+import project.BaseTest;
 import project.servlets.doctors_only.HospitalCards;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
-class HospitalCardsTest {
+class HospitalCardsTest extends BaseTest {
     private final static String path = "/doctors_only/hospital_cards.jsp";
 
     @Test
