@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+
 @WebServlet("/register")
 public class Register extends HttpServlet {
     UsersDAO usersDAO = new UsersDAO();
