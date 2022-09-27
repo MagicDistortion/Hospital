@@ -19,7 +19,7 @@
     <table>
          <tr >
             <td style="color:#0000ff" /><h3/> ${phrases['langSurname']}:</td>
-            <td><input class="form-control" name="surname" placeholder="${phrases['langEnterSurname']}" value="${user.getSurname()}" pattern="^[A-Za-zА-Яа-яІіЇїєЄ]{1,32}" required/></td>
+            <td><input class="form-contro   l" name="surname" placeholder="${phrases['langEnterSurname']}" value="${user.getSurname()}" pattern="^[A-Za-zА-Яа-яІіЇїєЄ]{1,32}" required/></td>
         </tr>
         <tr>
             <td style="color:#ffff00" /><h3/> ${phrases['langName']}:</td>

@@ -22,7 +22,7 @@ public class UpdateDate extends HttpServlet {
             date = LocalDate.parse(req.getParameter("date"));
             if (date.isAfter(LocalDate.now()) || date.equals(LocalDate.now())){
                 appointmentDetailsDAO.updateDateAppointment(date, id);
-                resp.sendRedirect("get_overdue_appointments");
+                resp.sendRedirect("get_appointments");
             }else {
                 req.setAttribute("mes", "wrong date");
                 req.getRequestDispatcher("/doctors_only/edit_hospital_cards.jsp").forward(req, resp);
