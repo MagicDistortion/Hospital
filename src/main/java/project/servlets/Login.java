@@ -15,6 +15,12 @@ public class Login extends HttpServlet {
     private final UsersDAO usersDAO=new UsersDAO();
     String login;
     String password;
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("index.jsp").forward(req, resp);
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         login = req.getParameter("login");

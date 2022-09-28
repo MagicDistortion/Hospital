@@ -12,6 +12,12 @@ import java.io.IOException;
 @WebServlet("/admins_only/add_category")
 public class AddCategory extends HttpServlet {
     private final CategoriesDAO categoriesDAO = new CategoriesDAO();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/admins_only/add_category.jsp").forward(req, resp);
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String category = req.getParameter("category");
