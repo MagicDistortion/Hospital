@@ -37,7 +37,7 @@
             <th style="color:#0000ff"><h4/> ${phrases['langSurname']} &nbsp</th>
             <th style="color:#ffff00"><h4/> ${phrases['langName']} &nbsp</th>
             <th style="color:#0000ff"><h4 align="center"/>${phrases['langCategory']} &nbsp</th>
-            <th style="color:#ffff00"><h4/>${phrases['langNOP']} &nbsp</th>
+            <th style="color:#ffff00"><h4 align="center"/>${phrases['langNOP']} &nbsp</th>
                   <c:forEach items="${docList}" var="i">
                       <tr>
                          <td style="color:#fff"><h3/>${i.getSurname()} &nbsp</td>

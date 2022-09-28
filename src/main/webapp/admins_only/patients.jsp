@@ -35,7 +35,7 @@
 
             <th style="color:#0000ff"><h4/> ${phrases['langSurname']} &nbsp</th>
             <th style="color:#ffff00"><h4/> ${phrases['langName']} &nbsp</th>
-            <th style="color:#0000ff"><h4/> ${phrases['langDateOfBirth']} &nbsp</th>
+            <th style="color:#0000ff"><h4 align="center"/>${phrases['langDateOfBirth']} &nbsp</th>
                   <c:forEach items="${patientlist}" var="i">
                       <tr>
                          <td style="color:#fff"><h3/>${i.getSurname()} &nbsp</td>
