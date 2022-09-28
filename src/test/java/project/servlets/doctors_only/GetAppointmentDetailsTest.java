@@ -3,8 +3,6 @@ package project.servlets.doctors_only;
 import org.junit.jupiter.api.Test;
 import project.BaseTest;
 import project.models.hospitalcard.HospitalCard;
-import project.servlets.doctors_only.GetAppointmentDetails;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
