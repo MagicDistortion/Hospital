@@ -12,7 +12,6 @@ public class Language extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().setAttribute("lang", req.getParameter("lang"));
-        resp.setHeader("Location",req.getHeader("referer"));
-        resp.setStatus(302);
+        resp.sendRedirect(req.getHeader("referer"));
     }
 }
