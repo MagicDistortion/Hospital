@@ -18,8 +18,7 @@ public class MyHospitalCard extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = ((User) req.getSession().getAttribute("user")).getId();
         HospitalCard hospitalCard = hospitalCardDAO.getHospitalCard(id);
-        req.setAttribute("myhospitalcard", hospitalCard);
-        req.getSession().setAttribute("status_patient", hospitalCard.getStatus());
+        req.getSession().setAttribute("myhospitalcard", hospitalCard);
         if (hospitalCard.getCurrentDoctorName() == null && hospitalCard.getCurrentDoctorSurname() == null) {
             hospitalCard.setCurrentDoctorSurname(((Map<?, ?>) req.getAttribute("phrases")).get("langNotAssigned").toString());
             hospitalCard.setCurrentDoctorName(((Map<?, ?>) req.getAttribute("phrases")).get("langNotAssigned").toString());

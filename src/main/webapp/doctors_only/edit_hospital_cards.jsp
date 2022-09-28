@@ -20,7 +20,7 @@ body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
         <td>
            <h2  style="color:#0000ff">${phrases['langGetAppointmentsOfPatient']}</h2>
             <form action ="../doctors_only/get_appointments" method ="get">
-                <input type="hidden" name="id" value="${id_card}"/>
+                <input type="hidden" name="id" value="${hospital_card.getDoctorsId()}"/>
                 <input type="submit" class="btn btn-primary" value="${phrases['langGetThem']}"/>
                 <select type="button" class="btn btn-dark dropdown-toggle" name="type">
                    <option value="actual" <c:if test="${type.equals('actual')}"> selected </c:if> >${phrases['langActual']}</option>
@@ -31,7 +31,7 @@ body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
              <table class="table table-dark table-striped table-bordered">
                <th style="color:fff"><h6/> ${phrases['langAppointment']} &nbsp</th>
                <th style="color:fff"><h6/> ${phrases['langAppointmentDetails']}</th>
-             <c:if test="${user.getId()!=doctors_id}">
+             <c:if test="${user.getId()!=hospital_card.getDoctorsId()}">
                 <th style="color:fff"><h6/> ${phrases['langCurrentDoctor']}</th>
              </c:if>
                <th style="color:fff"><h6/> ${phrases['langDesignatedNurse']}</th>
@@ -39,13 +39,13 @@ body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
         <c:choose>
             <c:when test="${type.equals('actual')}">
                <th style="color:fff"><h6/> ${phrases['langStatus']} &nbsp</th>
-             <c:if test="${user.getId()==doctors_id}">
+             <c:if test="${user.getId()==hospital_card.getDoctorsId()}">
                <th style="color:fff"><h6 />${phrases['langSetStatus']} &nbsp</th>
              </c:if>
             </c:when>
             <c:when test="${type.equals('overdue')}">
                <th style="color:fff"><h6/> ${phrases['langStatus']} &nbsp</th>
-             <c:if test="${user.getId()==doctors_id}">
+             <c:if test="${user.getId()==hospital_card.getDoctorsId()}">
                <th style="color:fff"><h6/> ${phrases['langNewDate']} &nbsp&nbsp&nbsp</th>
                <th style="color:fff"><h6/> ${phrases['langChangeDate']} &nbsp&nbsp&nbsp</th>
              </c:if>
@@ -55,7 +55,7 @@ body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
                   <tr>
                     <td><h6 style="color:#fff"/>${i.getAppointment()}&nbsp</td>
                     <td><h6 style="color:#fff"/>${i.getText()}&nbsp</td>
-           <c:if test="${user.getId()!=doctors_id}">
+           <c:if test="${user.getId()!=hospital_card.getDoctorsId()}">
                     <td><h6 style="color:#fff"/>${i.getDoctorFullName()}&nbsp</td>
            </c:if>
                     <td><h6 style="color:#fff"/>${i.getNurseFullName()} &nbsp</td>
@@ -63,7 +63,7 @@ body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
            <c:choose>
             <c:when test="${type.equals('actual')}">
                     <td><h6 style="color:#fff"/>${i.getStatus()} &nbsp</td>
-           <c:if test="${user.getId()==doctors_id}">
+           <c:if test="${user.getId()==hospital_card.getDoctorsId()}">
                 <form action ="../doctors_only/update_status_appointment" method ="post">
                   <input type="hidden" name="id" value="${i.getId()}"/>
                   <td><select class="btn btn-primary dropdown-toggle" name="status">
@@ -79,7 +79,7 @@ body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
            </c:when>
            <c:when test="${type.equals('overdue')}">
                     <td><h6 style="color:#fff"/>${i.getStatus()} &nbsp</td>
-           <c:if test="${user.getId()==doctors_id}">
+           <c:if test="${user.getId()==hospital_card.getDoctorsId()}">
                 <form action ="../doctors_only/update_date" method ="post">
                   <input type="hidden" name="id" value="${i.getId()}"/>
                   <td><input class="btn btn-primary dropdown-toggle" type="date" name="date" value=<mt:myTag/> required/></td>
@@ -95,10 +95,10 @@ body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
                    <c:if  test="${not empty mes}" >${mes}</c:if>
                </h2>
 
-           <c:if test="${user.getId()==doctors_id}">
+           <c:if test="${user.getId()==hospital_card.getDoctorsId()}">
              <h2  style="color:#ffff00">${phrases['langAddAppointment']}</h2>
               <form action ="../doctors_only/insert_appoint" method ="post">
-                  <input type="hidden" name="id" value="${id_card}"/>
+                  <input type="hidden" name="id" value="${hospital_card.getDoctorsId()}"/>
                 <select class="btn btn-primary dropdown-toggle" name="appoint" required>
                     <option disabled>${phrases['langPickAPoint']}</option>
                    <c:forEach items="${appoints}" var="j">
@@ -128,38 +128,38 @@ body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
                 <br><br>
                      <tr style="color:#0000ff">
                          <td>${phrases['langPatientSurname']}:&nbsp</td>
-                         <td>${patient_surname}</td>
+                         <td>${hospital_card.getPatientsSurname()}</td>
                      </tr>
                      <tr style="color:#ffff00">
                          <td>${phrases['langPatientName']}:</td>
-                         <td>${patient_name}</td>
+                         <td>${hospital_card.getPatientsName()}</td>
                      </tr>
                      <tr style="color:#0000ff">
                         <td/>${phrases['langDateOfRegistration']}:</td>
-	                    <td>${create_time}</td>
+	                    <td>${hospital_card.getCreateTime()}</td>
                      </tr>
                      <tr style="color:#ffff00">
                         <td>${phrases['langDoctorSurname']}:</td>
-                        <td>${current_doctorSurname}</td>
+                        <td>${hospital_card.getCurrentDoctorSurname()}</td>
                      </tr>
                      <tr style="color:#0000ff">
                         <td>${phrases['langDoctorName']}:</td>
-                        <td>${current_doctorName}</td>
+                        <td>${hospital_card.getCurrentDoctorName()}</td>
                      </tr>
                      <tr style="color:#ffff00">
                         <td>${phrases['langCurrentDiagnosis']}:</td>
-                        <td>${diagnosis}</td>
+                        <td>${hospital_card.getDiagnosis()}</td>
                      </tr>
                      <tr style="color:#0000ff">
                         <td>${phrases['langStatus']}:</td>
-                        <td>${status_patient}</td>
+                        <td>${hospital_card.getStatus()}</td>
                      </tr>
                      <tr>
-                     <c:if test="${user.getId()==doctors_id}">
+                     <c:if test="${user.getId()==hospital_card.getDoctorsId()}">
                          <td><form action ="../doctors_only/update_diagnosis" method ="post">
-                           <input type="hidden" name="id" value="${id_card}"/>
+                           <input type="hidden" name="id" value="${hospital_card.getDoctorsId()}"/>
     	                   <input type="submit" class="btn btn-primary" value="${phrases['langChangeDiagnosis']}"/><br>
-    	                   <input name="diagnosis"  class="form-control" placeholder="${phrases['langEnterNewDiagnosis']}"/><br>
+    	                   <input name="diagnosis" class="form-control" placeholder="${phrases['langEnterNewDiagnosis']}"/><br>
                          </form></td>
                          <td><form action ="../doctors_only/update_status" method ="post">
                              <select  class="form-control" name="status">
@@ -180,7 +180,7 @@ body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
     </tr>
 </table>
 <div align="center">
-<input type="submit" class="btn btn-dark" value="${phrases['langGoBack']}"  onclick="window.location='${back}.jsp';"/>
+<input type="submit" class="btn btn-dark" value="${phrases['langGoBack']}"  onclick="window.location='${back}';"/>
 </div>
 </body>
 </html>

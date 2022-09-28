@@ -6,6 +6,7 @@ import project.dao.HospitalCardDAO;
 import project.dao.NursesDAO;
 import project.models.hospitalcard.HospitalCard;
 import project.models.users.Nurse;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +18,10 @@ import java.util.Map;
 
 @WebServlet("/doctors_only/edit_hospital_cards")
 public class EditHospitalCard extends HttpServlet {
-    private final NursesDAO nursesDAO=new NursesDAO();
-    private final HospitalCardDAO hospitalCardDAO= new HospitalCardDAO();
+    private final NursesDAO nursesDAO = new NursesDAO();
+    private final HospitalCardDAO hospitalCardDAO = new HospitalCardDAO();
     private final AppointmentsDAO appointmentsDAO = new AppointmentsDAO();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Appointment> allAppointments = appointmentsDAO.findAllAppointments();
@@ -30,26 +32,14 @@ public class EditHospitalCard extends HttpServlet {
 
         int patientId = Integer.parseInt(req.getParameter("id"));
         HospitalCard hospitalCard = hospitalCardDAO.getHospitalCard(patientId);
+        req.getSession().setAttribute("back", req.getHeader("referer"));
+        req.getSession().setAttribute("hospital_card", hospitalCard);
 
-        req.getSession().setAttribute("back", req.getParameter("back"));
-        req.getSession().setAttribute("patient_surname", hospitalCard.getPatientsSurname());
-        req.getSession().setAttribute("patient_name", hospitalCard.getPatientsName());
-        req.getSession().setAttribute("create_time", hospitalCard.getCreateTime());
-        req.getSession().setAttribute("id_card", hospitalCard.getId());
-        req.getSession().setAttribute("status_patient", hospitalCard.getStatus());
-        req.getSession().setAttribute("doctors_id",hospitalCard.getDoctorsId());
-
-        if (hospitalCard.getDiagnosis() != null) {
-            req.getSession().setAttribute("diagnosis", hospitalCard.getDiagnosis());
-        } else
-            req.getSession().setAttribute("diagnosis", ((Map<?, ?>) req.getAttribute("phrases")).get("langNotExistYet"));
-
-        if (hospitalCard.getCurrentDoctorName() != null && hospitalCard.getCurrentDoctorSurname() != null) {
-            req.getSession().setAttribute("current_doctorSurname", hospitalCard.getCurrentDoctorSurname());
-            req.getSession().setAttribute("current_doctorName", hospitalCard.getCurrentDoctorName());
-        } else {
-            req.getSession().setAttribute("current_doctorSurname", ((Map<?, ?>) req.getAttribute("phrases")).get("langNotAssigned"));
-            req.getSession().setAttribute("current_doctorName", ((Map<?, ?>) req.getAttribute("phrases")).get("langNotAssigned"));
+        if (hospitalCard.getDiagnosis() == null)
+            hospitalCard.setDiagnosis(((Map<?, ?>) req.getAttribute("phrases")).get("langNotExistYet").toString());
+        if (hospitalCard.getCurrentDoctorName() == null && hospitalCard.getCurrentDoctorSurname() == null) {
+            hospitalCard.setCurrentDoctorName(((Map<?, ?>) req.getAttribute("phrases")).get("langNotAssigned").toString());
+            hospitalCard.setCurrentDoctorSurname(((Map<?, ?>) req.getAttribute("phrases")).get("langNotAssigned").toString());
         }
         req.getRequestDispatcher("/doctors_only/edit_hospital_cards.jsp").forward(req, resp);
     }

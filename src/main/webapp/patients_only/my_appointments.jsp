@@ -66,7 +66,7 @@
         </table>
     </h3>
     </c:if>
-             <c:if test="${status_patient.equals('discharged')}">
+             <c:if test="${myhospitalcard.getStatus().equals('discharged')}">
                  <form action ="../patients_only/newbee_again" method ="post">
                     <input type="submit" class="btn btn-dark" value="${phrases['langNeedHelpAgain']}"/>
                  </form>

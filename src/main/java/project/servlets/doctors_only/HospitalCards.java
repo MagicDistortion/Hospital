@@ -13,7 +13,6 @@ import java.util.List;
 @WebServlet("/doctors_only/hospital_cards")
 public class HospitalCards extends HttpServlet {
     private final Paginator paginator = new Paginator();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<HospitalCard> cards = paginator.paginationHospitalCards(req);

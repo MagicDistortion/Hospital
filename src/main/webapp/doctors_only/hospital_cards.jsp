@@ -37,7 +37,6 @@
                          <td style="color:#fff"><h3/>${i.getPatientsName()} &nbsp</td>
                             <form action ="../doctors_only/edit_hospital_cards" method ="post">
                                <input type="hidden" name="id" value="${i.getId()}"/>
-                               <input type="hidden" name="back" value="hospital_cards"/>
                          <td> <input type="submit" class="btn btn-light" value="${phrases['langGetDetail']}"> </td>
                             </form>
                       </tr>

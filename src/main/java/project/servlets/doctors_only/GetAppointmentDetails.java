@@ -2,6 +2,7 @@ package project.servlets.doctors_only;
 
 import project.models.appointments.AppointmentDetails;
 import project.dao.AppointmentDetailsDAO;
+import project.models.hospitalcard.HospitalCard;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,10 +21,11 @@ public class GetAppointmentDetails extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<AppointmentDetails> appointmentsDetails = new ArrayList<>();
-        String type="actual";
-        if (req.getSession().getAttribute("id_card") != null) id = (int) req.getSession().getAttribute("id_card");
-        if (req.getParameter("type")!=null) type=req.getParameter("type");
-        req.setAttribute("type",type);
+        String type = "actual";
+        if (req.getSession().getAttribute(("hospital_card")) != null)
+            id = ((HospitalCard) req.getSession().getAttribute(("hospital_card"))).getId();
+        if (req.getParameter("type") != null) type = req.getParameter("type");
+        req.setAttribute("type", type);
         switch (type) {
             case "actual":
                 appointmentsDetails = appointmentDetailsDAO.findAllAppointmentDetailsByID(id);

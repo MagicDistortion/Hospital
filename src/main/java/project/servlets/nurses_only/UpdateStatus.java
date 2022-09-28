@@ -14,7 +14,6 @@ public class UpdateStatus extends HttpServlet {
     private final AppointmentDetailsDAO appointmentDetailsDAO = new AppointmentDetailsDAO();
     int id;
     String status;
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (Integer.parseInt(req.getParameter("id")) != 0 && req.getParameter("status") != null) {

@@ -44,7 +44,6 @@
                          <td style="color:#fff" align="center"><h3/>${i.getDateOfBirth()} &nbsp</td>
                             <form action ="../doctors_only/edit_hospital_cards" method ="post">
                                <input type="hidden" name="id" value="${i.getId()}"/>
-                               <input type="hidden" name="back" value="my_patients"/>
                          <td> <input type="submit" class="btn btn-light" value="${phrases['langGetDetail']}"> </td>
                             </form>
 
