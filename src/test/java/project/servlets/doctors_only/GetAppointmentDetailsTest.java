@@ -2,6 +2,7 @@ package project.servlets.doctors_only;
 
 import org.junit.jupiter.api.Test;
 import project.BaseTest;
+import project.models.hospitalcard.HospitalCard;
 import project.servlets.doctors_only.GetAppointmentDetails;
 
 import javax.servlet.RequestDispatcher;
@@ -29,7 +30,7 @@ class GetAppointmentDetailsTest extends BaseTest {
 
         when(request.getRequestDispatcher(path)).thenReturn(dispatcher);
         when(request.getSession()).thenReturn(session);
-        when(request.getSession().getAttribute("id_card")).thenReturn(33);
+        when(request.getSession().getAttribute("hospital_card")).thenReturn(new HospitalCard(33));
 
         servlet.doGet(request, response);
 
