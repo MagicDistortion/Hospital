@@ -22,8 +22,7 @@ public class LangFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig){
         for (String lang : LANGS) {
-            try (InputStream stream = LangFilter.class.getClassLoader()
-                    .getResourceAsStream("lang." + lang + ".properties")) {
+            try (InputStream stream = LangFilter.class.getClassLoader().getResourceAsStream("lang." + lang + ".properties")) {
                 if (stream != null) {
                     Map<String, String> phrases = new HashMap<>();
                     Properties properties = new Properties();
@@ -36,7 +35,6 @@ public class LangFilter implements Filter {
             }
         }
     }
-
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServlet = (HttpServletRequest) servletRequest;
@@ -47,8 +45,6 @@ public class LangFilter implements Filter {
         }
         Map<String, String> phrases = localizations.get(lang);
         servletRequest.setAttribute("phrases", phrases);
-
         filterChain.doFilter(servletRequest, servletResponse);
-
     }
 }
