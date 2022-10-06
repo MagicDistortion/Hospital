@@ -17,6 +17,7 @@ public class DoctorsList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Doctor> doctors = paginator.paginationDoctorsList(req);
+        req.setAttribute("docList", doctors);
         req.getRequestDispatcher("doctors.jsp").forward(req, resp);
     }
 }

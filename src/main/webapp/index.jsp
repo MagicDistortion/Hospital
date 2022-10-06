@@ -12,8 +12,7 @@
           </style>
     <body>
     <%@ include file="header.jspf" %>
-     <c:choose>
-        <c:when test="${empty user}">
+        <c:if test="${empty user}">
            <br><br><br><br><br><br><br>
                <form action ="login" method ="post">
                    <div align="center" >
@@ -34,7 +33,6 @@
                            </h2>
                    </div>
                </form>
-        </c:when>
-     </c:choose>
+        </c:if>
   </body>
 </html>

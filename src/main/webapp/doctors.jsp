@@ -51,7 +51,14 @@
                    <a class="btn btn-outline-primary"  href="doctors_sortlist?pagination=${pagination}&sort=${sort}&page=${page-1}"><<</a>
                    </c:if>
                   <c:forEach begin="1" end="${pages}" var="i" step="1">
-                        <a class="btn btn-outline-primary" href="doctors_sortlist?pagination=${pagination}&sort=${sort}&page=${i}">${i}</a>
+                       <c:choose>
+                        <c:when test="${page==i}">
+                         <a class="btn btn-primary" href="doctors_sortlist?pagination=${pagination}&sort=${sort}&page=${i}">${i}</a>
+                        </c:when>
+                        <c:otherwise>
+                         <a class="btn btn-outline-primary" href="doctors_sortlist?pagination=${pagination}&sort=${sort}&page=${i}">${i}</a>
+                        </c:otherwise>
+                       </c:choose>
                    </c:forEach>
                    <c:if test="${page<pages}">
                    <a class="btn btn-outline-primary"  href="doctors_sortlist?pagination=${pagination}&sort=${sort}&page=${page+1}">>></a>

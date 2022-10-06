@@ -46,7 +46,14 @@
                    <a class="btn btn-outline-primary"  href="../doctors_only/hospital_cards?pagination=${pagination}&page=${page-1}"><<</a>
                    </c:if>
                        <c:forEach begin="1" end="${pages}" var="i" step="1">
+                       <c:choose>
+                        <c:when test="${page==i}">
+                          <a class="btn btn-primary"  href="../doctors_only/hospital_cards?pagination=${pagination}&page=${i}">${i}</a>
+                        </c:when>
+                        <c:otherwise>
                           <a class="btn btn-outline-primary"  href="../doctors_only/hospital_cards?pagination=${pagination}&page=${i}">${i}</a>
+                        </c:otherwise>
+                       </c:choose>
                       </c:forEach>
                    <c:if test="${page<pages}">
                    <a class="btn btn-outline-primary"  href="../doctors_only/hospital_cards?pagination=${pagination}&page=${page+1}">>></a>

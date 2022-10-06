@@ -15,7 +15,7 @@ public class Paginator {
     private final DoctorsDAO doctorsDAO = new DoctorsDAO();
     private final HospitalCardDAO hospitalCardDAO = new HospitalCardDAO();
     /* метод повертає у сервлет лист пацієнтів за id лікаря*/
-    public synchronized List<Patient> paginationMyPatients(HttpServletRequest req) {
+    public List<Patient> paginationMyPatients(HttpServletRequest req) {
         int id = ((User)req.getSession().getAttribute("user")).getId();
         String sort = "surname";
         if (req.getParameter("sort") != null) sort = req.getParameter("sort");
@@ -30,25 +30,19 @@ public class Paginator {
         int patientsCount= patientsDAO.patientsCountForDoctor(id);
         int pagination = getPagination(req);
         int page = getPage(req);
-
         getPages(req, patientsCount, pagination);
-        List<Patient> patientList = patientsDAO.findPatientsWithLimit(sort, page, pagination);
-        req.setAttribute("patientlist", patientList);
-        return patientList;
+        return patientsDAO.findPatientsWithLimit(sort, page, pagination);
     }
     /* метод повертає у сервлет лист Лікарняних карт*/
-    public synchronized List<HospitalCard> paginationHospitalCards(HttpServletRequest req) {
+    public List<HospitalCard> paginationHospitalCards(HttpServletRequest req) {
         int hospitalCardsCount = hospitalCardDAO.hospitalCardsCount();
         int pagination = getPagination(req);
         int page = getPage(req);
         getPages(req, hospitalCardsCount, pagination);
-
-        List<HospitalCard> cards = hospitalCardDAO.getHospitalCardsWithLimit(page, pagination);
-        req.setAttribute("cards", cards);
-        return cards;
+        return hospitalCardDAO.getHospitalCardsWithLimit(page, pagination);
     }
     /* метод повертає у сервлет лист пацієнтів*/
-    public synchronized List<Patient> paginationPatientsList(HttpServletRequest req) {
+    public List<Patient> paginationPatientsList(HttpServletRequest req) {
         String sort = "surname";
         if (req.getParameter("sort") != null) sort = req.getParameter("sort");
         req.setAttribute("sort", sort);
@@ -63,13 +57,10 @@ public class Paginator {
         int pagination = getPagination(req);
         int page = getPage(req);
         getPages(req, patientsCount, pagination);
-
-        List<Patient> patientsList = patientsDAO.findPatientsWithLimit(sort, page, pagination);
-        req.setAttribute("patientlist", patientsList);
-        return patientsList;
+        return patientsDAO.findPatientsWithLimit(sort, page, pagination);
     }
     /* метод повертає у сервлет лист лікарів*/
-    public synchronized List<Doctor> paginationDoctorsList(HttpServletRequest req) {
+    public List<Doctor> paginationDoctorsList(HttpServletRequest req) {
         String sort = "surname";
         if (req.getParameter("sort") != null) sort = req.getParameter("sort");
         req.setAttribute("sort", sort);
@@ -87,13 +78,10 @@ public class Paginator {
         int pagination = getPagination(req);
         int page = getPage(req);
         getPages(req, doctorsCount, pagination);
-
-        List<Doctor> doctors = doctorsDAO.findDoctorsWithLimit(sort, page, pagination);
-        req.setAttribute("docList", doctors);
-        return doctors;
+        return doctorsDAO.findDoctorsWithLimit(sort, page, pagination);
     }
     /* метод повертає номер сторінки, та передає його у запит*/
-    private static int getPage(HttpServletRequest req) {
+    private int getPage(HttpServletRequest req) {
         int page = 1;
         if (req.getParameter("page") != null)
             page = Integer.parseInt(req.getParameter("page"));
@@ -101,7 +89,7 @@ public class Paginator {
         return page;
     }
     /* метод повертає кількість відповідей які отримає користувач на одній сторінці,також передає у запит */
-    private static int getPagination(HttpServletRequest req) {
+    private int getPagination(HttpServletRequest req) {
         int pagination;
         if (req.getParameter("pagination") == null || Integer.parseInt(req.getParameter("pagination")) <= 0) {
             pagination = 5;
@@ -111,7 +99,7 @@ public class Paginator {
         return pagination;
     }
     /* метод повертає загальну кількість сторінок, також передає її у запит*/
-    private static void getPages(HttpServletRequest req, int size, int pagination) {
+    private void getPages(HttpServletRequest req, int size, int pagination) {
         int pages = size / pagination;
         if (size % pagination != 0) pages += 1;
         req.setAttribute("pages", pages);

@@ -25,6 +25,7 @@ public class PatientsList extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Patient> patients = paginator.paginationPatientsList(req);
         if (patients.size() == 0) req.setAttribute("mes", ((Map<?, ?>) req.getAttribute("phrases")).get("langEmpty"));
+        req.setAttribute("patientlist", patients);
         req.getRequestDispatcher("/admins_only/patients.jsp").forward(req, resp);
     }
 

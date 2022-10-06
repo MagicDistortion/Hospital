@@ -18,6 +18,7 @@ private final Paginator paginator=new Paginator();
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Patient>patientList = paginator.paginationMyPatients(req);
         if (patientList.size()==0)  req.setAttribute("mes",((Map<?, ?>)req.getAttribute("phrases")).get("langEmpty"));
+        req.setAttribute("patientlist", patientList);
         req.getRequestDispatcher("/doctors_only/my_patients.jsp").forward(req, resp);
     }
 }
