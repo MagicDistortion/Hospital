@@ -3,6 +3,7 @@ package project.servlets;
 import project.dao.UsersDAO;
 import project.models.users.User;
 import project.validator.Validator;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,9 +17,10 @@ import java.util.List;
 @WebServlet("/register")
 public class Register extends HttpServlet {
     private final UsersDAO usersDAO = new UsersDAO();
-    private final Validator validator = new Validator();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Validator validator = new Validator();
         List<String> errors = validator.registerValidate(req);
         User user = new User(req.getParameter("surname")
                 , req.getParameter("name")
@@ -30,10 +32,10 @@ public class Register extends HttpServlet {
             usersDAO.insertUser(user);
             req.getSession().setAttribute("user", user);
             resp.sendRedirect("index.jsp");
-        }else  {
-            req.setAttribute("user",user);
-            req.setAttribute("tel",req.getParameter("tel"));
-            req.setAttribute("errors",errors);
+        } else {
+            req.setAttribute("user", user);
+            req.setAttribute("tel", req.getParameter("tel"));
+            req.setAttribute("errors", errors);
             req.getRequestDispatcher("register_form.jsp").forward(req, resp);
         }
     }

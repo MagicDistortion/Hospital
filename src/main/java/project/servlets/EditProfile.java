@@ -15,10 +15,9 @@ import java.util.List;
 @WebServlet("/edit_profile")
 public class EditProfile extends HttpServlet {
     private final UsersDAO usersDAO = new UsersDAO();
-    private final ValidatorEditForm validatorEditForm = new ValidatorEditForm();
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ValidatorEditForm validatorEditForm = new ValidatorEditForm();
         List<String> errors = validatorEditForm.editValidate(req);
         User user = usersDAO.findUserByID(((User) req.getSession().getAttribute("user")).getId());
         req.getSession().setAttribute("user", user);
