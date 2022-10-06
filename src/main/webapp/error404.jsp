@@ -14,13 +14,15 @@
        <c:if test="${lang=='UA'}">
             <h2 align="center">Помилка 404</h2>
             <h2 align="center">Упс. Щось пішло не так. Поверніться на головну </h2>
+                    <br><br><br><br><br><br><br><br><br><br><br><br>
+                       <h1> <a class="btn btn-light" href="/Hospital/index.jsp">Повернутись на головну</a> </h1>
         </c:if>
         <c:if test="${lang=='EN'}">
             <h2 align="center">Error 404</h2>
             <h2 align="center">Oops. Something went wrong. Go to Login> </h2>
+                    <br><br><br><br><br><br><br><br><br><br><br><br>
+                       <h1> <a class="btn btn-light" href="/Hospital/index.jsp">Go to Login</a> </h1>
         </c:if>
-        <br><br><br><br><br><br><br><br><br><br><br><br>
-           <h1> <a class="btn btn-light" href="/Hospital/index.jsp">${phrases['langGoToLogin']}</a> </h1>
          </div>
     </body>
 </html>

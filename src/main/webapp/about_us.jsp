@@ -15,7 +15,7 @@
     <br><br><br><br><br>
         <div style="color:#fff"/>
         <c:if test="${lang=='UA'}">
-            <h2 align="center">О Нас</h2>
+            <h2 align="center">Про Нас</h2>
             <h3 align="center">Ми найкраща лікарня у місті Одеса </h3>
         </c:if>
         <c:if test="${lang=='EN'}">

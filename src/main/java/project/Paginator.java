@@ -28,10 +28,9 @@ public class Paginator {
                 sort = "WHERE current_doctor_id ="+id+" ORDER BY date_of_birth";
         }
         int patientsCount= patientsDAO.patientsCountForDoctor(id);
-        req.setAttribute("patientsCount", patientsCount);
-
         int pagination = getPagination(req);
         int page = getPage(req);
+
         getPages(req, patientsCount, pagination);
         List<Patient> patientList = patientsDAO.findPatientsWithLimit(sort, page, pagination);
         req.setAttribute("patientlist", patientList);
@@ -40,8 +39,6 @@ public class Paginator {
     /* метод повертає у сервлет лист Лікарняних карт*/
     public synchronized List<HospitalCard> paginationHospitalCards(HttpServletRequest req) {
         int hospitalCardsCount = hospitalCardDAO.hospitalCardsCount();
-        req.setAttribute("hospitalCardsCount", hospitalCardsCount);
-
         int pagination = getPagination(req);
         int page = getPage(req);
         getPages(req, hospitalCardsCount, pagination);
@@ -63,8 +60,6 @@ public class Paginator {
                 sort = "WHERE `status`!='discharged' ORDER BY date_of_birth";
         }
         int patientsCount = patientsDAO.patientsCount();
-        req.setAttribute("patientsCount", patientsCount);
-
         int pagination = getPagination(req);
         int page = getPage(req);
         getPages(req, patientsCount, pagination);
@@ -89,8 +84,6 @@ public class Paginator {
                 sort = "ORDER BY number_of_patients DESC";
         }
         int doctorsCount = doctorsDAO.doctorsCount();
-        req.setAttribute("doctorsCount", doctorsCount);
-
         int pagination = getPagination(req);
         int page = getPage(req);
         getPages(req, doctorsCount, pagination);

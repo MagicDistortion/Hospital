@@ -40,7 +40,7 @@
   </div>
         <table align="right">
               <tr>
-                 <td> <c:if  test="${user.getRolesId()!=null}" >
+                 <td> <c:if  test="${user!=null}" >
                      <h5 align="right" style="color:#0000ff"><tf:user message="${phrases['langHi']}${user.getName()}"/></h5>
                       </c:if>
                 <c:if  test="${user.getRolesId()==null}" ><h5/><br></c:if>
