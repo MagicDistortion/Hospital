@@ -14,11 +14,9 @@ import java.util.List;
 @WebServlet("/doctors_sortlist")
 public class DoctorsList extends HttpServlet {
     private final Paginator paginator = new Paginator();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Doctor> doctors = paginator.paginationDoctorsList(req);
-        req.setAttribute("docList", doctors);
         req.getRequestDispatcher("doctors.jsp").forward(req, resp);
     }
 }

@@ -16,7 +16,7 @@ public class Validator {
     private static final List<String> errors = new ArrayList<>();
     private static final UsersDAO usersDAO = new UsersDAO();
     /* метод запускає перевірку отриманих з Http запиту данних, та повертає лист з помилками якщо вони є */
-    public synchronized static List<String> registerValidate(HttpServletRequest req) {
+    public List<String> registerValidate(HttpServletRequest req) {
         errors.clear();
         errors.add(validateName(req.getParameter("name")));
         errors.add(validateSurname(req.getParameter("surname")));
@@ -28,29 +28,29 @@ public class Validator {
         return errors;
     }
     /* перевірка імені */
-    private static String validateName(String name) {
+    private String validateName(String name) {
         if (name != null && name.length() >= 2 && name.length() < 32) return null;
         return "name is wrong";
     }
     /* перевірка прізвища */
-    private static String validateSurname(String surname) {
+    private String validateSurname(String surname) {
         if (surname != null && surname.length() >= 2 && surname.length() < 32) return null;
         return "surname is wrong";
     }
     /* перевірка логіну */
-    private static String validateLogin(String login) {
+    private String validateLogin(String login) {
         if (usersDAO.findUserByLogin(login) != null) return "The login is already in use";
         if (login != null && login.length() >= 2 && login.length() < 32) return null;
         return "login is wrong";
     }
     /* перевірка паролю*/
-    private static String validatePassword(String password, String rePassword) {
+    private String validatePassword(String password, String rePassword) {
         if (!password.equals(rePassword)) return "passwords not a same";
         if (password.length() >= 4 && password.length() < 32) return null;
         return "password is wrong";
     }
     /* перевірка телефону */
-    private static String validatePhoneNumber(String number) {
+    private String validatePhoneNumber(String number) {
         if (number == null) return "phone number is wrong";
         String finalTel = finalTel(number);
         if (finalTel.length() < 12) return "phone number is wrong";
@@ -59,7 +59,7 @@ public class Validator {
         return null;
     }
     /* перевірка дати народження */
-    private static String validateDateOfBirth(String date) {
+    private String validateDateOfBirth(String date) {
         LocalDate dateOfBirth;
         if (date == null) return "date is wrong";
         try {

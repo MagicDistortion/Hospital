@@ -15,10 +15,11 @@ import java.util.List;
 
 @WebServlet("/register")
 public class Register extends HttpServlet {
-    UsersDAO usersDAO = new UsersDAO();
+    private final UsersDAO usersDAO = new UsersDAO();
+    private final Validator validator = new Validator();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<String> errors = Validator.registerValidate(req);
+        List<String> errors = validator.registerValidate(req);
         User user = new User(req.getParameter("surname")
                 , req.getParameter("name")
                 , req.getParameter("login")

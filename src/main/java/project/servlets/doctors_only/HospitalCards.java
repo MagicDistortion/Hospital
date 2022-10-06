@@ -15,8 +15,7 @@ public class HospitalCards extends HttpServlet {
     private final Paginator paginator = new Paginator();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<HospitalCard> cards = paginator.paginationHospitalCards(req);
-        req.setAttribute("cards", cards);
+        List<HospitalCard> hospitalCards = paginator.paginationHospitalCards(req);
         req.getRequestDispatcher("/doctors_only/hospital_cards.jsp").forward(req, resp);
     }
 }

@@ -2,6 +2,7 @@ package project.validator;
 
 import project.dao.UsersDAO;
 import project.models.users.User;
+
 import javax.servlet.http.HttpServletRequest;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -11,14 +12,14 @@ import java.util.Objects;
 
 /*класс для перевірки даних у формі редагування профілю*/
 public class ValidatorEditForm {
-    private static final List<String> errors = new ArrayList<>();
-    private static final UsersDAO usersDAO = new UsersDAO();
-    private static User user;
+    private final List<String> errors = new ArrayList<>();
+    private final UsersDAO usersDAO = new UsersDAO();
+    private User user;
 
     /* метод отримує дані з Http запиту, перевіряє які поля були змінені, якщо такі є то
-    * перевіряє дані на валідність та повертає в результаті лист з помилками, якщо такі є,та підтвердженням
-    * змінених полей */
-    public synchronized static List<String> editValidate(HttpServletRequest req) {
+     * перевіряє дані на валідність та повертає в результаті лист з помилками, якщо такі є,та підтвердженням
+     * змінених полей */
+    public List<String> editValidate(HttpServletRequest req) {
         errors.clear();
         User oldUser = (User) req.getSession().getAttribute("user");
         user = new User(req.getParameter("surname"), req.getParameter("name"), req.getParameter("login")
@@ -41,24 +42,27 @@ public class ValidatorEditForm {
         errors.removeIf(Objects::isNull);
         return errors;
     }
+
     /* перевірка та оновлення прізвища */
-    private static String validateSurname(String surname) {
+    private String validateSurname(String surname) {
         if (surname != null && surname.length() >= 2 && surname.length() < 32) {
             usersDAO.updateUseSurname(surname, user.getId());
             return "surname is changed";
         }
         return "surname is wrong";
     }
+
     /* перевірка та оновлення імені */
-    private static String validateName(String name) {
+    private String validateName(String name) {
         if (name != null && name.length() >= 2 && name.length() < 32) {
             usersDAO.updateUserName(name, user.getId());
             return "name is changed";
         }
         return "name is wrong";
     }
+
     /* перевірка та оновлення логіну */
-    private static String validateLogin(String login) {
+    private String validateLogin(String login) {
         if (usersDAO.findUserByLogin(login) != null) return "The login is already in use";
         if (login != null && login.length() >= 2 && login.length() < 32) {
             usersDAO.updateUserLogin(login, user.getId());
@@ -66,8 +70,9 @@ public class ValidatorEditForm {
         }
         return "login is wrong";
     }
+
     /* перевірка та оновлення паролю*/
-    private static String validatePassword(String password, String rePassword) {
+    private String validatePassword(String password, String rePassword) {
         if (!password.equals(rePassword)) return "passwords not a same";
         if (password.length() >= 4 && password.length() < 32) {
             usersDAO.updateUserPassword(password, user.getId());
@@ -75,8 +80,9 @@ public class ValidatorEditForm {
         }
         return "password is wrong";
     }
+
     /* перевірка та оновлення телефону */
-    private static String validatePhoneNumber(String number) {
+    private String validatePhoneNumber(String number) {
         if (number == null) return "phone number is wrong";
         String finalTel = Validator.finalTel(number);
         if (finalTel.length() < 12) return "phone number is wrong";
@@ -85,8 +91,9 @@ public class ValidatorEditForm {
         usersDAO.updateUserTel(finalTel, user.getId());
         return "phone number is changed";
     }
+
     /* перевірка та оновлення дати народження */
-    private static String validateDateOfBirth(String date) {
+    private String validateDateOfBirth(String date) {
         LocalDate dateOfBirth;
         if (date == null) return "date is wrong";
         try {
