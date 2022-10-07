@@ -42,7 +42,7 @@ public class UsersDAO {
             preparedStatement.setString(4, String.valueOf(user.getPassword().hashCode()));
             preparedStatement.setString(5, user.getTel());
             preparedStatement.setObject(6, user.getDateOfBirth());
-            preparedStatement.setInt(7, LocalDate.now().getYear() - user.getDateOfBirth().getYear());
+            preparedStatement.setInt(7, user.getAge());
             preparedStatement.executeUpdate();
             try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                 generatedKeys.next();
