@@ -11,6 +11,15 @@ public class Patient {
     private String name;
     private LocalDate dateOfBirth;
     private int currentDoctorId;
+    private int Age;
+
+    public int getAge() {
+        return Age;
+    }
+
+    public void setAge(int age) {
+        Age = age;
+    }
 
     public Patient(User user) {
         this.id = user.getId();

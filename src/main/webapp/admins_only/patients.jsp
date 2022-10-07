@@ -28,6 +28,7 @@
                    <option disabled>${phrases['langSorted']}</option>
                    <option value="surname" <c:if test="${sort.equals('surname')}"> selected </c:if>>${phrases['langBySurname']}</option>
                    <option value="date" <c:if test="${sort.equals('date')}"> selected </c:if>>${phrases['langByDateOfBirth']}</option>
+                   <option value="age" <c:if test="${sort.equals('age')}"> selected </c:if>>по возрасту</option>
                 <input type="submit" class="btn btn-dark" value="${phrases['langGetThem']}"/><br>
             </form>
         <h2 style="color:#B22222">
@@ -35,11 +36,13 @@
 
             <th style="color:#0000ff"><h4/> ${phrases['langSurname']} &nbsp</th>
             <th style="color:#ffff00"><h4/> ${phrases['langName']} &nbsp</th>
+            <th style="color:#ffff00"><h4/> Возраст &nbsp</th>
             <th style="color:#0000ff"><h4 align="center"/>${phrases['langDateOfBirth']} &nbsp</th>
                   <c:forEach items="${patientlist}" var="i">
                       <tr>
                          <td style="color:#fff"><h3/>${i.getSurname()} &nbsp</td>
                          <td style="color:#fff"><h3/>${i.getName()} &nbsp</td>
+                         <td style="color:#fff"><h3/>${i.getAge()} &nbsp</td>
                          <td style="color:#fff" align="center"><h3/>${i.getDateOfBirth()} &nbsp</td>
                       </tr>
                   </c:forEach>

@@ -52,6 +52,10 @@ public class Paginator {
                 break;
             case "date":
                 sort = "WHERE `status`!='discharged' ORDER BY date_of_birth";
+                break;
+            case"age"   :
+                sort = "WHERE `status`!='discharged' ORDER BY age";
+
         }
         int patientsCount = patientsDAO.patientsCount();
         int pagination = getPagination(req);

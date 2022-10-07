@@ -3,7 +3,7 @@ package project;
 /* Клас з запитами до БД */
 public class Constants {
     public static final String INSERT_USERS
-            = "INSERT INTO users (surname,name, login, password,tel,date_of_birth) VALUES (?,?,?,?,?,?)";
+            = "INSERT INTO users (surname,name, login, password,tel,date_of_birth,age) VALUES (?,?,?,?,?,?,?)";
     public static final String INSERT_SYS_ADMIN = "INSERT INTO sys_admin (id) VALUES (?)";
     public static final String INSERT_DOCTORS = "INSERT INTO doctors (id) VALUES (?)";
     public static final String INSERT_NURSE = "INSERT INTO nurse (id) VALUES (?)";

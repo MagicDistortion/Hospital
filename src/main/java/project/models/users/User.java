@@ -19,6 +19,7 @@ public class User implements Serializable {
     private Phonenumber.PhoneNumber tel;
     private int rolesId;
     private LocalDate dateOfBirth;
+    private final int age;
 
     public User(String surname, String name, String login, String password, String tel, LocalDate dateOfBirth) {
         PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
@@ -33,6 +34,7 @@ public class User implements Serializable {
         this.login = login;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
+        this.age = LocalDate.now().getYear()-dateOfBirth.getYear();
     }
 
     public int getId() {
@@ -49,6 +51,14 @@ public class User implements Serializable {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        age = age;
     }
 
     public String getPassword() {

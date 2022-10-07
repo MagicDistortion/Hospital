@@ -112,6 +112,7 @@ public class PatientsDAO {
             while (resultSet.next()) {
                 Patient patient = new Patient(usersDAO.getUser(resultSet));
                 patient.setCurrentDoctorId(resultSet.getInt("current_doctor_id"));
+                patient.setAge(resultSet.getInt("age"));
                 patientList.add(patient);
             }
         } catch (SQLException e) {
