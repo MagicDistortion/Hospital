@@ -98,7 +98,7 @@ body {background:#000000 url(../images/Serze2.jpg) no-repeat;}
            <c:if test="${user.getId()==hospital_card.getDoctorsId()}">
              <h2  style="color:#ffff00">${phrases['langAddAppointment']}</h2>
               <form action ="../doctors_only/insert_appoint" method ="post">
-                  <input type="hidden" name="id" value="${hospital_card.getDoctorsId()}"/>
+                  <input type="hidden" name="id" value="${hospital_card.getId()}"/>
                 <select class="btn btn-primary dropdown-toggle" name="appoint" required>
                     <option disabled>${phrases['langPickAPoint']}</option>
                    <c:forEach items="${appoints}" var="j">
