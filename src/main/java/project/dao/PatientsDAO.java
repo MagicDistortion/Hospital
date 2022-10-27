@@ -53,7 +53,8 @@ public class PatientsDAO {
         }
         return patient;
     }
-/* метод отримання кількості пацієнтів в базі*/
+
+    /* метод отримання кількості пацієнтів в базі*/
     public int patientsCount() {
         int count = 0;
         try (Connection connection = dbManager.getConnection();
@@ -72,8 +73,8 @@ public class PatientsDAO {
     public int patientsCountForDoctor(int id) {
         int count = 0;
         try (Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(Constants.FROM_PATIENTS_COUNT_FOR_DOCTOR)) {
-            preparedStatement.setInt(1,id);
+             PreparedStatement preparedStatement = connection.prepareStatement(Constants.FROM_PATIENTS_COUNT_FOR_DOCTOR)) {
+            preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     count = resultSet.getInt(1);
@@ -85,6 +86,7 @@ public class PatientsDAO {
         }
         return count;
     }
+
     /* метод отримання списку всіх пацієнтів за сортуванням */
     public List<Patient> findAllPatients(String sorted) {
         List<Patient> patientList = new ArrayList<>();
