@@ -46,7 +46,7 @@ public class ValidatorEditForm {
     /* перевірка та оновлення прізвища */
     private String validateSurname(String surname) {
         if (surname != null && surname.length() >= 2 && surname.length() < 32) {
-            usersDAO.updateUseSurname(surname, user.getId());
+            usersDAO.updateUserSurname(surname, user.getId());
             return "surname is changed";
         }
         return "surname is wrong";

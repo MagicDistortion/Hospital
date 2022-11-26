@@ -67,7 +67,7 @@ public class UsersDAO {
     }
 
     /* метод оновлення Прізвища користувача  */
-    public void updateUseSurname(String surname, int id) {
+    public void updateUserSurname(String surname, int id) {
         try (Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Constants.UPDATE_USER_SURNAME)) {
             preparedStatement.setString(1, surname);
