@@ -19,7 +19,7 @@ public class UpdateDiagnosis extends HttpServlet {
         if (req.getSession().getAttribute(("hospital_card")) != null) {
             hospitalCard = ((HospitalCard) req.getSession().getAttribute("hospital_card"));
         }
-        int id = Integer.parseInt(req.getParameter("id"));
+        int id = hospitalCard.getId();
         String diagnosis = req.getParameter("diagnosis");
         if (!diagnosis.isEmpty()) {
             hospitalCardDAO.updateDiagnosis(diagnosis, id);
